@@ -3,11 +3,12 @@ import react from "@vitejs/plugin-react";
 import { readFileSync, existsSync } from "fs";
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
+import type { ServerOptions as HttpsServerOptions } from "node:https";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-// Try to use mkcert certificates if available, otherwise use Vite's default
-function getHttpsConfig() {
+// Prefer mkcert certs when present; otherwise let Vite use a self-signed cert.
+function getHttpsConfig(): HttpsServerOptions {
   // Try localhost+3 format first (common mkcert output)
   const altCert = resolve(__dirname, "localhost+3.pem");
   const altKey = resolve(__dirname, "localhost+3-key.pem");
@@ -35,9 +36,9 @@ function getHttpsConfig() {
   // Fallback to Vite's default (may show certificate warning)
   console.log("⚠️  Using Vite's default certificate (may show warning)");
   console.log(
-    "💡 Tip: Run 'mkcert localhost 127.0.0.1 ::1 YOUR_IP' in apps/playground folder"
+    "💡 Tip: Run 'mkcert localhost 127.0.0.1 ::1 YOUR_IP' in apps/playground folder",
   );
-  return true;
+  return {};
 }
 
 export default defineConfig({

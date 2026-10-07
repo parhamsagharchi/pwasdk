@@ -105,7 +105,7 @@ pnpm dev
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) and the [Code of Conduct](CODE_OF_CONDUCT.md).
+See [CONTRIBUTING.md](CONTRIBUTING.md), [STYLE_GUIDE.md](STYLE_GUIDE.md), and the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## License
 
