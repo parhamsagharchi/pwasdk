@@ -2,6 +2,8 @@
 
 Progressive Web App helpers for the browser. One small TypeScript package with focused modules for common device and web APIs.
 
+**Live demo:** [pwasdk.vercel.app](https://pwasdk.vercel.app)
+
 ```bash
 pnpm add @pwasdk/core
 ```

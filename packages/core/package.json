@@ -43,7 +43,7 @@
   "bugs": {
     "url": "https://github.com/parhamsagharchi/pwasdk/issues"
   },
-  "homepage": "https://github.com/parhamsagharchi/pwasdk#readme",
+  "homepage": "https://pwasdk.vercel.app",
   "author": "Parham Sagharichi Ha",
   "publishConfig": {
     "access": "public"
