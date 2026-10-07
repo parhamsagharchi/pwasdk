@@ -1,0 +1,13 @@
+{
+  "name": "PWA SDK Playground",
+  "short_name": "PWA SDK",
+  "description": "Playground for testing PWA SDK features",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "orientation": "any",
+  "icons": []
+}
+

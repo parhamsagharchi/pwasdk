@@ -1,0 +1,16 @@
+{
+  "name": "pwasdk",
+  "private": true,
+  "description": "Monorepo for @pwasdk/core — Progressive Web App browser helpers",
+  "license": "MIT",
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "dev": "pnpm --filter playground dev",
+    "build": "pnpm --filter @pwasdk/core build",
+    "build:all": "pnpm -r build"
+  },
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=9"
+  }
+}

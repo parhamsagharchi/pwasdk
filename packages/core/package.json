@@ -1,0 +1,58 @@
+{
+  "name": "@pwasdk/core",
+  "version": "0.2.0",
+  "description": "Browser PWA helpers for haptics, share, clipboard, push, install, media, and more",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --clean --tsconfig tsconfig.build.json",
+    "prepublishOnly": "pnpm run build"
+  },
+  "keywords": [
+    "pwa",
+    "progressive-web-app",
+    "haptic",
+    "vibration",
+    "web-share",
+    "clipboard",
+    "push-notifications",
+    "geolocation",
+    "wake-lock",
+    "browser"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parhamsagharchi/pwasdk.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/parhamsagharchi/pwasdk/issues"
+  },
+  "homepage": "https://github.com/parhamsagharchi/pwasdk#readme",
+  "author": "Parham Sagharichi Ha",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "tsup": "^8.2.0",
+    "typescript": "^5.6.3"
+  }
+}

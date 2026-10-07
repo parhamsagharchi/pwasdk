@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+*.tsbuildinfo
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+
+# Logs & debug
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json.example
+
+# Test / coverage
+coverage/
+.nyc_output/
+
+# Local HTTPS certs (mkcert)
+*.pem
+!*.pem.example
+
+# Vite
+apps/playground/node_modules/
+apps/**/.vite/
+
+# Optional local notes
+*.local.md
