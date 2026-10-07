@@ -23,6 +23,7 @@ pnpm add @pwasdk/core
 - **AppStorage** — safe local/session storage + JSON
 - **Camera / Microphone** — getUserMedia helpers
 - **Pwa** — standalone detection & install hints
+- **Screenshot** — native-bridge screenshot events + notify helpers
 
 ## Usage
 

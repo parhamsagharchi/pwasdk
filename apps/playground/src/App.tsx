@@ -12,6 +12,7 @@ import LocationDemo from "./components/location-demo";
 import WakeLockDemo from "./components/wake-lock-demo";
 import FullscreenDemo from "./components/fullscreen-demo";
 import StorageDemo from "./components/storage-demo";
+import ScreenshotDemo from "./components/screenshot-demo";
 import { useDemoBootstrap } from "./hooks/use-demo-bootstrap.hooks";
 
 export default function App() {
@@ -37,6 +38,7 @@ export default function App() {
       <BadgeDemo />
       <CameraDemo />
       <MicrophoneDemo />
+      <ScreenshotDemo />
       <DeviceInfo online={online} orientation={orientation} />
       <LocationDemo />
       <WakeLockDemo />

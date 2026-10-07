@@ -5,6 +5,61 @@ import {
 } from "../../constants/demo.constants";
 
 function HapticDemo() {
+  const handleLightClick = () => {
+    console.log("Testing light vibration...");
+    const result = Haptic.trigger("light");
+    console.log("Result:", result);
+    if (!result) {
+      alert(
+        "Vibration failed. Check console for details. Make sure you're on Chrome/Android!",
+      );
+    } else {
+      console.log("✅ Light vibration should have triggered");
+    }
+  };
+
+  const handleMediumClick = () => {
+    console.log("Testing medium vibration...");
+    const result = Haptic.trigger("medium");
+    console.log("Result:", result);
+    if (!result) {
+      alert(
+        "Vibration failed. Check console for details. Make sure you're on Chrome/Android!",
+      );
+    } else {
+      console.log("✅ Medium vibration should have triggered");
+    }
+  };
+
+  const handleHeavyClick = () => {
+    console.log("Testing heavy vibration...");
+    const result = Haptic.trigger("heavy");
+    console.log("Result:", result);
+    if (!result) {
+      alert(
+        "Vibration failed. Check console for details. Make sure you're on Chrome/Android!",
+      );
+    } else {
+      console.log("✅ Heavy vibration should have triggered");
+    }
+  };
+
+  const handlePatternClick = () => {
+    console.log("Testing custom pattern...");
+    const result = Haptic.pattern([200, 100, 200, 100, 200]);
+    console.log("Result:", result);
+    if (!result) {
+      alert("Vibration failed. Check console for details.");
+    } else {
+      console.log("✅ Custom pattern should have triggered");
+    }
+  };
+
+  const handleStopClick = () => {
+    const result = Haptic.stop();
+    console.log("Stop vibration result:", result);
+  };
+
   return (
     <section style={DEMO_SECTION_STYLE}>
       <h2>📳 Haptic Feedback</h2>
@@ -35,79 +90,19 @@ function HapticDemo() {
         </div>
       )}
       <div>
-        <button
-          style={DEMO_BUTTON_STYLE}
-          onClick={() => {
-            console.log("Testing light vibration...");
-            const result = Haptic.trigger("light");
-            console.log("Result:", result);
-            if (!result) {
-              alert(
-                "Vibration failed. Check console for details. Make sure you're on Chrome/Android!",
-              );
-            } else {
-              console.log("✅ Light vibration should have triggered");
-            }
-          }}
-        >
+        <button style={DEMO_BUTTON_STYLE} onClick={handleLightClick}>
           Light Vibration (100ms)
         </button>
-        <button
-          style={DEMO_BUTTON_STYLE}
-          onClick={() => {
-            console.log("Testing medium vibration...");
-            const result = Haptic.trigger("medium");
-            console.log("Result:", result);
-            if (!result) {
-              alert(
-                "Vibration failed. Check console for details. Make sure you're on Chrome/Android!",
-              );
-            } else {
-              console.log("✅ Medium vibration should have triggered");
-            }
-          }}
-        >
+        <button style={DEMO_BUTTON_STYLE} onClick={handleMediumClick}>
           Medium Vibration (200ms)
         </button>
-        <button
-          style={DEMO_BUTTON_STYLE}
-          onClick={() => {
-            console.log("Testing heavy vibration...");
-            const result = Haptic.trigger("heavy");
-            console.log("Result:", result);
-            if (!result) {
-              alert(
-                "Vibration failed. Check console for details. Make sure you're on Chrome/Android!",
-              );
-            } else {
-              console.log("✅ Heavy vibration should have triggered");
-            }
-          }}
-        >
+        <button style={DEMO_BUTTON_STYLE} onClick={handleHeavyClick}>
           Heavy Vibration (300-100-300ms)
         </button>
-        <button
-          style={DEMO_BUTTON_STYLE}
-          onClick={() => {
-            console.log("Testing custom pattern...");
-            const result = Haptic.pattern([200, 100, 200, 100, 200]);
-            console.log("Result:", result);
-            if (!result) {
-              alert("Vibration failed. Check console for details.");
-            } else {
-              console.log("✅ Custom pattern should have triggered");
-            }
-          }}
-        >
+        <button style={DEMO_BUTTON_STYLE} onClick={handlePatternClick}>
           Custom Pattern (200-100-200-100-200ms)
         </button>
-        <button
-          style={DEMO_BUTTON_STYLE}
-          onClick={() => {
-            const result = Haptic.stop();
-            console.log("Stop vibration result:", result);
-          }}
-        >
+        <button style={DEMO_BUTTON_STYLE} onClick={handleStopClick}>
           Stop Vibration
         </button>
       </div>

@@ -207,6 +207,65 @@ From [react-patterns](https://github.com/lydiahallie/javascript-react-patterns/t
 | Component + hooks | `.wrap.tsx` / render-prop wrappers |
 | Provider only for real shared app state | Prop-drilling everything *or* context for everything |
 | Compound components when UI is a set | Giant prop bags for related sub-UI |
+| **Named event handlers** | Inline `onClick={() => { ... }}` in JSX |
+| **`useReducer` for related multi-field state** | Many `useState` calls for one feature/hook |
+
+### State: `useReducer` vs many `useState`
+
+When a hook or component owns **several related fields** (roughly 3+ that update together or belong to one feature), prefer **one** `useReducer` over a pile of `useState`.
+
+| Use | When |
+|-----|------|
+| `useState` | One independent value (open/closed, a single string, etc.) |
+| `useReducer` | Bootstrap / panel / form-like state with multiple fields and named actions |
+
+```ts
+// ❌ Bad — many useState for one feature
+const [online, setOnline] = useState(Device.online);
+const [debugInfo, setDebugInfo] = useState("");
+const [protocol, setProtocol] = useState(window.location.protocol);
+const [orientation, setOrientation] = useState<string | null>(null);
+
+// ✅ Good — one reducer + typed actions
+const [state, dispatch] = useReducer(demoBootstrapReducer, initialState);
+dispatch({ type: "SET_ONLINE", online: true });
+```
+
+### Event handlers (required)
+
+JSX must stay declarative. **Do not** put multi-line or business logic inside JSX props.
+
+| Rule | Detail |
+|------|--------|
+| Extract handlers | `const handleClick = () => { ... }` (or `handleX` / `onX` from a hook) |
+| JSX only references | `onClick={handleClick}` |
+| Naming | Prefer `handle` + event/action: `handleShare`, `handleToggleFullscreen` |
+| Where to put them | In the component body, or in `[feature].hooks.ts` when stateful/shared |
+| Allowed in JSX | Only a bare identifier / already-bound handler — never an inline arrow with a body |
+
+```tsx
+// ❌ Bad — logic inside JSX
+<button
+  onClick={() => {
+    const result = Haptic.trigger("light");
+    if (!result) alert("Failed");
+  }}
+>
+  Vibrate
+</button>
+
+// ❌ Bad — even short inline logic
+<button onClick={() => openCamera("front")}>Front</button>
+
+// ✅ Good — named handler in component or hooks file
+const handleOpenFrontCamera = () => {
+  void openCamera("front");
+};
+
+<button type="button" onClick={handleOpenFrontCamera}>
+  Front
+</button>
+```
 
 ```tsx
 // sample-panel.types.ts
@@ -298,6 +357,7 @@ import { Geolocation, type IGeoPosition } from "@pwasdk/core";
 | `types.ts` / `interface.ts` without feature prefix | `foo.types.ts` |
 | Unprefixed `interface` / `type` / `enum` | `I` / `T` / `E` |
 | `.wrap.tsx` | `[name].tsx` + `[name].hooks.ts` |
+| Inline `onClick={() => { ... }}` in JSX | `const handleClick = () => {}` then `onClick={handleClick}` |
 | Classes as core API | Namespace object |
 | `console.*` in core | Typed return / `throw` |
 | Secrets in repo | Env / consumer config |
@@ -311,6 +371,7 @@ import { Geolocation, type IGeoPosition } from "@pwasdk/core";
 - [ ] `I*` / `T*` / `E*` on our types
 - [ ] Core: namespace + `isSupported()` + no import side effects
 - [ ] Playground: no `.wrap.tsx`; SDK via `@pwasdk/core`
+- [ ] Playground: no inline JSX handlers — use `const handleX = () => {}`
 - [ ] No secrets · no `console.*` in core
 - [ ] `pnpm --filter @pwasdk/core build` passes
 

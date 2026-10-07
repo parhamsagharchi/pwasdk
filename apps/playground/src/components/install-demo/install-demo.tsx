@@ -5,6 +5,22 @@ import {
 } from "../../constants/demo.constants";
 
 function InstallDemo() {
+  const handleInstallClick = async () => {
+    console.log("Install button clicked");
+    try {
+      const installed = await Install.prompt();
+      console.log("Install result:", installed);
+      if (installed) {
+        alert("✅ PWA installed successfully!");
+      } else {
+        alert("Install prompt not available. Check console for details.");
+      }
+    } catch (error: any) {
+      console.error("Install error:", error);
+      alert("Install error: " + (error.message || error));
+    }
+  };
+
   return (
     <section style={DEMO_SECTION_STYLE}>
       <h2>📱 Install PWA</h2>
@@ -44,23 +60,7 @@ function InstallDemo() {
       )}
       <button
         style={DEMO_BUTTON_STYLE}
-        onClick={async () => {
-          console.log("Install button clicked");
-          try {
-            const installed = await Install.prompt();
-            console.log("Install result:", installed);
-            if (installed) {
-              alert("✅ PWA installed successfully!");
-            } else {
-              alert(
-                "Install prompt not available. Check console for details.",
-              );
-            }
-          } catch (error: any) {
-            console.error("Install error:", error);
-            alert("Install error: " + (error.message || error));
-          }
-        }}
+        onClick={handleInstallClick}
         disabled={Install.isInstalled()}
       >
         {Install.isInstalled() ? "Already Installed" : "Install App"}

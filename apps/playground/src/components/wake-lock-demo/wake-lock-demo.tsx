@@ -8,6 +8,20 @@ import {
 function WakeLockDemo() {
   const [wakeLockActive, setWakeLockActive] = useState(false);
 
+  const handleRequestWakeLockClick = async () => {
+    try {
+      await WakeLock.request();
+      setWakeLockActive(true);
+    } catch (e: any) {
+      alert(e?.message || "Failed to request wake lock");
+    }
+  };
+
+  const handleReleaseWakeLockClick = async () => {
+    await WakeLock.release();
+    setWakeLockActive(false);
+  };
+
   return (
     <section style={DEMO_SECTION_STYLE}>
       <h2>🔒 Wake Lock</h2>
@@ -32,24 +46,14 @@ function WakeLockDemo() {
       <div>
         <button
           style={DEMO_BUTTON_STYLE}
-          onClick={async () => {
-            try {
-              await WakeLock.request();
-              setWakeLockActive(true);
-            } catch (e: any) {
-              alert(e?.message || "Failed to request wake lock");
-            }
-          }}
+          onClick={handleRequestWakeLockClick}
           disabled={!WakeLock.isSupported() || wakeLockActive}
         >
           Request Wake Lock
         </button>
         <button
           style={DEMO_BUTTON_STYLE}
-          onClick={async () => {
-            await WakeLock.release();
-            setWakeLockActive(false);
-          }}
+          onClick={handleReleaseWakeLockClick}
           disabled={!wakeLockActive}
         >
           Release Wake Lock

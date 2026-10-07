@@ -10,6 +10,25 @@ function StorageDemo() {
     () => AppStorage.local.get("demo:name") || "",
   );
 
+  const handleSetNameClick = () => {
+    const name = prompt("Enter a name to store:", storedName) || "";
+    try {
+      AppStorage.local.set("demo:name", name);
+      setStoredName(name);
+    } catch (e: any) {
+      alert(e?.message || "Failed to store name");
+    }
+  };
+
+  const handleClearNameClick = () => {
+    try {
+      AppStorage.local.remove("demo:name");
+      setStoredName("");
+    } catch (e: any) {
+      alert(e?.message || "Failed to clear name");
+    }
+  };
+
   return (
     <section style={DEMO_SECTION_STYLE}>
       <h2>💾 Storage</h2>
@@ -36,29 +55,14 @@ function StorageDemo() {
       <div>
         <button
           style={DEMO_BUTTON_STYLE}
-          onClick={() => {
-            const name = prompt("Enter a name to store:", storedName) || "";
-            try {
-              AppStorage.local.set("demo:name", name);
-              setStoredName(name);
-            } catch (e: any) {
-              alert(e?.message || "Failed to store name");
-            }
-          }}
+          onClick={handleSetNameClick}
           disabled={!AppStorage.local.isSupported()}
         >
           Set Name in localStorage
         </button>
         <button
           style={DEMO_BUTTON_STYLE}
-          onClick={() => {
-            try {
-              AppStorage.local.remove("demo:name");
-              setStoredName("");
-            } catch (e: any) {
-              alert(e?.message || "Failed to clear name");
-            }
-          }}
+          onClick={handleClearNameClick}
           disabled={!AppStorage.local.isSupported()}
         >
           Clear Name
