@@ -22,11 +22,13 @@ apps/playground # local demo app (not published)
 
 ## Development guidelines
 
+Follow [STYLE_GUIDE.md](./STYLE_GUIDE.md). Highlights:
+
 1. Keep modules browser-only and side-effect free on import.
 2. Prefer small, focused modules with an `isSupported()` helper.
 3. Avoid `console.log` in library code; throw or return typed results instead.
 4. Do not add default secrets or hardcoded production keys.
-5. Match existing TypeScript style and naming (PascalCase namespaces).
+5. Use feature folders + suffix files (`*.types.ts`, `*.utils.ts`, …) and `I`/`T`/`E` type prefixes.
 
 ## Pull requests
 
