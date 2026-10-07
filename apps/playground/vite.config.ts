@@ -42,6 +42,12 @@ function getHttpsConfig() {
 
 export default defineConfig({
   plugins: [react()],
+  resolve: {
+    alias: {
+      // Use package source in the monorepo so Vite always gets fresh types/code
+      "@pwasdk/core": resolve(__dirname, "../../packages/core/src/index.ts"),
+    },
+  },
   server: {
     host: "0.0.0.0", // Explicitly bind to all interfaces
     port: 3000,

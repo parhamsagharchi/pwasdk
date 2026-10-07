@@ -4,7 +4,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev:http": "vite --config vite.config.http.ts"
+    "dev:http": "vite --config vite.config.http.ts",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@google/genai": "^1.40.0",

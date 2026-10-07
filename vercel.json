@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "installCommand": "pnpm install",
+  "buildCommand": "pnpm --filter @pwasdk/core build && pnpm --filter playground build",
+  "outputDirectory": "apps/playground/dist",
+  "rewrites": [
+    {
+      "source": "/((?!assets/|sw\\.js|manifest\\.json).*)",
+      "destination": "/index.html"
+    }
+  ]
+}

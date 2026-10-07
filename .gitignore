@@ -39,3 +39,5 @@ apps/**/.vite/
 
 # Optional local notes
 *.local.md
+.vercel
+.env*
