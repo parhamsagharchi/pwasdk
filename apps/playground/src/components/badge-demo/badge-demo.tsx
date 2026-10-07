@@ -5,34 +5,32 @@ import {
 } from "../../constants/demo.constants";
 
 function BadgeDemo() {
+  const handleSetBadgeClick = async () => {
+    try {
+      await Badge.set(5);
+      alert("Badge set to 5");
+    } catch (error: any) {
+      alert("Failed: " + error.message);
+    }
+  };
+
+  const handleClearBadgeClick = async () => {
+    try {
+      await Badge.clear();
+      alert("Badge cleared");
+    } catch (error: any) {
+      alert("Failed: " + error.message);
+    }
+  };
+
   return (
     <section style={DEMO_SECTION_STYLE}>
       <h2>🏷️ App Badge</h2>
       <div>
-        <button
-          style={DEMO_BUTTON_STYLE}
-          onClick={async () => {
-            try {
-              await Badge.set(5);
-              alert("Badge set to 5");
-            } catch (error: any) {
-              alert("Failed: " + error.message);
-            }
-          }}
-        >
+        <button style={DEMO_BUTTON_STYLE} onClick={handleSetBadgeClick}>
           Set Badge (5)
         </button>
-        <button
-          style={DEMO_BUTTON_STYLE}
-          onClick={async () => {
-            try {
-              await Badge.clear();
-              alert("Badge cleared");
-            } catch (error: any) {
-              alert("Failed: " + error.message);
-            }
-          }}
-        >
+        <button style={DEMO_BUTTON_STYLE} onClick={handleClearBadgeClick}>
           Clear Badge
         </button>
       </div>

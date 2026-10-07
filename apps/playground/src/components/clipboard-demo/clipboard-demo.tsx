@@ -8,35 +8,33 @@ import {
 function ClipboardDemo() {
   const [clipboardText, setClipboardText] = useState("");
 
+  const handleCopyClick = async () => {
+    try {
+      await Clipboard.copy("Hello from PWA SDK!");
+      alert("Copied to clipboard!");
+    } catch (error: any) {
+      alert("Failed to copy: " + error.message);
+    }
+  };
+
+  const handlePasteClick = async () => {
+    try {
+      const text = await Clipboard.paste();
+      setClipboardText(text);
+      alert("Pasted: " + text);
+    } catch (error: any) {
+      alert("Failed to paste: " + error.message);
+    }
+  };
+
   return (
     <section style={DEMO_SECTION_STYLE}>
       <h2>📋 Clipboard</h2>
       <div>
-        <button
-          style={DEMO_BUTTON_STYLE}
-          onClick={async () => {
-            try {
-              await Clipboard.copy("Hello from PWA SDK!");
-              alert("Copied to clipboard!");
-            } catch (error: any) {
-              alert("Failed to copy: " + error.message);
-            }
-          }}
-        >
+        <button style={DEMO_BUTTON_STYLE} onClick={handleCopyClick}>
           Copy Text
         </button>
-        <button
-          style={DEMO_BUTTON_STYLE}
-          onClick={async () => {
-            try {
-              const text = await Clipboard.paste();
-              setClipboardText(text);
-              alert("Pasted: " + text);
-            } catch (error: any) {
-              alert("Failed to paste: " + error.message);
-            }
-          }}
-        >
+        <button style={DEMO_BUTTON_STYLE} onClick={handlePasteClick}>
           Paste Text
         </button>
       </div>

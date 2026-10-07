@@ -46,12 +46,14 @@ const position = await Geolocation.getCurrent();
 | `Camera` | getUserMedia video |
 | `Microphone` | getUserMedia audio |
 | `Pwa` | Standalone / platform helpers |
+| `Screenshot` | Screenshot event bus + notification helpers |
 
 ## Notes
 
 - Browser-only. Do not import into Node/SSR without guards.
 - `Push.subscribe(vapidPublicKey)` requires **your** VAPID public key.
 - Call `Install.init()` during app bootstrap to capture `beforeinstallprompt`.
+- OS screenshot detection is **not** available in pure browsers. Use a native WebView bridge that calls `Screenshot.notifyDetected()`.
 
 ## License
 

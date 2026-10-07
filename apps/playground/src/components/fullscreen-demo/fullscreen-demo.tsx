@@ -8,6 +8,15 @@ import {
 function FullscreenDemo() {
   const [isFullscreen, setIsFullscreen] = useState(false);
 
+  const handleToggleFullscreenClick = async () => {
+    try {
+      await Fullscreen.toggle();
+      setIsFullscreen(Fullscreen.isFullscreen());
+    } catch (e: any) {
+      alert(e?.message || "Failed to toggle fullscreen");
+    }
+  };
+
   return (
     <section style={DEMO_SECTION_STYLE}>
       <h2>⛶ Fullscreen</h2>
@@ -32,14 +41,7 @@ function FullscreenDemo() {
       <div>
         <button
           style={DEMO_BUTTON_STYLE}
-          onClick={async () => {
-            try {
-              await Fullscreen.toggle();
-              setIsFullscreen(Fullscreen.isFullscreen());
-            } catch (e: any) {
-              alert(e?.message || "Failed to toggle fullscreen");
-            }
-          }}
+          onClick={handleToggleFullscreenClick}
           disabled={!Fullscreen.isSupported()}
         >
           {isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}

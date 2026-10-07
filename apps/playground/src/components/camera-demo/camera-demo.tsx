@@ -14,6 +14,18 @@ function CameraDemo() {
     stopCameraOnly,
   } = useCameraDemo();
 
+  const handleOpenFrontCameraClick = () => {
+    void openCamera("front");
+  };
+
+  const handleOpenBackCameraClick = () => {
+    void openCamera("back");
+  };
+
+  const handleOpenLaptopCameraClick = () => {
+    void openCamera("laptop");
+  };
+
   return (
     <section style={DEMO_SECTION_STYLE}>
       <h2>📷 Camera</h2>
@@ -41,21 +53,21 @@ function CameraDemo() {
       <div>
         <button
           style={DEMO_BUTTON_STYLE}
-          onClick={() => openCamera("front")}
+          onClick={handleOpenFrontCameraClick}
           disabled={!isMediaDevicesSupported}
         >
           Open Front Camera
         </button>
         <button
           style={DEMO_BUTTON_STYLE}
-          onClick={() => openCamera("back")}
+          onClick={handleOpenBackCameraClick}
           disabled={!isMediaDevicesSupported}
         >
           Open Back Camera
         </button>
         <button
           style={DEMO_BUTTON_STYLE}
-          onClick={() => openCamera("laptop")}
+          onClick={handleOpenLaptopCameraClick}
           disabled={!isMediaDevicesSupported}
         >
           Open Camera (Laptop)
