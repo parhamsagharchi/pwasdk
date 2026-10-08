@@ -1,5 +1,6 @@
 {
   "name": "pwasdk",
+  "version": "1.0.0",
   "private": true,
   "description": "Monorepo for @pwasdk/core — Progressive Web App browser helpers",
   "license": "MIT",

@@ -1,58 +1,47 @@
 import { Device, Haptic } from "@pwasdk/core";
 import {
-  DEMO_BUTTON_STYLE,
-  DEMO_SECTION_STYLE,
+  DEMO_BUTTON_CLASS,
+  DEMO_SECTION_CLASS,
 } from "../../constants/demo.constants";
+import CodeSnippet from "../code-snippet";
+import { HAPTIC_EXAMPLE } from "./haptic-demo.constants";
+
+const MOBILE_VIBRATION_FAILURE =
+  "Vibration failed. Check console for details. Make sure you're on Chrome/Android!";
+
+function reportHaptic(label: string, result: boolean, failureMessage: string) {
+  console.log(`Testing ${label}...`);
+  console.log("Result:", result);
+  if (!result) {
+    alert(failureMessage);
+    return;
+  }
+  console.log(`✅ ${label} should have triggered`);
+}
 
 function HapticDemo() {
   const handleLightClick = () => {
-    console.log("Testing light vibration...");
-    const result = Haptic.trigger("light");
-    console.log("Result:", result);
-    if (!result) {
-      alert(
-        "Vibration failed. Check console for details. Make sure you're on Chrome/Android!",
-      );
-    } else {
-      console.log("✅ Light vibration should have triggered");
-    }
+    reportHaptic("Light vibration", Haptic.trigger("light"), MOBILE_VIBRATION_FAILURE);
   };
 
   const handleMediumClick = () => {
-    console.log("Testing medium vibration...");
-    const result = Haptic.trigger("medium");
-    console.log("Result:", result);
-    if (!result) {
-      alert(
-        "Vibration failed. Check console for details. Make sure you're on Chrome/Android!",
-      );
-    } else {
-      console.log("✅ Medium vibration should have triggered");
-    }
+    reportHaptic(
+      "Medium vibration",
+      Haptic.trigger("medium"),
+      MOBILE_VIBRATION_FAILURE,
+    );
   };
 
   const handleHeavyClick = () => {
-    console.log("Testing heavy vibration...");
-    const result = Haptic.trigger("heavy");
-    console.log("Result:", result);
-    if (!result) {
-      alert(
-        "Vibration failed. Check console for details. Make sure you're on Chrome/Android!",
-      );
-    } else {
-      console.log("✅ Heavy vibration should have triggered");
-    }
+    reportHaptic("Heavy vibration", Haptic.trigger("heavy"), MOBILE_VIBRATION_FAILURE);
   };
 
   const handlePatternClick = () => {
-    console.log("Testing custom pattern...");
-    const result = Haptic.pattern([200, 100, 200, 100, 200]);
-    console.log("Result:", result);
-    if (!result) {
-      alert("Vibration failed. Check console for details.");
-    } else {
-      console.log("✅ Custom pattern should have triggered");
-    }
+    reportHaptic(
+      "Custom pattern",
+      Haptic.pattern([200, 100, 200, 100, 200]),
+      "Vibration failed. Check console for details.",
+    );
   };
 
   const handleStopClick = () => {
@@ -61,19 +50,11 @@ function HapticDemo() {
   };
 
   return (
-    <section style={DEMO_SECTION_STYLE}>
+    <section className={DEMO_SECTION_CLASS}>
       <h2>📳 Haptic Feedback</h2>
       <p>Test vibration patterns on mobile devices</p>
       {!Haptic.isSupported() && (
-        <div
-          style={{
-            padding: "10px",
-            backgroundColor: "#fff3cd",
-            border: "1px solid #ffc107",
-            borderRadius: "4px",
-            marginBottom: "10px",
-          }}
-        >
+        <div className="demo-callout">
           <strong>⚠️ Vibration not supported:</strong>
           <br />
           {/iPhone|iPad|iPod/.test(navigator.userAgent) ? (
@@ -90,19 +71,19 @@ function HapticDemo() {
         </div>
       )}
       <div>
-        <button style={DEMO_BUTTON_STYLE} onClick={handleLightClick}>
+        <button className={DEMO_BUTTON_CLASS} onClick={handleLightClick}>
           Light Vibration (100ms)
         </button>
-        <button style={DEMO_BUTTON_STYLE} onClick={handleMediumClick}>
+        <button className={DEMO_BUTTON_CLASS} onClick={handleMediumClick}>
           Medium Vibration (200ms)
         </button>
-        <button style={DEMO_BUTTON_STYLE} onClick={handleHeavyClick}>
+        <button className={DEMO_BUTTON_CLASS} onClick={handleHeavyClick}>
           Heavy Vibration (300-100-300ms)
         </button>
-        <button style={DEMO_BUTTON_STYLE} onClick={handlePatternClick}>
+        <button className={DEMO_BUTTON_CLASS} onClick={handlePatternClick}>
           Custom Pattern (200-100-200-100-200ms)
         </button>
-        <button style={DEMO_BUTTON_STYLE} onClick={handleStopClick}>
+        <button className={DEMO_BUTTON_CLASS} onClick={handleStopClick}>
           Stop Vibration
         </button>
       </div>
@@ -130,6 +111,7 @@ function HapticDemo() {
           </small>
         </p>
       </div>
+      <CodeSnippet code={HAPTIC_EXAMPLE} />
     </section>
   );
 }

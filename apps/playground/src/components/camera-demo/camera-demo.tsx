@@ -1,7 +1,10 @@
 import {
-  DEMO_BUTTON_STYLE,
-  DEMO_SECTION_STYLE,
+  DEMO_BUTTON_CLASS,
+  DEMO_SECTION_CLASS,
 } from "../../constants/demo.constants";
+import CodeSnippet from "../code-snippet";
+import PageLoader from "../page-loader";
+import { CAMERA_EXAMPLE } from "./camera-demo.constants";
 import { useCameraDemo } from "./camera-demo.hooks";
 
 function CameraDemo() {
@@ -9,6 +12,8 @@ function CameraDemo() {
     videoRef,
     cameraStream,
     cameraError,
+    isCameraLoading,
+    frameCallbackRan,
     isMediaDevicesSupported,
     openCamera,
     stopCameraOnly,
@@ -27,22 +32,16 @@ function CameraDemo() {
   };
 
   return (
-    <section style={DEMO_SECTION_STYLE}>
+    <section className={DEMO_SECTION_CLASS}>
+      {isCameraLoading ? <PageLoader /> : null}
       <h2>📷 Camera</h2>
       <p style={{ fontSize: "14px" }}>
-        Open device camera (front / back). Requires HTTPS and user permission.
+        Open the camera, then pass your own action to Camera.watch — for
+        example a QR scan on each frame.
       </p>
 
       {!isMediaDevicesSupported && (
-        <div
-          style={{
-            padding: "10px",
-            backgroundColor: "#fff3cd",
-            border: "1px solid #ffc107",
-            borderRadius: "4px",
-            marginBottom: "10px",
-          }}
-        >
+        <div className="demo-callout">
           <strong>⚠️ Camera not supported:</strong>
           <br />
           Your browser does not support{" "}
@@ -52,28 +51,28 @@ function CameraDemo() {
 
       <div>
         <button
-          style={DEMO_BUTTON_STYLE}
+          className={DEMO_BUTTON_CLASS}
           onClick={handleOpenFrontCameraClick}
           disabled={!isMediaDevicesSupported}
         >
           Open Front Camera
         </button>
         <button
-          style={DEMO_BUTTON_STYLE}
+          className={DEMO_BUTTON_CLASS}
           onClick={handleOpenBackCameraClick}
           disabled={!isMediaDevicesSupported}
         >
           Open Back Camera
         </button>
         <button
-          style={DEMO_BUTTON_STYLE}
+          className={DEMO_BUTTON_CLASS}
           onClick={handleOpenLaptopCameraClick}
           disabled={!isMediaDevicesSupported}
         >
           Open Camera (Laptop)
         </button>
         <button
-          style={DEMO_BUTTON_STYLE}
+          className={DEMO_BUTTON_CLASS}
           onClick={stopCameraOnly}
           disabled={!cameraStream}
         >
@@ -104,7 +103,9 @@ function CameraDemo() {
         <p style={{ fontSize: "12px", marginTop: "6px" }}>
           💡 On mobile you must allow camera permissions and use HTTPS.
         </p>
+        {frameCallbackRan && <p>Frame callback is running.</p>}
       </div>
+      <CodeSnippet code={CAMERA_EXAMPLE} />
     </section>
   );
 }

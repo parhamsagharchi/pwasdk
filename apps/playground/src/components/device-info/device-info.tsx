@@ -1,12 +1,14 @@
 import { Device, Pwa } from "@pwasdk/core";
-import { DEMO_SECTION_STYLE } from "../../constants/demo.constants";
+import { DEMO_SECTION_CLASS } from "../../constants/demo.constants";
+import CodeSnippet from "../code-snippet";
+import { DEVICE_EXAMPLE } from "./device-info.constants";
 import type { IDeviceInfoProps } from "./device-info.types";
 
 function DeviceInfo({ online, orientation }: IDeviceInfoProps) {
   return (
-    <section style={DEMO_SECTION_STYLE}>
+    <section className={DEMO_SECTION_CLASS}>
       <h2>📱 Device Information</h2>
-      <div style={{ fontFamily: "monospace", fontSize: "14px" }}>
+      <div className="demo-meta">
         <p>
           <strong>Mobile:</strong> {String(Device.isMobile)}
         </p>
@@ -47,6 +49,7 @@ function DeviceInfo({ online, orientation }: IDeviceInfoProps) {
           <strong>Standalone:</strong> {String(Pwa.isStandalone())}
         </p>
       </div>
+      <CodeSnippet code={DEVICE_EXAMPLE} />
     </section>
   );
 }

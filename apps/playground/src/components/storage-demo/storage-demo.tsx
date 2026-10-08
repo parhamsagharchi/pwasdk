@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { AppStorage } from "@pwasdk/core";
 import {
-  DEMO_BUTTON_STYLE,
-  DEMO_SECTION_STYLE,
+  DEMO_BUTTON_CLASS,
+  DEMO_SECTION_CLASS,
 } from "../../constants/demo.constants";
+import CodeSnippet from "../code-snippet";
+import { STORAGE_EXAMPLE } from "./storage-demo.constants";
 
 function StorageDemo() {
   const [storedName, setStoredName] = useState<string>(
@@ -30,22 +32,14 @@ function StorageDemo() {
   };
 
   return (
-    <section style={DEMO_SECTION_STYLE}>
+    <section className={DEMO_SECTION_CLASS}>
       <h2>💾 Storage</h2>
       <p style={{ fontSize: "14px" }}>
         Simple wrapper around <code>localStorage</code> and{" "}
         <code>sessionStorage</code>.
       </p>
       {!AppStorage.local.isSupported() && (
-        <div
-          style={{
-            padding: "10px",
-            backgroundColor: "#fff3cd",
-            border: "1px solid #ffc107",
-            borderRadius: "4px",
-            marginBottom: "10px",
-          }}
-        >
+        <div className="demo-callout">
           <strong>⚠️ localStorage not available:</strong>
           <br />
           This browser does not allow access to localStorage (possibly due to
@@ -54,14 +48,14 @@ function StorageDemo() {
       )}
       <div>
         <button
-          style={DEMO_BUTTON_STYLE}
+          className={DEMO_BUTTON_CLASS}
           onClick={handleSetNameClick}
           disabled={!AppStorage.local.isSupported()}
         >
           Set Name in localStorage
         </button>
         <button
-          style={DEMO_BUTTON_STYLE}
+          className={DEMO_BUTTON_CLASS}
           onClick={handleClearNameClick}
           disabled={!AppStorage.local.isSupported()}
         >
@@ -72,6 +66,7 @@ function StorageDemo() {
         <strong>Stored name:</strong>{" "}
         {storedName ? <code>{storedName}</code> : "—"}
       </p>
+      <CodeSnippet code={STORAGE_EXAMPLE} />
     </section>
   );
 }

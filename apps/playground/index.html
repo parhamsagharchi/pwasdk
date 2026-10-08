@@ -3,16 +3,57 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="PWA SDK Playground - Test haptic feedback, share, clipboard, push notifications and more" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="@pwasdk/core — browser helpers for vibration, camera, share, location, and other device APIs. This page lets you try them." />
+    <meta name="theme-color" content="#05070b" />
     <link rel="manifest" href="/manifest.json" />
-    <title>PWA SDK Playground</title>
+    <title>PWA SDK — try the browser APIs</title>
+    <style>
+      html,
+      body,
+      #root {
+        min-height: 100%;
+        background: #05070b;
+      }
+
+      .boot-loader {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .boot-loader span {
+        display: inline-block;
+        width: 5px;
+        height: 42px;
+        margin: 4px;
+        border-radius: 3px;
+        background: #00f2fe;
+        animation: boot-scale 1s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08);
+        animation-fill-mode: both;
+      }
+
+      .boot-loader span:nth-child(1) { animation-delay: 0.1s; }
+      .boot-loader span:nth-child(2) { animation-delay: 0.2s; }
+      .boot-loader span:nth-child(3) { animation-delay: 0.3s; }
+      .boot-loader span:nth-child(4) { animation-delay: 0.4s; }
+      .boot-loader span:nth-child(5) { animation-delay: 0.5s; }
+
+      @keyframes boot-scale {
+        0% { transform: scaley(1); }
+        50% { transform: scaley(0.4); }
+        100% { transform: scaley(1); }
+      }
+    </style>
   </head>
   <body>
     <div id="root">
-      <div style="padding: 20px; text-align: center; font-family: sans-serif;">
-        <h1>Loading PWA SDK...</h1>
-        <p>If this message doesn't disappear, check the browser console for errors.</p>
+      <div class="boot-loader" role="status" aria-label="Loading">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
     </div>
     <script type="module" src="/src/main.tsx"></script>

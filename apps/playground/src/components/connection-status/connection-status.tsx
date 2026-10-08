@@ -1,31 +1,15 @@
 import type { IConnectionStatusProps } from "./connection-status.types";
 
 function ConnectionStatus({ protocol, debugInfo }: IConnectionStatusProps) {
+  const secure = protocol === "https:";
+
   return (
-    <div
-      style={{
-        padding: "12px",
-        marginBottom: "20px",
-        backgroundColor: protocol === "https:" ? "#d4edda" : "#fff3cd",
-        border: `2px solid ${protocol === "https:" ? "#28a745" : "#ffc107"}`,
-        borderRadius: "8px",
-      }}
-    >
+    <div className={secure ? "demo-callout ok" : "demo-callout"}>
       <strong>Connection:</strong>{" "}
-      {protocol === "https:" ? "✅ HTTPS (Secure)" : "⚠️ HTTP (Not Secure)"}
+      {secure ? "HTTPS (Secure)" : "HTTP (Not Secure)"}
       <br />
       <strong>URL:</strong> {window.location.href}
-      {debugInfo && (
-        <div
-          style={{
-            marginTop: "10px",
-            fontSize: "14px",
-            whiteSpace: "pre-line",
-          }}
-        >
-          {debugInfo}
-        </div>
-      )}
+      {debugInfo && <div className="demo-callout-body">{debugInfo}</div>}
     </div>
   );
 }

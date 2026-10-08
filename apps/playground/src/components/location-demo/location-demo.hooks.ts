@@ -5,10 +5,12 @@ export function useLocationDemo() {
   const [location, setLocation] = useState<IGeoPosition | null>(null);
   const [locationError, setLocationError] = useState("");
   const [isWatchingLocation, setIsWatchingLocation] = useState(false);
+  const [isLocationLoading, setIsLocationLoading] = useState(false);
   const locationStopRef = useRef<(() => void) | null>(null);
 
   const getCurrentLocation = async () => {
     setLocationError("");
+    setIsLocationLoading(true);
     try {
       const pos = await Geolocation.getCurrent({
         enableHighAccuracy: true,
@@ -17,6 +19,8 @@ export function useLocationDemo() {
       setLocation(pos);
     } catch (e: any) {
       setLocationError(e?.message || "Failed to get location");
+    } finally {
+      setIsLocationLoading(false);
     }
   };
 
@@ -48,6 +52,7 @@ export function useLocationDemo() {
   return {
     location,
     locationError,
+    isLocationLoading,
     isWatchingLocation,
     getCurrentLocation,
     toggleWatchLocation,

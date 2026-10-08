@@ -1,8 +1,10 @@
 import { Badge } from "@pwasdk/core";
 import {
-  DEMO_BUTTON_STYLE,
-  DEMO_SECTION_STYLE,
+  DEMO_BUTTON_CLASS,
+  DEMO_SECTION_CLASS,
 } from "../../constants/demo.constants";
+import CodeSnippet from "../code-snippet";
+import { BADGE_EXAMPLE } from "./badge-demo.constants";
 
 function BadgeDemo() {
   const handleSetBadgeClick = async () => {
@@ -24,13 +26,13 @@ function BadgeDemo() {
   };
 
   return (
-    <section style={DEMO_SECTION_STYLE}>
+    <section className={DEMO_SECTION_CLASS}>
       <h2>🏷️ App Badge</h2>
       <div>
-        <button style={DEMO_BUTTON_STYLE} onClick={handleSetBadgeClick}>
+        <button className={DEMO_BUTTON_CLASS} onClick={handleSetBadgeClick}>
           Set Badge (5)
         </button>
-        <button style={DEMO_BUTTON_STYLE} onClick={handleClearBadgeClick}>
+        <button className={DEMO_BUTTON_CLASS} onClick={handleClearBadgeClick}>
           Clear Badge
         </button>
       </div>
@@ -43,6 +45,7 @@ function BadgeDemo() {
         Chrome/Edge) when the PWA is installed; on iOS it is usually not
         supported.
       </p>
+      <CodeSnippet code={BADGE_EXAMPLE} />
     </section>
   );
 }
