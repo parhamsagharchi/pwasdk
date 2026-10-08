@@ -1,8 +1,10 @@
 import { Screenshot } from "@pwasdk/core";
 import {
-  DEMO_BUTTON_STYLE,
-  DEMO_SECTION_STYLE,
+  DEMO_BUTTON_CLASS,
+  DEMO_SECTION_CLASS,
 } from "../../constants/demo.constants";
+import CodeSnippet from "../code-snippet";
+import { SCREENSHOT_EXAMPLE } from "./screenshot-demo.constants";
 import { useScreenshotDemo } from "./screenshot-demo.hooks";
 
 function ScreenshotDemo() {
@@ -16,23 +18,15 @@ function ScreenshotDemo() {
   } = useScreenshotDemo();
 
   return (
-    <section style={DEMO_SECTION_STYLE}>
+    <section className={DEMO_SECTION_CLASS}>
       <h2>📸 Screenshot</h2>
       <p style={{ fontSize: "14px" }}>
-        Browsers cannot detect OS screenshots. This module listens for native
-        bridge / manual events and can show a notification.
+        Browsers cannot see an OS screenshot. Pass your own action to
+        onDetected. This card's action records the event below.
       </p>
 
       {!nativeSupported && (
-        <div
-          style={{
-            padding: "10px",
-            backgroundColor: "#fff3cd",
-            border: "1px solid #ffc107",
-            borderRadius: "4px",
-            marginBottom: "10px",
-          }}
-        >
+        <div className="demo-callout">
           <strong>⚠️ Native screenshot detection not available:</strong>
           <br />
           In a WebView, set{" "}
@@ -43,8 +37,8 @@ function ScreenshotDemo() {
       )}
 
       <div>
-        <button style={DEMO_BUTTON_STYLE} onClick={simulateCapture}>
-          Simulate Screenshot + Notify
+        <button className={DEMO_BUTTON_CLASS} onClick={simulateCapture}>
+          Report a screenshot
         </button>
       </div>
 
@@ -74,6 +68,7 @@ function ScreenshotDemo() {
           </p>
         )}
       </div>
+      <CodeSnippet code={SCREENSHOT_EXAMPLE} />
     </section>
   );
 }

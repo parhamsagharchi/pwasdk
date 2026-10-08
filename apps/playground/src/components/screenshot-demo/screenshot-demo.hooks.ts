@@ -8,21 +8,12 @@ export function useScreenshotDemo() {
   useEffect(() => {
     return Screenshot.onDetected((event) => {
       setLastEvent(event);
+      setNotifyResult("Your callback ran.");
     });
   }, []);
 
-  const simulateCapture = async () => {
-    setNotifyResult("");
+  const simulateCapture = () => {
     Screenshot.notifyDetected({ source: "manual" });
-    const ok = await Screenshot.showNotification({
-      title: "Screenshot detected",
-      body: "Demo: a screenshot event was reported to the app.",
-    });
-    setNotifyResult(
-      ok
-        ? "Notification shown (or queued via service worker)."
-        : "Notification blocked or unsupported — check browser permission.",
-    );
   };
 
   return {

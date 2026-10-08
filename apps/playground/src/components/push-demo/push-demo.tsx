@@ -1,8 +1,10 @@
 import { Push } from "@pwasdk/core";
 import {
-  DEMO_BUTTON_STYLE,
-  DEMO_SECTION_STYLE,
+  DEMO_BUTTON_CLASS,
+  DEMO_SECTION_CLASS,
 } from "../../constants/demo.constants";
+import CodeSnippet from "../code-snippet";
+import { PUSH_EXAMPLE } from "./push-demo.constants";
 
 function PushDemo() {
   const handleEnablePushClick = async () => {
@@ -57,10 +59,10 @@ function PushDemo() {
   };
 
   return (
-    <section style={DEMO_SECTION_STYLE}>
+    <section className={DEMO_SECTION_CLASS}>
       <h2>🔔 Push Notifications</h2>
       <div>
-        <button style={DEMO_BUTTON_STYLE} onClick={handleEnablePushClick}>
+        <button className={DEMO_BUTTON_CLASS} onClick={handleEnablePushClick}>
           Enable Push Notifications
         </button>
       </div>
@@ -84,6 +86,7 @@ function PushDemo() {
           <small>💡 Open browser console to see detailed logs</small>
         </p>
       </div>
+      <CodeSnippet code={PUSH_EXAMPLE} />
     </section>
   );
 }

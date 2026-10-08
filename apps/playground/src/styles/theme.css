@@ -1,0 +1,41 @@
+@config "../../tailwind.config.js";
+
+:root {
+  --bg-deep: theme(colors.obsidian.deep);
+  --bg-surface: theme(colors.obsidian.surface);
+  --bg-card: theme(colors.obsidian.card);
+  --bg-card-hover: theme(colors.obsidian.hover);
+  --bg-glass: theme(colors.obsidian.glass);
+
+  --border-subtle: theme(colors.line.subtle);
+  --border-glow: theme(colors.line.glow);
+  --border-active: theme(colors.line.active);
+
+  --text-main: theme(colors.ink.DEFAULT);
+  --text-muted: theme(colors.ink.muted);
+  --text-dim: theme(colors.ink.dim);
+  --ink-inverse: theme(colors.ink.inverse);
+
+  --cyan: theme(colors.cyan.DEFAULT);
+  --cyan-soft: theme(colors.cyan.soft);
+  --cyan-glow: theme(colors.cyan.glow);
+  --emerald: theme(colors.emerald.DEFAULT);
+  --emerald-glow: theme(colors.emerald.glow);
+  --violet: theme(colors.violet.DEFAULT);
+  --violet-glow: theme(colors.violet.glow);
+  --coral: theme(colors.coral);
+
+  --font-display: theme(fontFamily.sans);
+  --font-body: theme(fontFamily.sans);
+  --font-mono: theme(fontFamily.mono);
+
+  --wrap: theme(maxWidth.wrap);
+  --radius-xl: theme(borderRadius.xl);
+  --radius-lg: theme(borderRadius.lg);
+  --radius-md: theme(borderRadius.md);
+  --radius-sm: theme(borderRadius.sm);
+  --radius-pill: theme(borderRadius.pill);
+
+  --spring-bounce: theme(transitionTimingFunction.bounce);
+  --spring-smooth: theme(transitionTimingFunction.smooth);
+}

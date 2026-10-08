@@ -11,10 +11,26 @@ Standards for:
 
 ## 1. Principles
 
+The pwasdk project applies the usual best practices of software development: **DRY** (Don't Repeat Yourself), **KISS** (Keep It Simple, Stupid), and **SOLID** (Single responsibility, Open-closed, Liskov substitution, Interface segregation, Dependency inversion).
+
 - One feature = one folder; one concern = one suffix file
 - Colocate first; promote to shared folders only after real reuse
 - Core is browser-only, side-effect free on import, no secrets, no `console.*`
 - Prefer consistency over cleverness
+- Repeat a block twice and stop; the third copy becomes a shared function, component, or class
+- Prefer the smallest design that meets the requirement. Do not add a layer, class, or context "for architecture"
+
+### How SOLID applies here
+
+| Principle | In this repo |
+|-----------|----------------|
+| **S** — Single responsibility | One module or component does one capability. `Haptic` does not also store files. |
+| **O** — Open-closed | Add a new `modules/[feature]/` folder. Do not fork an existing module to special-case one app. |
+| **L** — Liskov substitution | Every core namespace honors the same contract: `isSupported()` before use, soft-fail or `throw` as documented. A new module must not silently change that contract. |
+| **I** — Interface segregation | Export small `I*` / `T*` types. Callers import the namespace they use (`Haptic`), not a grab-bag facade. |
+| **D** — Dependency inversion | Playground and apps depend on `@pwasdk/core`. They do not reimplement browser APIs the SDK already wraps. |
+
+Namespace objects stay the core API. SOLID here does **not** mean introducing a class hierarchy.
 
 ---
 
@@ -358,6 +374,7 @@ import { Geolocation, type IGeoPosition } from "@pwasdk/core";
 | Unprefixed `interface` / `type` / `enum` | `I` / `T` / `E` |
 | `.wrap.tsx` | `[name].tsx` + `[name].hooks.ts` |
 | Inline `onClick={() => { ... }}` in JSX | `const handleClick = () => {}` then `onClick={handleClick}` |
+| Copy-pasted style objects or the same logic in 3+ places | One class, helper, or component |
 | Classes as core API | Namespace object |
 | `console.*` in core | Typed return / `throw` |
 | Secrets in repo | Env / consumer config |
@@ -372,6 +389,7 @@ import { Geolocation, type IGeoPosition } from "@pwasdk/core";
 - [ ] Core: namespace + `isSupported()` + no import side effects
 - [ ] Playground: no `.wrap.tsx`; SDK via `@pwasdk/core`
 - [ ] Playground: no inline JSX handlers — use `const handleX = () => {}`
+- [ ] DRY / KISS / SOLID: no third copy of the same logic or style; no extra layer that the feature does not need
 - [ ] No secrets · no `console.*` in core
 - [ ] `pnpm --filter @pwasdk/core build` passes
 

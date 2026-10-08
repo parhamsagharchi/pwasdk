@@ -1,8 +1,10 @@
 import { Share } from "@pwasdk/core";
 import {
-  DEMO_BUTTON_STYLE,
-  DEMO_SECTION_STYLE,
+  DEMO_BUTTON_CLASS,
+  DEMO_SECTION_CLASS,
 } from "../../constants/demo.constants";
+import CodeSnippet from "../code-snippet";
+import { SHARE_EXAMPLE } from "./share-demo.constants";
 
 function ShareDemo() {
   const handleShareClick = async () => {
@@ -17,14 +19,15 @@ function ShareDemo() {
   };
 
   return (
-    <section style={DEMO_SECTION_STYLE}>
+    <section className={DEMO_SECTION_CLASS}>
       <h2>📤 Share</h2>
-      <button style={DEMO_BUTTON_STYLE} onClick={handleShareClick}>
+      <button className={DEMO_BUTTON_CLASS} onClick={handleShareClick}>
         Share This Page
       </button>
       <p>
         <small>Supported: {String(Share.isSupported())}</small>
       </p>
+      <CodeSnippet code={SHARE_EXAMPLE} />
     </section>
   );
 }

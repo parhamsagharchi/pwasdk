@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { WakeLock } from "@pwasdk/core";
 import {
-  DEMO_BUTTON_STYLE,
-  DEMO_SECTION_STYLE,
+  DEMO_BUTTON_CLASS,
+  DEMO_SECTION_CLASS,
 } from "../../constants/demo.constants";
+import CodeSnippet from "../code-snippet";
+import { WAKE_LOCK_EXAMPLE } from "./wake-lock-demo.constants";
 
 function WakeLockDemo() {
   const [wakeLockActive, setWakeLockActive] = useState(false);
@@ -23,21 +25,13 @@ function WakeLockDemo() {
   };
 
   return (
-    <section style={DEMO_SECTION_STYLE}>
+    <section className={DEMO_SECTION_CLASS}>
       <h2>🔒 Wake Lock</h2>
       <p style={{ fontSize: "14px" }}>
         Keep the screen awake while the user is interacting with your app.
       </p>
       {!WakeLock.isSupported() && (
-        <div
-          style={{
-            padding: "10px",
-            backgroundColor: "#fff3cd",
-            border: "1px solid #ffc107",
-            borderRadius: "4px",
-            marginBottom: "10px",
-          }}
-        >
+        <div className="demo-callout">
           <strong>⚠️ Wake Lock not supported:</strong>
           <br />
           This browser does not support the Wake Lock API.
@@ -45,14 +39,14 @@ function WakeLockDemo() {
       )}
       <div>
         <button
-          style={DEMO_BUTTON_STYLE}
+          className={DEMO_BUTTON_CLASS}
           onClick={handleRequestWakeLockClick}
           disabled={!WakeLock.isSupported() || wakeLockActive}
         >
           Request Wake Lock
         </button>
         <button
-          style={DEMO_BUTTON_STYLE}
+          className={DEMO_BUTTON_CLASS}
           onClick={handleReleaseWakeLockClick}
           disabled={!wakeLockActive}
         >
@@ -63,6 +57,7 @@ function WakeLockDemo() {
         <strong>Status:</strong>{" "}
         {wakeLockActive ? "✅ Active" : "❌ Not active"}
       </p>
+      <CodeSnippet code={WAKE_LOCK_EXAMPLE} />
     </section>
   );
 }

@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Clipboard } from "@pwasdk/core";
 import {
-  DEMO_BUTTON_STYLE,
-  DEMO_SECTION_STYLE,
+  DEMO_BUTTON_CLASS,
+  DEMO_SECTION_CLASS,
 } from "../../constants/demo.constants";
+import CodeSnippet from "../code-snippet";
+import { CLIPBOARD_EXAMPLE } from "./clipboard-demo.constants";
 
 function ClipboardDemo() {
   const [clipboardText, setClipboardText] = useState("");
@@ -28,13 +30,13 @@ function ClipboardDemo() {
   };
 
   return (
-    <section style={DEMO_SECTION_STYLE}>
+    <section className={DEMO_SECTION_CLASS}>
       <h2>📋 Clipboard</h2>
       <div>
-        <button style={DEMO_BUTTON_STYLE} onClick={handleCopyClick}>
+        <button className={DEMO_BUTTON_CLASS} onClick={handleCopyClick}>
           Copy Text
         </button>
-        <button style={DEMO_BUTTON_STYLE} onClick={handlePasteClick}>
+        <button className={DEMO_BUTTON_CLASS} onClick={handlePasteClick}>
           Paste Text
         </button>
       </div>
@@ -46,6 +48,7 @@ function ClipboardDemo() {
       <p>
         <small>Supported: {String(Clipboard.isSupported())}</small>
       </p>
+      <CodeSnippet code={CLIPBOARD_EXAMPLE} />
     </section>
   );
 }

@@ -1,8 +1,10 @@
 import { Install } from "@pwasdk/core";
 import {
-  DEMO_BUTTON_STYLE,
-  DEMO_SECTION_STYLE,
+  DEMO_BUTTON_CLASS,
+  DEMO_SECTION_CLASS,
 } from "../../constants/demo.constants";
+import CodeSnippet from "../code-snippet";
+import { INSTALL_EXAMPLE } from "./install-demo.constants";
 
 function InstallDemo() {
   const handleInstallClick = async () => {
@@ -22,35 +24,19 @@ function InstallDemo() {
   };
 
   return (
-    <section style={DEMO_SECTION_STYLE}>
+    <section className={DEMO_SECTION_CLASS}>
       <h2>📱 Install PWA</h2>
       {Install.isInstalled() && (
-        <div
-          style={{
-            padding: "10px",
-            backgroundColor: "#d4edda",
-            border: "1px solid #28a745",
-            borderRadius: "4px",
-            marginBottom: "10px",
-          }}
-        >
+        <div className="demo-callout ok">
           ✅ App is already installed!
         </div>
       )}
       {!Install.isSupported() && (
-        <div
-          style={{
-            padding: "10px",
-            backgroundColor: "#fff3cd",
-            border: "1px solid #ffc107",
-            borderRadius: "4px",
-            marginBottom: "10px",
-          }}
-        >
+        <div className="demo-callout">
           <strong>⚠️ Install not available:</strong>
           <br />
           Make sure you have:
-          <ul style={{ margin: "5px 0", paddingLeft: "20px" }}>
+          <ul>
             <li>Valid manifest.json</li>
             <li>Service worker registered</li>
             <li>HTTPS connection</li>
@@ -59,7 +45,7 @@ function InstallDemo() {
         </div>
       )}
       <button
-        style={DEMO_BUTTON_STYLE}
+        className={DEMO_BUTTON_CLASS}
         onClick={handleInstallClick}
         disabled={Install.isInstalled()}
       >
@@ -82,6 +68,7 @@ function InstallDemo() {
           <small>💡 Open browser console to see install prompt events</small>
         </p>
       </div>
+      <CodeSnippet code={INSTALL_EXAMPLE} />
     </section>
   );
 }

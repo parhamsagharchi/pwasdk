@@ -13,7 +13,7 @@ export function hasWindow(): boolean {
 
 export function hasNativeBridge(): boolean {
   if (!hasWindow()) return false;
-  const win = window as Window & Record<string, unknown>;
+  const win = window as unknown as Record<string, unknown>;
   return win[SCREENSHOT_BRIDGE_KEY] === true;
 }
 

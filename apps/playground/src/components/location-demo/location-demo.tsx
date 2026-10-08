@@ -1,35 +1,32 @@
 import { Geolocation } from "@pwasdk/core";
 import {
-  DEMO_BUTTON_STYLE,
-  DEMO_SECTION_STYLE,
+  DEMO_BUTTON_CLASS,
+  DEMO_SECTION_CLASS,
 } from "../../constants/demo.constants";
+import CodeSnippet from "../code-snippet";
+import PageLoader from "../page-loader";
+import { LOCATION_EXAMPLE } from "./location-demo.constants";
 import { useLocationDemo } from "./location-demo.hooks";
 
 function LocationDemo() {
   const {
     location,
     locationError,
+    isLocationLoading,
     isWatchingLocation,
     getCurrentLocation,
     toggleWatchLocation,
   } = useLocationDemo();
 
   return (
-    <section style={DEMO_SECTION_STYLE}>
+    <section className={DEMO_SECTION_CLASS}>
+      {isLocationLoading ? <PageLoader /> : null}
       <h2>📍 Location</h2>
       <p style={{ fontSize: "14px" }}>
         Get the user&apos;s current location using the Geolocation API.
       </p>
       {!Geolocation.isSupported() && (
-        <div
-          style={{
-            padding: "10px",
-            backgroundColor: "#fff3cd",
-            border: "1px solid #ffc107",
-            borderRadius: "4px",
-            marginBottom: "10px",
-          }}
-        >
+        <div className="demo-callout">
           <strong>⚠️ Location not supported:</strong>
           <br />
           Your browser does not support the Geolocation API.
@@ -37,14 +34,14 @@ function LocationDemo() {
       )}
       <div>
         <button
-          style={DEMO_BUTTON_STYLE}
+          className={DEMO_BUTTON_CLASS}
           onClick={getCurrentLocation}
           disabled={!Geolocation.isSupported()}
         >
           Get Current Location
         </button>
         <button
-          style={DEMO_BUTTON_STYLE}
+          className={DEMO_BUTTON_CLASS}
           onClick={toggleWatchLocation}
           disabled={!Geolocation.isSupported()}
         >
@@ -77,6 +74,7 @@ function LocationDemo() {
           )}
         </div>
       )}
+      <CodeSnippet code={LOCATION_EXAMPLE} />
     </section>
   );
 }

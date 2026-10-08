@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Fullscreen } from "@pwasdk/core";
 import {
-  DEMO_BUTTON_STYLE,
-  DEMO_SECTION_STYLE,
+  DEMO_BUTTON_CLASS,
+  DEMO_SECTION_CLASS,
 } from "../../constants/demo.constants";
+import CodeSnippet from "../code-snippet";
+import { FULLSCREEN_EXAMPLE } from "./fullscreen-demo.constants";
 
 function FullscreenDemo() {
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -18,21 +20,13 @@ function FullscreenDemo() {
   };
 
   return (
-    <section style={DEMO_SECTION_STYLE}>
+    <section className={DEMO_SECTION_CLASS}>
       <h2>⛶ Fullscreen</h2>
       <p style={{ fontSize: "14px" }}>
         Toggle fullscreen mode for the page (useful for games or videos).
       </p>
       {!Fullscreen.isSupported() && (
-        <div
-          style={{
-            padding: "10px",
-            backgroundColor: "#fff3cd",
-            border: "1px solid #ffc107",
-            borderRadius: "4px",
-            marginBottom: "10px",
-          }}
-        >
+        <div className="demo-callout">
           <strong>⚠️ Fullscreen not supported:</strong>
           <br />
           This browser does not support the Fullscreen API.
@@ -40,7 +34,7 @@ function FullscreenDemo() {
       )}
       <div>
         <button
-          style={DEMO_BUTTON_STYLE}
+          className={DEMO_BUTTON_CLASS}
           onClick={handleToggleFullscreenClick}
           disabled={!Fullscreen.isSupported()}
         >
@@ -50,6 +44,7 @@ function FullscreenDemo() {
       <p style={{ fontSize: "14px", marginTop: "8px" }}>
         <strong>Fullscreen:</strong> {String(isFullscreen)}
       </p>
+      <CodeSnippet code={FULLSCREEN_EXAMPLE} />
     </section>
   );
 }
