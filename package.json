@@ -1,14 +1,15 @@
 {
   "name": "pwasdk",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "description": "Monorepo for @pwasdk/core — Progressive Web App browser helpers",
   "license": "MIT",
   "packageManager": "pnpm@9.0.0",
   "scripts": {
-    "dev": "pnpm --filter playground dev",
+    "dev": "pnpm --filter react-playground dev",
     "build": "pnpm --filter @pwasdk/core build",
-    "build:playground": "pnpm --filter @pwasdk/core build && pnpm --filter playground build",
+    "build:playground": "pnpm --filter @pwasdk/core build && pnpm --filter react-playground build",
+    "build:react-playground": "pnpm --filter @pwasdk/core build && pnpm --filter react-playground build",
     "build:all": "pnpm -r build"
   },
   "engines": {

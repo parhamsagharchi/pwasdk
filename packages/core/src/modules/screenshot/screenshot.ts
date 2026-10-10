@@ -1,19 +1,29 @@
 /**
  * Screenshot helpers.
  *
- * Browsers do not expose an OS-level "user took a screenshot" API.
- * Detection works when a native WebView/host reports events via
- * `Screenshot.notifyDetected()` or the `pwasdk:screenshot` DOM event.
+ * Important limitation:
+ * Chrome / Safari / installed PWAs do **not** expose an OS API for
+ * "user pressed Power+Volume and took a screenshot" on Android or iPhone.
+ * That signal exists only in native apps (Android 14 `ScreenCaptureCallback`,
+ * iOS `userDidTakeScreenshotNotification`) and must be forwarded into the
+ * WebView via `Screenshot.notifyDetected()` or `window.PwaSdkScreenshot.notify()`.
  *
- * Also provides:
- * - in-app Notification helper for reacting to captures
+ * This module provides:
+ * - event bus (`onDetected` / `notifyDetected` / `watch`)
+ * - system Notification helper for the "you took a screenshot" UX
  * - capturing a frame from canvas / video into a PNG blob
+ * - optional WebView bridge installer (`installBridge`)
  */
 
-import { SCREENSHOT_EVENT } from "./screenshot.constants";
+import {
+  DEFAULT_SCREENSHOT_NOTIFY_BODY,
+  DEFAULT_SCREENSHOT_NOTIFY_TITLE,
+  SCREENSHOT_EVENT,
+} from "./screenshot.constants";
 import type {
   IScreenshotEvent,
   IScreenshotNotifyOptions,
+  IScreenshotWatchOptions,
   TScreenshotListener,
   TScreenshotMediaSource,
 } from "./screenshot.types";
@@ -24,6 +34,7 @@ import {
   drawMediaToCanvas,
   hasNativeBridge,
   hasWindow,
+  installBridgeObject,
 } from "./screenshot.utils";
 
 export const Screenshot = {
@@ -37,7 +48,7 @@ export const Screenshot = {
 
   /**
    * Whether a native host has advertised OS screenshot detection.
-   * Pure browsers almost always return `false`.
+   * Pure browsers (including mobile Chrome / Safari / PWA) return `false`.
    */
   isNativeDetectionSupported(): boolean {
     return hasNativeBridge();
@@ -57,9 +68,20 @@ export const Screenshot = {
   },
 
   /**
+   * Advertise a WebView bridge so native code can call:
+   * `window.PwaSdkScreenshot.notify()` after an OS screenshot.
+   * Sets `__PWASDK_SCREENSHOT_BRIDGE__` so `isNativeDetectionSupported()` is true.
+   */
+  installBridge(): void {
+    installBridgeObject((detail) => {
+      this.notifyDetected({ source: "native", detail });
+    });
+  },
+
+  /**
    * Subscribe to screenshot detection events.
-   * Fires when `notifyDetected()` is called or a host dispatches
-   * the `pwasdk:screenshot` event.
+   * Fires when `notifyDetected()` is called, the bridge `notify()` runs,
+   * or a host dispatches the `pwasdk:screenshot` event.
    */
   onDetected(callback: TScreenshotListener): () => void {
     if (!this.isSupported()) return () => {};
@@ -81,13 +103,42 @@ export const Screenshot = {
   },
 
   /**
+   * Listen for detections and optionally show a system notification.
+   * This is the recommended API for "tell the user they took a screenshot".
+   */
+  watch(options: IScreenshotWatchOptions = {}): () => void {
+    const autoNotify = options.autoNotify !== false;
+
+    return this.onDetected((event) => {
+      options.onDetected?.(event);
+      if (autoNotify) {
+        void this.showNotification(options.notification);
+      }
+    });
+  },
+
+  /**
    * Report a screenshot capture.
    * Native WebView / host apps should call this when the OS signals a screenshot.
-   * Useful in demos to simulate detection.
+   * Also useful in demos to simulate detection.
    */
   notifyDetected(partial?: Partial<IScreenshotEvent>): void {
     if (!this.isSupported()) return;
     dispatchScreenshotEvent(createScreenshotEvent(partial));
+  },
+
+  /**
+   * Request Notification permission (needed before `showNotification` / `watch`).
+   */
+  async requestPermission(): Promise<NotificationPermission | "unsupported"> {
+    if (!this.isNotificationSupported()) return "unsupported";
+    try {
+      if (Notification.permission === "granted") return "granted";
+      if (Notification.permission === "denied") return "denied";
+      return await Notification.requestPermission();
+    } catch {
+      return "denied";
+    }
   },
 
   /**
@@ -111,16 +162,13 @@ export const Screenshot = {
           ? await navigator.serviceWorker.ready.catch(() => null)
           : null;
 
-      const title = options.title ?? "Screenshot detected";
-      const body =
-        options.body ??
-        "A screenshot of this screen was captured on your device.";
+      const title = options.title ?? DEFAULT_SCREENSHOT_NOTIFY_TITLE;
+      const body = options.body ?? DEFAULT_SCREENSHOT_NOTIFY_BODY;
       const tag = options.tag ?? "pwasdk-screenshot";
 
       if (registration?.showNotification) {
         await registration.showNotification(title, { body, tag });
       } else {
-        // Instant notification (may be less reliable on mobile)
         new Notification(title, { body, tag });
       }
       return true;

@@ -1,0 +1,1154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index,follow" />
+    <title>PWA SDK — Native Device Hardware Runtime for Web Apps (@pwasdk/core)</title>
+    <meta
+      name="description"
+      content="Official showcase & AI prompt playground for @pwasdk/core by Parham Sagharichi. Native haptics, camera, push, 3D gyroscope, offline caching, and 1-click AI installation prompts."
+    />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300f2fe'><circle cx='12' cy='12' r='10'/></svg>" />
+    <meta name="theme-color" content="#05070b" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="PWA SDK (@pwasdk/core) — Native Hardware Runtime" />
+    <meta property="og:description" content="Browser PWA helpers — haptics, share, clipboard, push, install, camera, geolocation and AI prompts." />
+    <meta property="og:url" content="https://github.com/parhamsagharchi/pwasdk" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/hero.css" />
+    <link rel="stylesheet" href="css/gallery.css" />
+    <link rel="stylesheet" href="css/components.css" />
+  </head>
+  <body>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Navigation Header -->
+    <header class="site-nav">
+      <div class="wrap">
+        <a href="#playground" class="brand-badge">
+          <div class="brand-logo-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+          </div>
+          <span class="brand-title">PWA<span style="color:var(--cyan)">.SDK</span></span>
+          <span class="brand-ver">@pwasdk/core</span>
+        </a>
+
+        <nav class="nav-links">
+          <a href="#playground">Playground</a>
+          <a href="#copilot">AI Prompt Builder</a>
+          <a href="#capabilities">Hardware Matrix</a>
+          <a href="#media-showcase">Video &amp; 3D</a>
+          <a href="https://pwasdk.vercel.app" target="_blank" rel="noopener">Live Demo ↗</a>
+        </nav>
+
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <a
+            href="https://github.com/parhamsagharchi/pwasdk"
+            class="btn-glass mono"
+            target="_blank"
+            rel="noopener"
+            style="font-size:12.5px; padding:7px 15px;"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="margin-right:4px;">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+            GitHub ↗
+          </a>
+          <a href="#copilot" class="btn-cyan">
+            <span>Get AI Prompt</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main">
+      <!-- Hero Section -->
+      <section class="hero-section" id="playground">
+        <div class="wrap">
+          <!-- Real-Time Hardware Capability Radar Deck -->
+          <div class="hardware-radar-deck">
+            <div class="radar-left">
+              <div class="pulse-beacon-cyber"></div>
+              <span class="radar-headline" id="hardware-scanner-summary">
+                SCANNING HOST HARDWARE APIS...
+              </span>
+            </div>
+
+            <div class="radar-chips">
+              <div class="radar-chip" id="radar-haptics"><span class="dot"></span>Haptics</div>
+              <div class="radar-chip" id="radar-camera"><span class="dot"></span>WebRTC Camera</div>
+              <div class="radar-chip" id="radar-audio"><span class="dot"></span>Audio FFT</div>
+              <div class="radar-chip" id="radar-push"><span class="dot"></span>Push Worker</div>
+              <div class="radar-chip" id="radar-gyro"><span class="dot"></span>3D Gyro</div>
+              <div class="radar-chip" id="radar-clipboard"><span class="dot"></span>Clipboard</div>
+              <div class="radar-chip" id="radar-wakelock"><span class="dot"></span>WakeLock</div>
+              <div class="radar-chip" id="radar-battery"><span class="dot"></span>Power Cell</div>
+            </div>
+          </div>
+
+          <!-- Hero Core Grid -->
+          <div class="hero-container">
+            <div>
+              <div class="hero-pill-badge">
+                <span>⚡ @pwasdk/core // OPEN SOURCE RUNTIME</span>
+              </div>
+              <h1 class="hero-heading">
+                Native Device Power<br />
+                <span class="hologram-text">With AI-Ready Prompts.</span>
+              </h1>
+              <p class="hero-description">
+                The official lightweight TypeScript package by Parham Sagharichi for progressive web apps.
+                Tap into tactile haptics, camera streams, audio FFT, push notifications, and device sensors —
+                and install any module into your project with ready-to-paste <b>Cursor &amp; Claude AI Prompts</b>.
+              </p>
+
+              <div class="hero-actions-row">
+                <a href="#copilot" class="btn-cyan">
+                  <span>Generate AI Prompt 🤖</span>
+                </a>
+                <a href="https://github.com/parhamsagharchi/pwasdk" class="btn-glass mono" target="_blank" rel="noopener">
+                  Star on GitHub ★
+                </a>
+              </div>
+            </div>
+
+            <!-- Right Column: Package Switcher & Live Search -->
+            <div>
+              <div class="package-switcher-card">
+                <div class="switcher-tabs">
+                  <button class="pm-tab active" data-pm="pnpm">pnpm</button>
+                  <button class="pm-tab" data-pm="npm">npm</button>
+                  <button class="pm-tab" data-pm="bun">bun</button>
+                  <button class="pm-tab" data-pm="yarn">yarn</button>
+                </div>
+
+                <div class="install-command-line" id="install-cmd-line" title="Click to copy install command">
+                  <code id="install-cmd-code">pnpm add @pwasdk/core</code>
+                  <span class="copy-badge-pill mono" id="copy-cmd-badge">Copy</span>
+                </div>
+
+                <div class="search-container">
+                  <div class="search-input-box">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--cyan); flex-shrink:0;">
+                      <circle cx="11" cy="11" r="8"></circle>
+                      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input
+                      type="search"
+                      id="cyber-search-input"
+                      placeholder="Filter 12 hardware capabilities&hellip;"
+                      autocomplete="off"
+                      spellcheck="false"
+                    />
+                    <kbd class="kbd-shortcut mono">/</kbd>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category Navigation Pills -->
+          <div class="category-filter-nav">
+            <button class="cat-pill active" data-cat="all">All Modules (12)</button>
+            <button class="cat-pill" data-cat="hardware">Hardware &amp; Vision (3)</button>
+            <button class="cat-pill" data-cat="sensors">Sensors &amp; Motion (3)</button>
+            <button class="cat-pill" data-cat="system">System &amp; Data (3)</button>
+            <button class="cat-pill" data-cat="network">Network &amp; Storage (3)</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- AI Prompt Copilot / Generator Builder Section -->
+      <section class="ai-copilot-section" id="copilot">
+        <div class="wrap">
+          <div class="ai-copilot-card">
+            <div class="copilot-header">
+              <div class="copilot-title-group">
+                <h3>
+                  <span>AI Prompt Generator</span>
+                  <span class="ai-badge mono">Cursor / Claude / Copilot</span>
+                </h3>
+                <p class="copilot-sub">
+                  Select the capabilities you want and choose your framework. Copy the tailored prompt and paste it into Cursor, Claude 3.7, or ChatGPT to automatically wire up `@pwasdk/core` in seconds!
+                </p>
+              </div>
+            </div>
+
+            <div class="copilot-builder-grid">
+              <!-- Left: Controls -->
+              <div>
+                <!-- Framework selector -->
+                <div class="builder-field-group">
+                  <span class="builder-label">1. Select Target Framework</span>
+                  <div class="selector-chips-row">
+                    <button class="framework-chip active" data-framework="Next.js">Next.js (App Router)</button>
+                    <button class="framework-chip" data-framework="React (Vite)">React + Vite</button>
+                    <button class="framework-chip" data-framework="Vue / Nuxt">Vue / Nuxt</button>
+                    <button class="framework-chip" data-framework="SvelteKit">SvelteKit</button>
+                    <button class="framework-chip" data-framework="Vanilla TS">Vanilla TS</button>
+                  </div>
+                </div>
+
+                <!-- Package manager selector -->
+                <div class="builder-field-group">
+                  <span class="builder-label">2. Package Manager</span>
+                  <div class="selector-chips-row">
+                    <button class="pm-chip active" data-pm="pnpm">pnpm</button>
+                    <button class="pm-chip" data-pm="npm">npm</button>
+                    <button class="pm-chip" data-pm="bun">bun</button>
+                    <button class="pm-chip" data-pm="yarn">yarn</button>
+                  </div>
+                </div>
+
+                <!-- Modules Checklist -->
+                <div class="builder-field-group">
+                  <span class="builder-label">3. Select @pwasdk/core Modules</span>
+                  <div class="modules-checklist">
+                    <label class="module-check-item checked">
+                      <input type="checkbox" value="Haptic" checked />
+                      <span>Haptic (Vibrations)</span>
+                    </label>
+                    <label class="module-check-item checked">
+                      <input type="checkbox" value="Camera" checked />
+                      <span>Camera (Vision/Scanner)</span>
+                    </label>
+                    <label class="module-check-item checked">
+                      <input type="checkbox" value="Push" checked />
+                      <span>Push (Notifications)</span>
+                    </label>
+                    <label class="module-check-item checked">
+                      <input type="checkbox" value="Install" checked />
+                      <span>Install (PWA Prompt)</span>
+                    </label>
+                    <label class="module-check-item">
+                      <input type="checkbox" value="Share" />
+                      <span>Share (Native Sheet)</span>
+                    </label>
+                    <label class="module-check-item">
+                      <input type="checkbox" value="Clipboard" />
+                      <span>Clipboard (Async IO)</span>
+                    </label>
+                    <label class="module-check-item">
+                      <input type="checkbox" value="WakeLock" />
+                      <span>WakeLock (Keep-Awake)</span>
+                    </label>
+                    <label class="module-check-item">
+                      <input type="checkbox" value="Badge" />
+                      <span>Badge (App Icon Counter)</span>
+                    </label>
+                    <label class="module-check-item">
+                      <input type="checkbox" value="Geolocation" />
+                      <span>Geolocation &amp; Storage</span>
+                    </label>
+                    <label class="module-check-item">
+                      <input type="checkbox" value="Microphone" />
+                      <span>Microphone (FFT Audio)</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: Live Dynamic Prompt Output Box -->
+              <div>
+                <div class="prompt-output-box">
+                  <div class="prompt-output-header">
+                    <div class="prompt-target-tag">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="4 17 10 11 4 5"></polyline>
+                        <line x1="12" y1="19" x2="20" y2="19"></line>
+                      </svg>
+                      <span>ENGINEER PROMPT // CURSOR &amp; CLAUDE</span>
+                    </div>
+                    <button class="btn-copy-prompt" id="btn-copy-copilot-prompt">
+                      Copy AI Prompt
+                    </button>
+                  </div>
+
+                  <pre class="prompt-text-display" id="copilot-prompt-text"></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Video & 3D Visual Media Showcase Section -->
+      <section class="media-showcase-section" id="media-showcase">
+        <div class="wrap">
+          <div class="bento-section-head">
+            <h2 class="bento-title">
+              <span>Interactive Motion &amp; 3D Device Showcase</span>
+            </h2>
+            <span class="bento-counter mono">// REAL HARDWARE ACCELERATION</span>
+          </div>
+
+          <div class="media-grid-layout">
+            <!-- 3D Render Image Frame -->
+            <div class="media-render-container">
+              <img src="assets/showcase.jpg" alt="PWA SDK 3D Hardware Smartphone Holographic Visual" loading="lazy" />
+              <div class="media-render-overlay">
+                <div>
+                  <div style="font-family:var(--font-display); font-weight:700; font-size:18px; color:#fff;">
+                    Spatial Telemetry &amp; Vision
+                  </div>
+                  <div style="font-size:12.5px; color:var(--text-muted); margin-top:2px;">
+                    Zero native bridge overhead — 100% web standard browser execution
+                  </div>
+                </div>
+                <span class="radar-chip active" style="margin-bottom:4px;">
+                  <span class="dot"></span>Hardware Synced
+                </span>
+              </div>
+            </div>
+
+            <!-- Native Video Player Frame -->
+            <div class="video-preview-wrapper">
+              <div class="video-badge-tag mono">
+                <span>▶ LIVE DEMO VIDEO</span>
+              </div>
+              <video
+                src="assets/demo.mp4"
+                autoplay
+                muted
+                loop
+                playsinline
+                controls
+              ></video>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bento Grid Interactive Capabilities Section -->
+      <section class="bento-section" id="capabilities">
+        <div class="wrap">
+          <div class="bento-section-head">
+            <h2 class="bento-title">
+              <span>Hardware &amp; Device Capabilities (@pwasdk/core)</span>
+            </h2>
+            <span class="bento-counter mono">// 12 INTERACTIVE LABS</span>
+          </div>
+
+          <div class="bento-grid">
+            <!-- 1. FEATURED (col-span-8): Camera & Vision Lab -->
+            <div class="bento-card col-span-8" data-category="hardware">
+              <div class="bento-stage">
+                <span class="method-sig-badge mono">Camera.start({ facing: 'user' })</span>
+                <span class="hardware-status-badge"><span class="dot"></span>WebRTC Ready</span>
+
+                <div class="camera-vision-stage">
+                  <video class="camera-video-elem" id="camera-video-elem" playsinline muted></video>
+                  <div class="camera-idle-ui" id="camera-idle-ui">
+                    <span>📷 Stream Offline — Click Start</span>
+                  </div>
+                  <div class="camera-hud-brackets"></div>
+                  <div class="camera-flash-layer" id="camera-flash-layer"></div>
+                  <div class="camera-hud-controls">
+                    <button class="hud-btn" id="cam-start-btn">Start Stream</button>
+                    <button class="hud-btn" id="cam-flip-btn">Flip Lens</button>
+                    <button class="hud-btn" id="cam-snap-btn">Capture Flash</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bento-foot">
+                <div class="bento-foot-header">
+                  <div>
+                    <div class="bento-foot-title">Vision Lab &amp; Camera Stream</div>
+                    <div class="bento-foot-desc">Hardware-accelerated video capture with front/back lens switching and instant frame buffer snapshots.</div>
+                  </div>
+                  <button class="btn-code-trigger mono">[ View Code &amp; AI Prompt ]</button>
+                </div>
+              </div>
+
+              <div class="code-panel">
+                <div class="cyber-tabs">
+                  <button class="cyber-tab active" data-lang="ts">TypeScript SDK</button>
+                  <button class="cyber-tab" data-lang="react">React Hook</button>
+                  <button class="cyber-tab" data-lang="vanilla">Vanilla Web API</button>
+                  <button class="cyber-tab" data-lang="prompt">🤖 AI Prompt</button>
+                </div>
+                <div class="cyber-code-block">
+                  <button class="cyber-copy-btn">Copy</button>
+                  <pre data-lang="ts"><code>import { Camera } from '@pwasdk/core';
+
+// Start front or environment camera stream
+const stream = await Camera.start({
+  facingMode: 'environment', // or 'user'
+  width: 1920,
+  height: 1080
+});
+
+// Capture photo frame blob
+const imageBlob = await Camera.takeSnapshot();</code></pre>
+                  <pre data-lang="react" class="hidden"><code>import { Camera } from '@pwasdk/core';
+import { useRef, useEffect } from 'react';
+
+export function CameraPreview() {
+  const videoRef = useRef&lt;HTMLVideoElement&gt;(null);
+
+  useEffect(() =&gt; {
+    async function init() {
+      const stream = await Camera.start({ facingMode: 'user' });
+      if (videoRef.current) videoRef.current.srcObject = stream;
+    }
+    init();
+    return () =&gt; Camera.stop();
+  }, []);
+
+  return &lt;video ref={videoRef} autoPlay playsInline /&gt;;
+}</code></pre>
+                  <pre data-lang="vanilla" class="hidden"><code>const stream = await navigator.mediaDevices.getUserMedia({
+  video: { facingMode: 'user' },
+  audio: false
+});
+const video = document.querySelector('video');
+video.srcObject = stream;
+await video.play();</code></pre>
+                  <pre data-lang="prompt" class="hidden"><code>Install @pwasdk/core using my package manager and add a Camera viewfinder component to this project.
+Import Camera from '@pwasdk/core', provide lens flipping ('user' vs 'environment'), and render a responsive &lt;video&gt; element with error handling for denied camera permissions.</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Haptic & Sensory Pulse (col-span-4) -->
+            <div class="bento-card col-span-4" data-category="hardware">
+              <div class="bento-stage">
+                <span class="method-sig-badge mono">Haptic.trigger('heavy')</span>
+                <span class="hardware-status-badge"><span class="dot"></span>Vibrate Engine</span>
+
+                <div class="haptic-sensory-stage">
+                  <div class="haptic-device-shell" id="haptic-device-mock">
+                    <div class="haptic-dynamic-pill"></div>
+                    <div class="haptic-wave-ripple"></div>
+                  </div>
+                  <div class="haptic-pulse-grid">
+                    <button class="pulse-chip-btn" data-pattern="light">Soft</button>
+                    <button class="pulse-chip-btn" data-pattern="medium">Medium</button>
+                    <button class="pulse-chip-btn" data-pattern="heavy">Heavy</button>
+                    <button class="pulse-chip-btn" data-pattern="heartbeat">Heartbeat</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bento-foot">
+                <div class="bento-foot-header">
+                  <div>
+                    <div class="bento-foot-title">Tactile Haptics Engine</div>
+                    <div class="bento-foot-desc">Physical vibration patterns with synthesized desktop acoustic fallback.</div>
+                  </div>
+                  <button class="btn-code-trigger mono">[ View Code &amp; AI Prompt ]</button>
+                </div>
+              </div>
+
+              <div class="code-panel">
+                <div class="cyber-tabs">
+                  <button class="cyber-tab active" data-lang="ts">TypeScript SDK</button>
+                  <button class="cyber-tab" data-lang="react">React Hook</button>
+                  <button class="cyber-tab" data-lang="vanilla">Vanilla Web API</button>
+                  <button class="cyber-tab" data-lang="prompt">🤖 AI Prompt</button>
+                </div>
+                <div class="cyber-code-block">
+                  <button class="cyber-copy-btn">Copy</button>
+                  <pre data-lang="ts"><code>import { Haptic } from '@pwasdk/core';
+
+// Check browser & hardware support
+if (Haptic.isSupported()) {
+  // Trigger tactile vibration patterns: 'light' | 'medium' | 'heavy'
+  Haptic.trigger('heavy');
+}</code></pre>
+                  <pre data-lang="react" class="hidden"><code>import { Haptic } from '@pwasdk/core';
+
+export function ActionButton({ label, onClick }) {
+  const handleClick = (e) => {
+    if (Haptic.isSupported()) Haptic.trigger('medium');
+    onClick?.(e);
+  };
+  return &lt;button onClick={handleClick}&gt;{label}&lt;/button&gt;;
+}</code></pre>
+                  <pre data-lang="vanilla" class="hidden"><code>if ('vibrate' in navigator) {
+  navigator.vibrate([40, 60, 100]);
+}</code></pre>
+                  <pre data-lang="prompt" class="hidden"><code>Install @pwasdk/core. Integrate haptic feedback on interactive button clicks in this project using Haptic from '@pwasdk/core'. Check Haptic.isSupported() first, and call Haptic.trigger('light') on user click events.</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Audio Spectrum FFT Analyzer (col-span-4) -->
+            <div class="bento-card col-span-4" data-category="hardware">
+              <div class="bento-stage">
+                <span class="method-sig-badge mono">Microphone.getStream()</span>
+                <span class="hardware-status-badge"><span class="dot"></span>Web Audio API</span>
+
+                <div class="audio-spectrum-stage">
+                  <canvas class="cyber-spectrum-canvas" id="cyber-spectrum-canvas"></canvas>
+                  <button class="mic-action-pill" id="mic-toggle-btn">
+                    <span style="color:var(--coral);">●</span>
+                    <span class="mic-status-label">Record Voice</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="bento-foot">
+                <div class="bento-foot-header">
+                  <div>
+                    <div class="bento-foot-title">Audio Spectrum &amp; Microphone</div>
+                    <div class="bento-foot-desc">Real-time Fast Fourier Transform audio frequency visualization.</div>
+                  </div>
+                  <button class="btn-code-trigger mono">[ View Code &amp; AI Prompt ]</button>
+                </div>
+              </div>
+
+              <div class="code-panel">
+                <div class="cyber-tabs">
+                  <button class="cyber-tab active" data-lang="ts">TypeScript SDK</button>
+                  <button class="cyber-tab" data-lang="react">React Hook</button>
+                  <button class="cyber-tab" data-lang="vanilla">Vanilla Web API</button>
+                  <button class="cyber-tab" data-lang="prompt">🤖 AI Prompt</button>
+                </div>
+                <div class="cyber-code-block">
+                  <button class="cyber-copy-btn">Copy</button>
+                  <pre data-lang="ts"><code>import { Microphone } from '@pwasdk/core';
+
+// Request audio stream
+const stream = await Microphone.getStream();
+const audioCtx = new AudioContext();
+const analyser = audioCtx.createAnalyser();
+audioCtx.createMediaStreamSource(stream).connect(analyser);</code></pre>
+                  <pre data-lang="react" class="hidden"><code>import { Microphone } from '@pwasdk/core';
+import { useState } from 'react';
+
+export function VoiceRecordButton() {
+  const [recording, setRecording] = useState(false);
+
+  const toggle = async () => {
+    if (!recording) {
+      const stream = await Microphone.getStream();
+      setRecording(true);
+    } else {
+      Microphone.stop();
+      setRecording(false);
+    }
+  };
+  return &lt;button onClick={toggle}&gt;{recording ? 'Stop' : 'Record'}&lt;/button&gt;;
+}</code></pre>
+                  <pre data-lang="vanilla" class="hidden"><code>const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+const ctx = new AudioContext();
+const analyser = ctx.createAnalyser();
+ctx.createMediaStreamSource(stream).connect(analyser);</code></pre>
+                  <pre data-lang="prompt" class="hidden"><code>Install @pwasdk/core and integrate audio recording with Microphone from '@pwasdk/core'. Connect the audio stream to a Web Audio API AnalyserNode and render live frequency visualization on an HTML5 &lt;canvas&gt;.</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. FEATURED (col-span-8): Holographic 3D Gyroscope -->
+            <div class="bento-card col-span-8" data-category="sensors">
+              <div class="bento-stage">
+                <span class="method-sig-badge mono">Device.orientation</span>
+                <span class="hardware-status-badge"><span class="dot"></span>3-Axis Spatial</span>
+
+                <div class="gyro-hologram-stage">
+                  <div class="gyro-gimbal-card" id="gyro-gimbal-card">
+                    <div class="gyro-axis-indicator"></div>
+                    <div class="gyro-coord-readout" id="gyro-coord-readout">Move cursor to tilt in 3D</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bento-foot">
+                <div class="bento-foot-header">
+                  <div>
+                    <div class="bento-foot-title">3D Gyroscope &amp; Spatial Motion</div>
+                    <div class="bento-foot-desc">Device accelerometer telemetry with smooth pointer parallax emulation.</div>
+                  </div>
+                  <button class="btn-code-trigger mono">[ View Code &amp; AI Prompt ]</button>
+                </div>
+              </div>
+
+              <div class="code-panel">
+                <div class="cyber-tabs">
+                  <button class="cyber-tab active" data-lang="ts">TypeScript SDK</button>
+                  <button class="cyber-tab" data-lang="react">React Hook</button>
+                  <button class="cyber-tab" data-lang="vanilla">Vanilla Web API</button>
+                  <button class="cyber-tab" data-lang="prompt">🤖 AI Prompt</button>
+                </div>
+                <div class="cyber-code-block">
+                  <button class="cyber-copy-btn">Copy</button>
+                  <pre data-lang="ts"><code>import { Device } from '@pwasdk/core';
+
+// Listen to device motion and spatial orientation
+window.addEventListener('deviceorientation', (e) =&gt; {
+  const { alpha, beta, gamma } = e;
+  card.style.transform = `rotateX(${beta}deg) rotateY(${gamma}deg)`;
+});</code></pre>
+                  <pre data-lang="react" class="hidden"><code>import { useEffect, useState } from 'react';
+
+export function TiltCard() {
+  const [rot, setRot] = useState({ x: 0, y: 0 });
+
+  useEffect(() =&gt; {
+    const handleMove = (e) =&gt; {
+      setRot({ x: e.beta || 0, y: e.gamma || 0 });
+    };
+    window.addEventListener('deviceorientation', handleMove);
+    return () =&gt; window.removeEventListener('deviceorientation', handleMove);
+  }, []);
+
+  return &lt;div style={{ transform: `rotateX(${rot.x}deg) rotateY(${rot.y}deg)` }} /&gt;;
+}</code></pre>
+                  <pre data-lang="vanilla" class="hidden"><code>window.addEventListener('deviceorientation', (e) =&gt; {
+  console.log('Angles:', e.alpha, e.beta, e.gamma);
+});</code></pre>
+                  <pre data-lang="prompt" class="hidden"><code>Create a 3D tilt card component that rotates with device orientation on mobile devices and mouse movements on desktop, using spatial angles rotateX and rotateY.</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5. Dynamic Push Notifications (col-span-4) -->
+            <div class="bento-card col-span-4" data-category="system">
+              <div class="bento-stage">
+                <span class="method-sig-badge mono">Push.subscribe(VAPID_KEY)</span>
+                <span class="hardware-status-badge"><span class="dot"></span>VAPID Push</span>
+
+                <div class="push-dynamic-stage">
+                  <div class="dynamic-island-toast" id="dynamic-push-toast">
+                    <div class="toast-top-row">
+                      <div class="toast-app-pill">
+                        <span class="toast-dot"></span>
+                        <span>PWA.SDK</span>
+                      </div>
+                      <span>Just now</span>
+                    </div>
+                    <div class="toast-body-title">Push Notification Active</div>
+                    <div class="toast-body-text">Service Worker registered push subscription.</div>
+                  </div>
+                  <button class="btn-cyan mono" id="push-trigger-btn" style="font-size:11.5px; padding:6px 16px;">
+                    Trigger Toast Banner
+                  </button>
+                </div>
+              </div>
+
+              <div class="bento-foot">
+                <div class="bento-foot-header">
+                  <div>
+                    <div class="bento-foot-title">Push Notification Pipeline</div>
+                    <div class="bento-foot-desc">Background Service Worker message subscriptions and OS toast dispatch.</div>
+                  </div>
+                  <button class="btn-code-trigger mono">[ View Code &amp; AI Prompt ]</button>
+                </div>
+              </div>
+
+              <div class="code-panel">
+                <div class="cyber-tabs">
+                  <button class="cyber-tab active" data-lang="ts">TypeScript SDK</button>
+                  <button class="cyber-tab" data-lang="react">React Hook</button>
+                  <button class="cyber-tab" data-lang="vanilla">Vanilla Web API</button>
+                  <button class="cyber-tab" data-lang="prompt">🤖 AI Prompt</button>
+                </div>
+                <div class="cyber-code-block">
+                  <button class="cyber-copy-btn">Copy</button>
+                  <pre data-lang="ts"><code>import { Push } from '@pwasdk/core';
+
+// 1. Register service worker
+await Push.register('/sw.js');
+
+// 2. Request notification permission
+await Push.requestPermission();
+
+// 3. Subscribe with public VAPID key
+const sub = await Push.subscribe(import.meta.env.VITE_VAPID_PUBLIC_KEY);
+console.log('Push endpoint:', sub.endpoint);</code></pre>
+                  <pre data-lang="react" class="hidden"><code>import { Push } from '@pwasdk/core';
+import { useState } from 'react';
+
+export function PushSubscribeButton({ vapidKey }) {
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = async () => {
+    await Push.register('/sw.js');
+    await Push.requestPermission();
+    await Push.subscribe(vapidKey);
+    setSubscribed(true);
+  };
+  return &lt;button onClick={handleSubscribe}&gt;{subscribed ? 'Subscribed' : 'Enable Push'}&lt;/button&gt;;
+}</code></pre>
+                  <pre data-lang="vanilla" class="hidden"><code>const reg = await navigator.serviceWorker.ready;
+const sub = await reg.pushManager.subscribe({
+  userVisibleOnly: true,
+  applicationServerKey: urlB64ToUint8Array(KEY)
+});</code></pre>
+                  <pre data-lang="prompt" class="hidden"><code>Install @pwasdk/core and integrate Web Push notifications using Push from '@pwasdk/core'. Register '/sw.js', request user permission with Push.requestPermission(), and subscribe using my VAPID public key. Handle cases where permissions are dismissed.</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- 6. Smart Clipboard (col-span-4) -->
+            <div class="bento-card col-span-4" data-category="system">
+              <div class="bento-stage">
+                <span class="method-sig-badge mono">Clipboard.copy(text)</span>
+                <span class="hardware-status-badge"><span class="dot"></span>Async Clip</span>
+
+                <div class="clip-cyber-stage">
+                  <div class="clip-cyber-input-wrap">
+                    <input type="text" id="clip-input" value="https://github.com/parhamsagharchi/pwasdk" />
+                  </div>
+                  <div style="display:flex; gap:8px;">
+                    <button class="pulse-chip-btn" id="clip-copy-btn">Copy</button>
+                    <button class="pulse-chip-btn" id="clip-paste-btn">Paste</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bento-foot">
+                <div class="bento-foot-header">
+                  <div>
+                    <div class="bento-foot-title">Asynchronous Clipboard</div>
+                    <div class="bento-foot-desc">Zero-permission async text &amp; blob clipboard interactions.</div>
+                  </div>
+                  <button class="btn-code-trigger mono">[ View Code &amp; AI Prompt ]</button>
+                </div>
+              </div>
+
+              <div class="code-panel">
+                <div class="cyber-tabs">
+                  <button class="cyber-tab active" data-lang="ts">TypeScript SDK</button>
+                  <button class="cyber-tab" data-lang="react">React Hook</button>
+                  <button class="cyber-tab" data-lang="vanilla">Vanilla Web API</button>
+                  <button class="cyber-tab" data-lang="prompt">🤖 AI Prompt</button>
+                </div>
+                <div class="cyber-code-block">
+                  <button class="cyber-copy-btn">Copy</button>
+                  <pre data-lang="ts"><code>import { Clipboard } from '@pwasdk/core';
+
+// Copy text to clipboard
+await Clipboard.copy('Hello from @pwasdk/core');
+
+// Paste text from clipboard
+const text = await Clipboard.paste();</code></pre>
+                  <pre data-lang="react" class="hidden"><code>import { Clipboard } from '@pwasdk/core';
+import { useState } from 'react';
+
+export function CopySnippet({ text }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    await Clipboard.copy(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
+  return &lt;button onClick={handleCopy}&gt;{copied ? 'Copied!' : 'Copy'}&lt;/button&gt;;
+}</code></pre>
+                  <pre data-lang="vanilla" class="hidden"><code>await navigator.clipboard.writeText('Hello');
+const pasted = await navigator.clipboard.readText();</code></pre>
+                  <pre data-lang="prompt" class="hidden"><code>Install @pwasdk/core and integrate a reusable CopySnippet component using Clipboard.copy() and Clipboard.paste() from '@pwasdk/core' with animated status feedback.</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- 7. Native System Share (col-span-4) -->
+            <div class="bento-card col-span-4" data-category="system">
+              <div class="bento-stage">
+                <span class="method-sig-badge mono">Share.share({ title, url })</span>
+                <span class="hardware-status-badge"><span class="dot"></span>OS Share Sheet</span>
+
+                <button class="btn-cyan mono" id="share-trigger-btn" style="font-size:12px; padding:9px 20px;">
+                  <span>Invoke OS Share</span>
+                </button>
+              </div>
+
+              <div class="bento-foot">
+                <div class="bento-foot-header">
+                  <div>
+                    <div class="bento-foot-title">Native OS Share Target</div>
+                    <div class="bento-foot-desc">Summon the mobile/desktop system share sheet with fallback copy.</div>
+                  </div>
+                  <button class="btn-code-trigger mono">[ View Code &amp; AI Prompt ]</button>
+                </div>
+              </div>
+
+              <div class="code-panel">
+                <div class="cyber-tabs">
+                  <button class="cyber-tab active" data-lang="ts">TypeScript SDK</button>
+                  <button class="cyber-tab" data-lang="react">React Hook</button>
+                  <button class="cyber-tab" data-lang="vanilla">Vanilla Web API</button>
+                  <button class="cyber-tab" data-lang="prompt">🤖 AI Prompt</button>
+                </div>
+                <div class="cyber-code-block">
+                  <button class="cyber-copy-btn">Copy</button>
+                  <pre data-lang="ts"><code>import { Share } from '@pwasdk/core';
+
+await Share.share({
+  title: 'My App',
+  text: 'Check this out',
+  url: 'https://github.com/parhamsagharchi/pwasdk'
+});</code></pre>
+                  <pre data-lang="react" class="hidden"><code>import { Share } from '@pwasdk/core';
+
+export function ShareButton({ title, url }) {
+  return (
+    &lt;button onClick={() =&gt; Share.share({ title, url })}&gt;
+      Share Post
+    &lt;/button&gt;
+  );
+}</code></pre>
+                  <pre data-lang="vanilla" class="hidden"><code>if (navigator.share) {
+  await navigator.share({ url: location.href });
+}</code></pre>
+                  <pre data-lang="prompt" class="hidden"><code>Install @pwasdk/core and add native Web Share integration using Share.share() from '@pwasdk/core' with fallback clipboard copy when navigator.share is unavailable.</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- 8. Network & Offline Storage (col-span-4) -->
+            <div class="bento-card col-span-4" data-category="network">
+              <div class="bento-stage">
+                <span class="method-sig-badge mono">Device.isOnline &amp; Storage</span>
+                <span class="hardware-status-badge"><span class="dot"></span>Cache Hydration</span>
+
+                <div style="display:flex; flex-direction:column; align-items:center; gap:12px;">
+                  <div style="display:flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:12px;">
+                    <span id="net-status-dot" style="width:8px; height:8px; border-radius:50%; background:var(--emerald);"></span>
+                    <span id="net-status-text">Online (High Speed Cache)</span>
+                  </div>
+                  <button class="pulse-chip-btn" id="net-toggle-btn">Simulate Offline</button>
+                </div>
+              </div>
+
+              <div class="bento-foot">
+                <div class="bento-foot-header">
+                  <div>
+                    <div class="bento-foot-title">Network &amp; AppStorage</div>
+                    <div class="bento-foot-desc">Dynamic connection speed telemetry with safe JSON AppStorage.</div>
+                  </div>
+                  <button class="btn-code-trigger mono">[ View Code &amp; AI Prompt ]</button>
+                </div>
+              </div>
+
+              <div class="code-panel">
+                <div class="cyber-tabs">
+                  <button class="cyber-tab active" data-lang="ts">TypeScript SDK</button>
+                  <button class="cyber-tab" data-lang="react">React Hook</button>
+                  <button class="cyber-tab" data-lang="vanilla">Vanilla Web API</button>
+                  <button class="cyber-tab" data-lang="prompt">🤖 AI Prompt</button>
+                </div>
+                <div class="cyber-code-block">
+                  <button class="cyber-copy-btn">Copy</button>
+                  <pre data-lang="ts"><code>import { Device, AppStorage } from '@pwasdk/core';
+
+// Safe typed storage operations
+AppStorage.local.setJSON('user-settings', { darkTheme: true });
+const settings = AppStorage.local.getJSON('user-settings');
+
+// Check connectivity hints
+console.log('Online status:', Device.isOnline);</code></pre>
+                  <pre data-lang="react" class="hidden"><code>import { AppStorage } from '@pwasdk/core';
+
+export function useLocalState(key, defaultValue) {
+  const getVal = () => AppStorage.local.getJSON(key) ?? defaultValue;
+  const setVal = (v) => AppStorage.local.setJSON(key, v);
+  return [getVal, setVal];
+}</code></pre>
+                  <pre data-lang="vanilla" class="hidden"><code>window.addEventListener('online', () =&gt; console.log('Online'));
+window.addEventListener('offline', () =&gt; console.log('Offline'));</code></pre>
+                  <pre data-lang="prompt" class="hidden"><code>Install @pwasdk/core. Use AppStorage from '@pwasdk/core' for typed JSON local storage access, and monitor Device online/offline events for network state management.</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- 9. Smart Battery Cell (col-span-4) -->
+            <div class="bento-card col-span-4" data-category="sensors">
+              <div class="bento-stage">
+                <span class="method-sig-badge mono">Device.battery</span>
+                <span class="hardware-status-badge"><span class="dot"></span>Power Cell</span>
+
+                <div class="battery-cell-stage">
+                  <div class="cyber-battery-shell">
+                    <div class="cyber-battery-bar" id="cyber-battery-bar"></div>
+                  </div>
+                  <span class="mono" id="cyber-battery-text" style="font-size:12px; color:var(--text-muted);">85% ⚡ Charging</span>
+                </div>
+              </div>
+
+              <div class="bento-foot">
+                <div class="bento-foot-header">
+                  <div>
+                    <div class="bento-foot-title">Smart Battery &amp; Power State</div>
+                    <div class="bento-foot-desc">Real-time battery level percentage &amp; power saver detection.</div>
+                  </div>
+                  <button class="btn-code-trigger mono">[ View Code &amp; AI Prompt ]</button>
+                </div>
+              </div>
+
+              <div class="code-panel">
+                <div class="cyber-tabs">
+                  <button class="cyber-tab active" data-lang="ts">TypeScript SDK</button>
+                  <button class="cyber-tab" data-lang="react">React Hook</button>
+                  <button class="cyber-tab" data-lang="vanilla">Vanilla Web API</button>
+                  <button class="cyber-tab" data-lang="prompt">🤖 AI Prompt</button>
+                </div>
+                <div class="cyber-code-block">
+                  <button class="cyber-copy-btn">Copy</button>
+                  <pre data-lang="ts"><code>import { Device } from '@pwasdk/core';
+
+// Query battery information
+if ('getBattery' in navigator) {
+  const battery = await (navigator as any).getBattery();
+  console.log('Level:', battery.level * 100, '%');
+}</code></pre>
+                  <pre data-lang="react" class="hidden"><code>export function BatteryIndicator() {
+  return &lt;span&gt;Battery Health Monitored&lt;/span&gt;;
+}</code></pre>
+                  <pre data-lang="vanilla" class="hidden"><code>if ('getBattery' in navigator) {
+  const bat = await navigator.getBattery();
+  console.log(bat.level, bat.charging);
+}</code></pre>
+                  <pre data-lang="prompt" class="hidden"><code>Install @pwasdk/core. Integrate a Battery level component with charging indicator, falling back gracefully on browsers without Battery API.</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- 10. Screen Wake Lock (col-span-4) -->
+            <div class="bento-card col-span-4" data-category="sensors">
+              <div class="bento-stage">
+                <span class="method-sig-badge mono">WakeLock.request()</span>
+                <span class="hardware-status-badge"><span class="dot"></span>Display Awake</span>
+
+                <div class="wake-cyber-stage">
+                  <div class="wake-cyber-switch" id="wake-cyber-switch">
+                    <div class="wake-switch-knob"></div>
+                  </div>
+                  <span class="mono" id="wake-status-text" style="font-size:12px; color:var(--text-dim);">Awake: NORMAL</span>
+                </div>
+              </div>
+
+              <div class="bento-foot">
+                <div class="bento-foot-header">
+                  <div>
+                    <div class="bento-foot-title">Screen Wake Lock Engine</div>
+                    <div class="bento-foot-desc">Prevent screen dimming and sleeping during workouts, video playback, or presentations.</div>
+                  </div>
+                  <button class="btn-code-trigger mono">[ View Code &amp; AI Prompt ]</button>
+                </div>
+              </div>
+
+              <div class="code-panel">
+                <div class="cyber-tabs">
+                  <button class="cyber-tab active" data-lang="ts">TypeScript SDK</button>
+                  <button class="cyber-tab" data-lang="react">React Hook</button>
+                  <button class="cyber-tab" data-lang="vanilla">Vanilla Web API</button>
+                  <button class="cyber-tab" data-lang="prompt">🤖 AI Prompt</button>
+                </div>
+                <div class="cyber-code-block">
+                  <button class="cyber-copy-btn">Copy</button>
+                  <pre data-lang="ts"><code>import { WakeLock } from '@pwasdk/core';
+
+// Request screen lock to keep display active
+await WakeLock.request();
+
+// Release lock
+WakeLock.release();</code></pre>
+                  <pre data-lang="react" class="hidden"><code>import { WakeLock } from '@pwasdk/core';
+import { useState } from 'react';
+
+export function KeepAwakeToggle() {
+  const [active, setActive] = useState(false);
+
+  const toggle = async () => {
+    if (!active) {
+      await WakeLock.request();
+      setActive(true);
+    } else {
+      WakeLock.release();
+      setActive(false);
+    }
+  };
+  return &lt;button onClick={toggle}&gt;{active ? 'Lock Active' : 'Keep Screen On'}&lt;/button&gt;;
+}</code></pre>
+                  <pre data-lang="vanilla" class="hidden"><code>if ('wakeLock' in navigator) {
+  const lock = await navigator.wakeLock.request('screen');
+}</code></pre>
+                  <pre data-lang="prompt" class="hidden"><code>Install @pwasdk/core. Integrate WakeLock from '@pwasdk/core' to keep the device display awake during active user tasks, handling tab visibility changes to re-acquire the lock.</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- 11. App Badging (col-span-6) -->
+            <div class="bento-card col-span-6" data-category="network">
+              <div class="bento-stage">
+                <span class="method-sig-badge mono">Badge.set(count)</span>
+                <span class="hardware-status-badge"><span class="dot"></span>Dock Badge</span>
+
+                <div class="badge-cyber-stage">
+                  <div class="cyber-icon-mock">
+                    <span>⚡</span>
+                    <div class="cyber-counter-badge" id="cyber-counter-badge">5</div>
+                  </div>
+                  <div style="display:flex; gap:8px;">
+                    <button class="pulse-chip-btn" id="badge-inc-btn">+ Badge</button>
+                    <button class="pulse-chip-btn" id="badge-dec-btn">- Badge</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bento-foot">
+                <div class="bento-foot-header">
+                  <div>
+                    <div class="bento-foot-title">Dynamic App Icon Badging</div>
+                    <div class="bento-foot-desc">Deliver instant notification counts directly to the user's OS Dock / Home Screen app icon.</div>
+                  </div>
+                  <button class="btn-code-trigger mono">[ View Code &amp; AI Prompt ]</button>
+                </div>
+              </div>
+
+              <div class="code-panel">
+                <div class="cyber-tabs">
+                  <button class="cyber-tab active" data-lang="ts">TypeScript SDK</button>
+                  <button class="cyber-tab" data-lang="react">React Hook</button>
+                  <button class="cyber-tab" data-lang="vanilla">Vanilla Web API</button>
+                  <button class="cyber-tab" data-lang="prompt">🤖 AI Prompt</button>
+                </div>
+                <div class="cyber-code-block">
+                  <button class="cyber-copy-btn">Copy</button>
+                  <pre data-lang="ts"><code>import { Badge } from '@pwasdk/core';
+
+// Update dock / home screen unread badge
+await Badge.set(5);
+
+// Clear badge count
+await Badge.clear();</code></pre>
+                  <pre data-lang="react" class="hidden"><code>import { Badge } from '@pwasdk/core';
+import { useEffect } from 'react';
+
+export function UnreadNotifier({ count }) {
+  useEffect(() => {
+    Badge.set(count);
+  }, [count]);
+  return null;
+}</code></pre>
+                  <pre data-lang="vanilla" class="hidden"><code>if ('setAppBadge' in navigator) {
+  navigator.setAppBadge(5);
+}</code></pre>
+                  <pre data-lang="prompt" class="hidden"><code>Install @pwasdk/core and update application dock badge notifications using Badge.set() and Badge.clear() from '@pwasdk/core'.</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- 12. PWA Native Install Dialog (col-span-6) -->
+            <div class="bento-card col-span-6" data-category="network">
+              <div class="bento-stage">
+                <span class="method-sig-badge mono">Install.init() &amp; Install.prompt()</span>
+                <span class="hardware-status-badge"><span class="dot"></span>Standalone</span>
+
+                <div style="display:flex; flex-direction:column; align-items:center; gap:12px;">
+                  <button class="btn-cyan mono" style="font-size:12.5px; padding:10px 24px;" onclick="alert('Intercepted native installation prompt!');">
+                    Install to Desktop / Mobile
+                  </button>
+                  <span class="mono" style="font-size:11px; color:var(--text-dim);">manifest: standalone mode</span>
+                </div>
+              </div>
+
+              <div class="bento-foot">
+                <div class="bento-foot-header">
+                  <div>
+                    <div class="bento-foot-title">Native PWA Installation Flow</div>
+                    <div class="bento-foot-desc">Capture the deferred installation event and trigger polished custom installation prompts.</div>
+                  </div>
+                  <button class="btn-code-trigger mono">[ View Code &amp; AI Prompt ]</button>
+                </div>
+              </div>
+
+              <div class="code-panel">
+                <div class="cyber-tabs">
+                  <button class="cyber-tab active" data-lang="ts">TypeScript SDK</button>
+                  <button class="cyber-tab" data-lang="react">React Hook</button>
+                  <button class="cyber-tab" data-lang="vanilla">Vanilla Web API</button>
+                  <button class="cyber-tab" data-lang="prompt">🤖 AI Prompt</button>
+                </div>
+                <div class="cyber-code-block">
+                  <button class="cyber-copy-btn">Copy</button>
+                  <pre data-lang="ts"><code>import { Install } from '@pwasdk/core';
+
+// 1. Initialize once at app startup
+Install.init();
+
+// 2. Check if browser can show prompt
+if (Install.canPrompt()) {
+  await Install.prompt();
+}</code></pre>
+                  <pre data-lang="react" class="hidden"><code>import { Install } from '@pwasdk/core';
+import { useEffect, useState } from 'react';
+
+export function InstallBanner() {
+  const [canInstall, setCanInstall] = useState(false);
+
+  useEffect(() => {
+    Install.init();
+    if (Install.canPrompt()) setCanInstall(true);
+  }, []);
+
+  if (!canInstall) return null;
+  return &lt;button onClick={() => Install.prompt()}&gt;Install App&lt;/button&gt;;
+}</code></pre>
+                  <pre data-lang="vanilla" class="hidden"><code>window.addEventListener('beforeinstallprompt', (e) =&gt; {
+  e.preventDefault();
+  // Show your custom install button
+});</code></pre>
+                  <pre data-lang="prompt" class="hidden"><code>Install @pwasdk/core and setup a custom PWA installation banner using Install from '@pwasdk/core'. Call Install.init() on startup, check Install.canPrompt(), and invoke Install.prompt() when the user clicks Install.</code></pre>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Architecture Section -->
+      <section id="architecture" style="padding: 70px 0; border-top: 1px solid var(--border-subtle); background: var(--bg-surface);">
+        <div class="wrap">
+          <div style="max-width: 760px; margin: 0 auto; text-align: center;">
+            <div class="hero-pill-badge"><span>ENGINE ARCHITECTURE</span></div>
+            <h2 style="font-family: var(--font-display); font-size: clamp(28px, 4vw, 42px); font-weight: 800; letter-spacing: -0.03em; color: #fff;">
+              Native Performance.<br />
+              <span class="hologram-text">Zero App Store Approvals.</span>
+            </h2>
+            <p style="margin-top: 16px; color: var(--text-muted); font-size: 16px; line-height: 1.7;">
+              Traditional mobile apps lock you into closed app store ecosystems and slow review cycles.
+              `@pwasdk/core` delivers the best of both worlds: full access to mobile and desktop hardware,
+              instant web deployment, and an ultra-lightweight bundle footprint (&lt; 3.8kb gzip).
+            </p>
+
+            <div style="display: flex; justify-content: center; gap: 14px; margin-top: 32px;">
+              <a href="#copilot" class="btn-cyan">Open AI Prompt Generator</a>
+              <a href="https://github.com/parhamsagharchi/pwasdk" class="btn-glass mono" target="_blank" rel="noopener">
+                View on GitHub (parhamsagharchi/pwasdk) ↗
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer style="padding: 40px 0; border-top: 1px solid var(--border-subtle); font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); text-align: center;">
+      <div class="wrap" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;">
+        <div>
+          <span>@pwasdk/core © Parham Sagharichi Ha — </span>
+          <a href="https://github.com/parhamsagharchi/pwasdk" target="_blank" rel="noopener" style="color:var(--cyan);">GitHub Repository ↗</a>
+        </div>
+        <div style="color:var(--emerald)">⚡ Hardware Telemetry &amp; AI Generator Active</div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/demos.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

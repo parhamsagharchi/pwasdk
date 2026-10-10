@@ -17,7 +17,7 @@ pnpm dev
 
 ```
 packages/core   # publishable SDK (@pwasdk/core)
-apps/playground # local demo app (not published)
+apps/react-playground # React live demo app (not published)
 ```
 
 ## Development guidelines
