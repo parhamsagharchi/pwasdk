@@ -2,9 +2,9 @@
 
 **Version:** `1.1.0`
 
-Browser helpers for Progressive Web Apps: haptics, share, clipboard, push, install prompts, geolocation, wake lock, camera, and more.
+Small TypeScript modules for browser and PWA APIs — one export per feature (`Camera`, `Haptic`, `Push`, `Share`, …). Import, call `isSupported()`, then use it.
 
-Live demo: [pwasdk.vercel.app](https://pwasdk.vercel.app) (`apps/react-playground`)
+Live demo: [pwasdk.vercel.app](https://pwasdk.vercel.app)
 
 ## Install
 

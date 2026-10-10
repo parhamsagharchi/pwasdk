@@ -17,10 +17,9 @@ export function useCameraDemo() {
     stream: MediaStream | null,
     setFn: (s: MediaStream | null) => void,
   ) => {
-    if (stream) {
-      stream.getTracks().forEach((t) => t.stop());
-      setFn(null);
-    }
+    if (!stream) return;
+    Camera.stop(stream);
+    setFn(null);
   };
 
   const stopFrames = () => {
@@ -59,10 +58,10 @@ export function useCameraDemo() {
           setFrameCallbackRan(true);
         });
       }
-    } catch (e: any) {
-      console.error("camera error:", e);
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : String(e);
       setCameraError(
-        e?.message ||
+        message ||
           "Failed to open camera. Check HTTPS and camera permissions.",
       );
     } finally {

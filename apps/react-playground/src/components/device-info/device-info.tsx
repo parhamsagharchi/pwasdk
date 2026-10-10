@@ -6,7 +6,7 @@ import type { IDeviceInfoProps } from "./device-info.types";
 function DeviceInfo({ online, orientation }: IDeviceInfoProps) {
   const stageRef = useRef<HTMLDivElement | null>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const [readout, setReadout] = useState("Move cursor to tilt in 3D");
+  const [readout, setReadout] = useState("Move pointer to tilt");
 
   useEffect(() => {
     const stage = stageRef.current;
@@ -24,7 +24,7 @@ function DeviceInfo({ online, orientation }: IDeviceInfoProps) {
 
     const handleLeave = () => {
       setTilt({ x: 0, y: 0 });
-      setReadout("Move cursor to tilt in 3D");
+      setReadout("Move pointer to tilt");
     };
 
     const handleOrientation = (event: DeviceOrientationEvent) => {

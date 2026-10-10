@@ -19,7 +19,11 @@ export type TAiModuleId =
   | "Badge"
   | "Geolocation"
   | "Screenshot"
-  | "AppStorage";
+  | "AppStorage"
+  | "Orientation"
+  | "Pwa"
+  | "Device"
+  | "Fullscreen";
 
 export interface IAiModuleOption {
   id: TAiModuleId;

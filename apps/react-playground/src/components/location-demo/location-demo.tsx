@@ -19,13 +19,11 @@ function LocationDemo() {
   return (
     <section className={DEMO_SECTION_CLASS}>
       {isLocationLoading ? <PageLoader /> : null}
-      {!Geolocation.isSupported() && (
+      {!Geolocation.isSupported() ? (
         <div className="demo-callout">
-          <strong>⚠️ Location not supported:</strong>
-          <br />
-          Your browser does not support the Geolocation API.
+          Geolocation API is not supported in this browser.
         </div>
-      )}
+      ) : null}
       <div className="demo-actions-row">
         <button
           type="button"

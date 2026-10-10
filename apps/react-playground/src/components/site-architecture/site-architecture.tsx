@@ -6,22 +6,20 @@ function SiteArchitecture() {
       <div className="wrap">
         <div className="architecture-inner">
           <div className="hero-pill-badge">
-            <span>ENGINE ARCHITECTURE</span>
+            <span>How it works</span>
           </div>
           <h2 className="architecture-heading">
-            Native Performance.
-            <br />
-            <span className="hologram-text">Zero App Store Approvals.</span>
+            Import. Check support. Call it.
           </h2>
           <p className="architecture-copy">
-            Traditional mobile apps lock you into closed store ecosystems.{" "}
-            <code>@pwasdk/core</code> gives you device APIs in the browser —
-            import the module, call <code>isSupported()</code>, then use it. This
-            page is the live React demo of that same package.
+            <code>@pwasdk/core</code> is a set of small TypeScript modules over
+            browser APIs (camera, vibration, push, share, and so on). Import a
+            module, call <code>isSupported()</code>, then use it — no app-store
+            build required. This page is the live React demo of that package.
           </p>
           <div className="architecture-actions">
             <a href="#copilot" className="btn-cyan">
-              Open AI Prompt Generator
+              Get AI prompt
             </a>
             <a
               href={GITHUB_URL}
@@ -29,7 +27,7 @@ function SiteArchitecture() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              View on GitHub
+              View source
             </a>
           </div>
         </div>

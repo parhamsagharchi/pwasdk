@@ -18,11 +18,11 @@ export const PACKAGE_MANAGERS: TPackageManager[] = [
 ];
 
 export const CATEGORY_PILLS: ICategoryPill[] = [
-  { id: "all", label: "All Modules (14)" },
-  { id: "hardware", label: "Hardware & Vision (3)" },
-  { id: "sensors", label: "Sensors & Motion (4)" },
-  { id: "system", label: "System & Data (5)" },
-  { id: "network", label: "Network & Storage (2)" },
+  { id: "all", label: "All (16)" },
+  { id: "hardware", label: "Camera & audio (3)" },
+  { id: "sensors", label: "Device (5)" },
+  { id: "system", label: "App (6)" },
+  { id: "network", label: "Storage (2)" },
 ];
 
 export const GITHUB_URL = "https://github.com/parhamsagharchi/pwasdk";

@@ -18,7 +18,7 @@ function CodeSnippet({ code }: ICodeSnippetProps) {
   return (
     <div className="code-snippet is-open">
       <div className="code-snippet-bar">
-        <span className="mono">TypeScript SDK</span>
+        <span className="mono">Example</span>
         <button type="button" className="pulse-chip-btn" onClick={handleCopyClick}>
           {copied ? "Copied!" : "Copy"}
         </button>

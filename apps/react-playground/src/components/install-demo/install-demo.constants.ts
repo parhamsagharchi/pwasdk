@@ -1,8 +1,10 @@
-export const INSTALL_EXAMPLE = `import { Install } from "@pwasdk/core";
+export const INSTALL_EXAMPLE = `import { Install, Pwa } from "@pwasdk/core";
 
 Install.init();
 
-if (Install.canPrompt()) {
+if (Pwa.platform() === "ios") {
+  console.log(Pwa.getIOSInstallInstructions());
+} else if (Install.canPrompt()) {
   await Install.prompt();
 }
 `;

@@ -79,7 +79,7 @@ function MicrophoneDemo() {
         >
           <span className="mic-live-dot">●</span>
           <span className="mic-status-label">
-            {micStream ? "Stop Mic" : "Record Voice"}
+            {micStream ? "Stop mic" : "Start mic"}
           </span>
         </button>
         <div className="haptic-pulse-grid">

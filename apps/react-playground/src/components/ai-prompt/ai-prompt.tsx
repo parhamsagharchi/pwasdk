@@ -22,13 +22,13 @@ function AiPrompt() {
           <div className="copilot-header">
             <div className="copilot-title-group">
               <h3>
-                <span>AI Prompt Generator</span>
-                <span className="ai-badge mono">Cursor / Claude / Copilot</span>
+                <span>AI prompt</span>
+                <span className="ai-badge mono">Cursor · Claude · Copilot</span>
               </h3>
               <p className="copilot-sub">
-                Pick a framework and the @pwasdk/core modules you need. Copy the
-                prompt and paste it into Cursor, Claude, or ChatGPT to wire the
-                real package APIs into your app.
+                Choose your framework and the modules you need. Copy the prompt
+                and paste it into Cursor, Claude, or ChatGPT to wire{" "}
+                <code>@pwasdk/core</code> into your project.
               </p>
             </div>
           </div>
@@ -36,7 +36,7 @@ function AiPrompt() {
           <div className="copilot-builder-grid">
             <div>
               <div className="builder-field-group">
-                <span className="builder-label">1. Select Target Framework</span>
+                <span className="builder-label">1. Framework</span>
                 <div className="selector-chips-row">
                   {AI_FRAMEWORKS.map((framework) => (
                     <button
@@ -58,7 +58,7 @@ function AiPrompt() {
               </div>
 
               <div className="builder-field-group">
-                <span className="builder-label">2. Package Manager</span>
+                <span className="builder-label">2. Package manager</span>
                 <div className="selector-chips-row">
                   {AI_PACKAGE_MANAGERS.map((manager) => (
                     <button
@@ -78,9 +78,7 @@ function AiPrompt() {
               </div>
 
               <div className="builder-field-group">
-                <span className="builder-label">
-                  3. Select @pwasdk/core Modules
-                </span>
+                <span className="builder-label">3. Modules</span>
                 <div className="modules-checklist">
                   {AI_MODULE_OPTIONS.map((option) => {
                     const checked = state.modules.includes(option.id);
@@ -121,7 +119,7 @@ function AiPrompt() {
                       <polyline points="4 17 10 11 4 5" />
                       <line x1="12" y1="19" x2="20" y2="19" />
                     </svg>
-                    <span>ENGINEER PROMPT // CURSOR &amp; CLAUDE</span>
+                    <span>Prompt preview</span>
                   </div>
                   <button
                     type="button"
@@ -130,7 +128,7 @@ function AiPrompt() {
                     }
                     onClick={handleCopyClick}
                   >
-                    {state.copied ? "Copied to Clipboard!" : "Copy AI Prompt"}
+                    {state.copied ? "Copied!" : "Copy prompt"}
                   </button>
                 </div>
                 <pre className="prompt-text-display">{promptText}</pre>

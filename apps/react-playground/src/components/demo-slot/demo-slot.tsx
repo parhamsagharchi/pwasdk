@@ -50,7 +50,7 @@ function DemoSlot({
             aria-expanded={codeOpen}
             onClick={handleCodeToggleClick}
           >
-            {codeOpen ? "[ Hide Code ]" : "[ View Code ]"}
+            {codeOpen ? "Hide code" : "Show code"}
           </button>
         </div>
         {codeOpen ? <CodeSnippet code={code} /> : null}

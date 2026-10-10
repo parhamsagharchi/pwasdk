@@ -16,11 +16,13 @@ export default function App() {
           <Ui.Location />
           <Ui.WakeLock />
           <Ui.Fullscreen />
+          <Ui.Orientation />
           <Ui.Share />
           <Ui.Clipboard />
           <Ui.Push />
           <Ui.Screenshot />
           <Ui.Install />
+          <Ui.Pwa />
           <Ui.Badge />
           <Ui.Storage />
         </Ui.Examples>

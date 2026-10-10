@@ -21,18 +21,22 @@ export const AI_PACKAGE_MANAGERS: TAiPackageManager[] = [
 ];
 
 export const AI_MODULE_OPTIONS: IAiModuleOption[] = [
-  { id: "Haptic", label: "Haptic (Vibrations)" },
-  { id: "Camera", label: "Camera (Vision / watch)" },
-  { id: "Microphone", label: "Microphone (listen)" },
-  { id: "Push", label: "Push (Notifications)" },
-  { id: "Install", label: "Install (PWA Prompt)" },
-  { id: "Share", label: "Share (Native Sheet)" },
-  { id: "Clipboard", label: "Clipboard (Async IO)" },
-  { id: "WakeLock", label: "WakeLock (Keep-Awake)" },
-  { id: "Badge", label: "Badge (App Icon Counter)" },
-  { id: "Geolocation", label: "Geolocation" },
-  { id: "Screenshot", label: "Screenshot (onDetected)" },
-  { id: "AppStorage", label: "AppStorage" },
+  { id: "Haptic", label: "Haptic — vibration" },
+  { id: "Camera", label: "Camera — video stream" },
+  { id: "Microphone", label: "Microphone — audio / speech" },
+  { id: "Device", label: "Device — platform / online" },
+  { id: "Push", label: "Push — web notifications" },
+  { id: "Install", label: "Install — PWA prompt" },
+  { id: "Pwa", label: "Pwa — platform / standalone" },
+  { id: "Share", label: "Share — system share sheet" },
+  { id: "Clipboard", label: "Clipboard — copy / paste" },
+  { id: "WakeLock", label: "WakeLock — keep screen on" },
+  { id: "Orientation", label: "Orientation — lock screen" },
+  { id: "Fullscreen", label: "Fullscreen — display mode" },
+  { id: "Badge", label: "Badge — app icon count" },
+  { id: "Geolocation", label: "Geolocation — GPS" },
+  { id: "Screenshot", label: "Screenshot — notify on capture" },
+  { id: "AppStorage", label: "AppStorage — local / session" },
 ];
 
 export const DEFAULT_AI_MODULES: TAiModuleId[] = [
@@ -67,6 +71,14 @@ export const AI_MODULE_INSTRUCTIONS: Record<TAiModuleId, string> = {
     "- Screenshot: Call Screenshot.installBridge() in WebViews, Screenshot.watch({ autoNotify: true }) for notifications, and have native Android/iOS call window.PwaSdkScreenshot.notify() on OS screenshots (browsers cannot detect Power+Volume alone).",
   AppStorage:
     "- AppStorage: Persist JSON with AppStorage.local.setJSON / getJSON.",
+  Orientation:
+    "- Orientation: Check Orientation.isSupported(), read Orientation.current(), and use Orientation.lock / unlock (often needs fullscreen or an installed PWA).",
+  Pwa:
+    "- Pwa: Use Pwa.platform(), Pwa.isStandalone(), and Pwa.getIOSInstallInstructions() for iOS Add to Home Screen.",
+  Device:
+    "- Device: Read Device.isMobile, Device.online, Device.platform, and Device.onOnlineStatusChange.",
+  Fullscreen:
+    "- Fullscreen: Call Fullscreen.isSupported() then Fullscreen.request / exit / toggle.",
 };
 
 export const AI_INSTALL_COMMANDS: Record<TAiPackageManager, string> = {

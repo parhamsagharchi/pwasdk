@@ -20,10 +20,9 @@ function ScreenshotDemo() {
   return (
     <section className={DEMO_SECTION_CLASS}>
       <div className="demo-callout">
-        Mobile Chrome / Safari / PWA cannot see Power+Volume screenshots.
-        Only a native Android / iOS shell can detect the OS event, then call{" "}
-        <code>window.PwaSdkScreenshot.notify()</code>. This card shows the
-        notification once that event (or a manual report) fires.
+        Browsers cannot detect a real phone screenshot. Use{" "}
+        <strong>Simulate screenshot</strong> to test the notification, or call{" "}
+        <code>window.PwaSdkScreenshot.notify()</code> from a native WebView.
       </div>
       <div className="demo-actions-row">
         {notificationSupported ? (

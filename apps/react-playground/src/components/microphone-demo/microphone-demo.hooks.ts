@@ -19,10 +19,9 @@ export function useMicrophoneDemo() {
     stream: MediaStream | null,
     setFn: (s: MediaStream | null) => void,
   ) => {
-    if (stream) {
-      stream.getTracks().forEach((t) => t.stop());
-      setFn(null);
-    }
+    if (!stream) return;
+    stream.getTracks().forEach((t) => t.stop());
+    setFn(null);
   };
 
   const openMic = async () => {
@@ -43,11 +42,9 @@ export function useMicrophoneDemo() {
       if (audioRef.current) {
         Microphone.attachToAudio(audioRef.current, stream);
       }
-    } catch (e: any) {
-      console.error("mic error:", e);
-      setMicError(
-        e?.message || "Failed to open microphone. Check permissions.",
-      );
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : String(e);
+      setMicError(message || "Failed to open microphone. Check permissions.");
     } finally {
       setIsMicLoading(false);
     }
@@ -78,8 +75,9 @@ export function useMicrophoneDemo() {
         }
       });
       setIsListening(true);
-    } catch (e: any) {
-      setMicError(e?.message || "Failed to listen.");
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : String(e);
+      setMicError(message || "Failed to listen.");
     }
   };
 

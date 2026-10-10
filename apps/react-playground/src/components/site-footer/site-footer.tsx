@@ -7,11 +7,11 @@ function SiteFooter() {
         <div>
           <span>@pwasdk/core — </span>
           <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
-            GitHub Repository
+            GitHub
           </a>
         </div>
         <div className="site-footer-status">
-          Hardware Telemetry &amp; AI Generator Active
+          TypeScript helpers for browser / PWA APIs
         </div>
       </div>
     </footer>

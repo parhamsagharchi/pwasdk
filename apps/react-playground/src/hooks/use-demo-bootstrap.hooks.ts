@@ -68,8 +68,6 @@ export function useDemoBootstrap() {
   }, []);
 
   useEffect(() => {
-    console.log("App mounted, checking features...");
-
     const isHTTPS = window.location.protocol === "https:";
     const isLocalhost =
       window.location.hostname === "localhost" ||
@@ -79,22 +77,20 @@ export function useDemoBootstrap() {
 
     if (!isHTTPS && !isLocalhost) {
       warnings.push(
-        "⚠️ HTTPS required for many PWA features! Use https:// instead of http://",
+        "HTTPS required for many PWA features. Use https:// instead of http://",
       );
     }
 
     if (!Haptic.isSupported()) {
-      warnings.push(
-        "📳 Haptic not supported - Make sure you're on a mobile device",
-      );
+      warnings.push("Haptic needs a phone (or a browser with Vibration API).");
     }
 
     if (!Clipboard.isSupported()) {
-      warnings.push("📋 Clipboard requires HTTPS (except localhost)");
+      warnings.push("Clipboard requires HTTPS (except localhost).");
     }
 
     if (!Push.isSupported()) {
-      warnings.push("🔔 Push notifications require HTTPS");
+      warnings.push("Push notifications require HTTPS and a service worker.");
     }
 
     dispatch({
@@ -102,8 +98,6 @@ export function useDemoBootstrap() {
       debugInfo: warnings.join("\n"),
       protocol: window.location.protocol,
     });
-    console.log("Protocol:", window.location.protocol);
-    console.log("Hostname:", window.location.hostname);
   }, []);
 
   return state;

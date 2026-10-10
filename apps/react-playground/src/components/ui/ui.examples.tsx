@@ -17,8 +17,12 @@ import { LOCATION_EXAMPLE } from "../location-demo/location-demo.constants";
 import LocationDemo from "../location-demo";
 import { MICROPHONE_EXAMPLE } from "../microphone-demo/microphone-demo.constants";
 import MicrophoneDemo from "../microphone-demo";
+import { ORIENTATION_EXAMPLE } from "../orientation-demo/orientation-demo.constants";
+import OrientationDemo from "../orientation-demo";
 import { PUSH_EXAMPLE } from "../push-demo/push-demo.constants";
 import PushDemo from "../push-demo";
+import { PWA_EXAMPLE } from "../pwa-demo/pwa-demo.constants";
+import PwaDemo from "../pwa-demo";
 import { SCREENSHOT_EXAMPLE } from "../screenshot-demo/screenshot-demo.constants";
 import ScreenshotDemo from "../screenshot-demo";
 import { SHARE_EXAMPLE } from "../share-demo/share-demo.constants";
@@ -65,12 +69,12 @@ function Camera() {
   return (
     <ExampleSlot
       category="hardware"
-      label="camera vision stream"
+      label="camera stream watch"
       span="col-span-8"
-      signature="Camera.openFront() + Camera.watch"
-      status="WebRTC Ready"
-      title="Vision Lab & Camera Stream"
-      description="Hardware-accelerated capture with lens switching and your own Camera.watch frame action."
+      signature="Camera.openFront() · Camera.watch"
+      status="getUserMedia"
+      title="Camera"
+      description="Open the front or back camera and run your own frame callback with Camera.watch."
       code={CAMERA_EXAMPLE}
     >
       <CameraDemo />
@@ -82,11 +86,11 @@ function Haptic() {
   return (
     <ExampleSlot
       category="hardware"
-      label="haptic vibration feedback"
+      label="haptic vibration"
       signature="Haptic.trigger('heavy')"
-      status="Vibrate Engine"
-      title="Tactile Haptics Engine"
-      description="Physical vibration patterns with desktop visual feedback."
+      status="Vibration API"
+      title="Haptic"
+      description="Trigger short vibration patterns on supported phones."
       code={HAPTIC_EXAMPLE}
     >
       <HapticDemo />
@@ -98,11 +102,11 @@ function Microphone() {
   return (
     <ExampleSlot
       category="hardware"
-      label="microphone audio"
+      label="microphone speech listen"
       signature="Microphone.listen(onTranscript)"
-      status="Speech Ready"
-      title="Audio Spectrum & Microphone"
-      description="Open the mic stream and pass your own listen callback — this card matches “hello”."
+      status="getUserMedia"
+      title="Microphone"
+      description="Open the mic and pass your own speech callback — this demo listens for “hello”."
       code={MICROPHONE_EXAMPLE}
     >
       <MicrophoneDemo />
@@ -116,12 +120,12 @@ function Device() {
   return (
     <ExampleSlot
       category="sensors"
-      label="device information orientation platform"
+      label="device platform online orientation"
       span="col-span-8"
-      signature="Device.isMobile / Device.orientation"
-      status="3-Axis Spatial"
-      title="3D Gyroscope & Spatial Motion"
-      description="Device telemetry with pointer parallax tilt and live platform signals."
+      signature="Device.isMobile · Device.online"
+      status="Navigator"
+      title="Device"
+      description="Read platform, online status, connection hints, and screen orientation."
       code={DEVICE_EXAMPLE}
     >
       <DeviceInfo online={online} orientation={orientation} />
@@ -135,9 +139,9 @@ function Location() {
       category="sensors"
       label="geolocation location"
       signature="Geolocation.getCurrent()"
-      status="Geo Ready"
+      status="Geolocation API"
       title="Geolocation"
-      description="Read or watch the user location with the Geolocation helpers."
+      description="Get the current position or watch updates with permission."
       code={LOCATION_EXAMPLE}
     >
       <LocationDemo />
@@ -149,11 +153,11 @@ function WakeLock() {
   return (
     <ExampleSlot
       category="sensors"
-      label="wake lock screen awake"
+      label="wake lock screen"
       signature="WakeLock.request()"
-      status="Display Awake"
-      title="Screen Wake Lock Engine"
-      description="Keep the display awake during workouts, video, or presentations."
+      status="Wake Lock API"
+      title="WakeLock"
+      description="Keep the screen on while a task is active (video, workout, kiosk)."
       code={WAKE_LOCK_EXAMPLE}
     >
       <WakeLockDemo />
@@ -167,12 +171,28 @@ function Fullscreen() {
       category="sensors"
       label="fullscreen display"
       signature="Fullscreen.toggle()"
-      status="Display"
+      status="Fullscreen API"
       title="Fullscreen"
-      description="Toggle fullscreen mode for immersive pages and media."
+      description="Enter or exit fullscreen for the page or an element."
       code={FULLSCREEN_EXAMPLE}
     >
       <FullscreenDemo />
+    </ExampleSlot>
+  );
+}
+
+function OrientationExample() {
+  return (
+    <ExampleSlot
+      category="sensors"
+      label="orientation lock portrait landscape"
+      signature="Orientation.lock('portrait')"
+      status="Screen Orientation"
+      title="Orientation"
+      description="Read the current screen orientation and lock portrait or landscape when the browser allows it."
+      code={ORIENTATION_EXAMPLE}
+    >
+      <OrientationDemo />
     </ExampleSlot>
   );
 }
@@ -181,11 +201,11 @@ function Share() {
   return (
     <ExampleSlot
       category="system"
-      label="share native sheet"
+      label="share web share"
       signature="Share.share({ title, url })"
-      status="OS Share Sheet"
-      title="Native OS Share Target"
-      description="Open the system share sheet with a clipboard fallback when needed."
+      status="Web Share API"
+      title="Share"
+      description="Open the system share sheet, with clipboard fallback when share is missing."
       code={SHARE_EXAMPLE}
     >
       <ShareDemo />
@@ -199,9 +219,9 @@ function Clipboard() {
       category="system"
       label="clipboard copy paste"
       signature="Clipboard.copy(text)"
-      status="Async Clip"
-      title="Asynchronous Clipboard"
-      description="Async text copy and paste through the Clipboard helpers."
+      status="Clipboard API"
+      title="Clipboard"
+      description="Copy and paste text with the async Clipboard helpers."
       code={CLIPBOARD_EXAMPLE}
     >
       <ClipboardDemo />
@@ -215,9 +235,9 @@ function Push() {
       category="system"
       label="push notifications"
       signature="Push.subscribe(VAPID_KEY)"
-      status="VAPID Push"
-      title="Push Notification Pipeline"
-      description="Register a worker, request permission, and subscribe with your VAPID key."
+      status="Push API"
+      title="Push"
+      description="Register a service worker, ask for permission, and subscribe with your VAPID key."
       code={PUSH_EXAMPLE}
     >
       <PushDemo />
@@ -229,11 +249,11 @@ function Screenshot() {
   return (
     <ExampleSlot
       category="system"
-      label="screenshot notify capture"
+      label="screenshot notify"
       signature="Screenshot.watch({ autoNotify })"
-      status="Notify Ready"
-      title="Screenshot Notification"
-      description="Shows a system notification when a screenshot is reported. OS detection needs a native Android/iOS bridge."
+      status="Event + Notification"
+      title="Screenshot"
+      description="Show a notification when a screenshot is reported. Real OS detection needs a native WebView bridge."
       code={SCREENSHOT_EXAMPLE}
     >
       <ScreenshotDemo />
@@ -246,13 +266,29 @@ function Install() {
     <ExampleSlot
       category="system"
       label="install pwa prompt"
-      signature="Install.init() & Install.prompt()"
-      status="Standalone"
-      title="Native PWA Installation Flow"
-      description="Capture the deferred install event and trigger a custom install prompt."
+      signature="Install.init() · Install.prompt()"
+      status="beforeinstallprompt"
+      title="Install"
+      description="Catch the browser install event and show your own Install button."
       code={INSTALL_EXAMPLE}
     >
       <InstallDemo />
+    </ExampleSlot>
+  );
+}
+
+function Pwa() {
+  return (
+    <ExampleSlot
+      category="system"
+      label="pwa platform standalone ios install"
+      signature="Pwa.platform() · Pwa.isStandalone()"
+      status="Display mode"
+      title="Pwa"
+      description="Detect platform, standalone mode, and show iOS Add to Home Screen steps."
+      code={PWA_EXAMPLE}
+    >
+      <PwaDemo />
     </ExampleSlot>
   );
 }
@@ -264,9 +300,9 @@ function Badge() {
       label="badge app icon"
       span="col-span-6"
       signature="Badge.set(count)"
-      status="Dock Badge"
-      title="Dynamic App Icon Badging"
-      description="Show unread counts on the dock or home-screen icon when supported."
+      status="Badging API"
+      title="Badge"
+      description="Set or clear the unread count on the app icon (when the browser supports it)."
       code={BADGE_EXAMPLE}
     >
       <BadgeDemo />
@@ -278,12 +314,12 @@ function Storage() {
   return (
     <ExampleSlot
       category="network"
-      label="storage local session network offline"
+      label="storage local session online"
       span="col-span-6"
-      signature="Device.online & AppStorage"
-      status="Cache Hydration"
-      title="Network & AppStorage"
-      description="Connection telemetry with typed JSON-safe AppStorage helpers."
+      signature="AppStorage.local · Device.online"
+      status="Storage API"
+      title="AppStorage"
+      description="Typed get/set/JSON helpers for localStorage and sessionStorage, plus online status."
       code={STORAGE_EXAMPLE}
     >
       <StorageDemo />
@@ -299,11 +335,13 @@ export const uiExamples = {
   Location,
   WakeLock,
   Fullscreen,
+  Orientation: OrientationExample,
   Share,
   Clipboard,
   Push,
   Screenshot,
   Install,
+  Pwa,
   Badge,
   Storage,
 };

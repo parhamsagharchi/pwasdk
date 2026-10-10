@@ -1,15 +1,42 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { WakeLock } from "@pwasdk/core";
 import { DEMO_SECTION_CLASS } from "../../constants/demo.constants";
 
 function WakeLockDemo() {
   const [wakeLockActive, setWakeLockActive] = useState(false);
+  const wantActiveRef = useRef(false);
+
+  useEffect(() => {
+    const handleVisibility = () => {
+      void (async () => {
+        if (document.visibilityState !== "visible") return;
+        if (!wantActiveRef.current || !WakeLock.isSupported()) return;
+        if (WakeLock.isActive()) {
+          setWakeLockActive(true);
+          return;
+        }
+        try {
+          await WakeLock.request();
+          setWakeLockActive(true);
+        } catch {
+          setWakeLockActive(false);
+          wantActiveRef.current = false;
+        }
+      })();
+    };
+
+    document.addEventListener("visibilitychange", handleVisibility);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibility);
+    };
+  }, []);
 
   const handleToggleClick = () => {
     void (async () => {
       if (!WakeLock.isSupported()) return;
 
       if (wakeLockActive) {
+        wantActiveRef.current = false;
         await WakeLock.release();
         setWakeLockActive(false);
         return;
@@ -17,6 +44,7 @@ function WakeLockDemo() {
 
       try {
         await WakeLock.request();
+        wantActiveRef.current = true;
         setWakeLockActive(true);
       } catch (e: unknown) {
         const message =
@@ -28,9 +56,12 @@ function WakeLockDemo() {
 
   return (
     <section className={DEMO_SECTION_CLASS}>
-      {!WakeLock.isSupported() && (
-        <div className="demo-callout">Wake Lock API is not supported.</div>
-      )}
+      {!WakeLock.isSupported() ? (
+        <div className="demo-callout">
+          Wake Lock API is not supported (needs a secure context on most
+          phones).
+        </div>
+      ) : null}
       <div className="wake-cyber-stage">
         <button
           type="button"
@@ -49,7 +80,7 @@ function WakeLockDemo() {
             wakeLockActive ? "wake-status-text is-active" : "wake-status-text"
           }
         >
-          Awake: {wakeLockActive ? "LOCKED" : "NORMAL"}
+          Screen: {wakeLockActive ? "kept on" : "normal"}
         </span>
       </div>
     </section>

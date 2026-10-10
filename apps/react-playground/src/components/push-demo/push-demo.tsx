@@ -70,7 +70,7 @@ function PushDemo() {
           className="btn-cyan mono btn-demo-compact"
           onClick={handleEnablePushClick}
         >
-          Trigger Toast Banner
+          Enable push
         </button>
         <p className="demo-meta">Supported: {String(Push.isSupported())}</p>
       </div>

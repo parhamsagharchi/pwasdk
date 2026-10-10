@@ -26,7 +26,7 @@ function PlaygroundHero({
           <div className="radar-left">
             <div className="pulse-beacon-cyber" />
             <span className="radar-headline">
-              {activeCount} of {radar.length} APIs work in this browser
+              {activeCount} of {radar.length} modules work in this browser
             </span>
           </div>
           <div className="radar-chips">
@@ -45,21 +45,21 @@ function PlaygroundHero({
         <div className="hero-container">
           <div>
             <div className="hero-pill-badge">
-              <span>⚡ @pwasdk/core // OPEN SOURCE RUNTIME</span>
+              <span>@pwasdk/core — TypeScript package</span>
             </div>
             <h1 className="hero-heading">
-              Native Device Power
+              Browser device APIs
               <br />
-              <span className="hologram-text">With AI-Ready Prompts.</span>
+              <span className="hologram-text">for your PWA.</span>
             </h1>
             <p className="hero-description">
-              The lightweight TypeScript package for progressive web apps. Tap
-              into haptics, camera streams, push, sensors, and more — then
-              install any module with ready-to-paste Cursor &amp; Claude prompts.
+              One npm package with small modules — Camera, Haptic, Push, Share,
+              and more. Import what you need, call <code>isSupported()</code>,
+              then use it. Copy a ready prompt for Cursor or Claude below.
             </p>
             <div className="hero-actions-row">
               <a href="#copilot" className="btn-cyan">
-                Generate AI Prompt
+                Get AI prompt
               </a>
               <a
                 href="https://github.com/parhamsagharchi/pwasdk"
@@ -67,7 +67,7 @@ function PlaygroundHero({
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Star on GitHub
+                GitHub
               </a>
             </div>
           </div>
@@ -90,7 +90,7 @@ function PlaygroundHero({
               </div>
               <div
                 className="install-command-line"
-                title="Click to copy install command"
+                title="Copy install command"
               >
                 <code>{INSTALL_COMMANDS[packageManager]}</code>
                 <button
@@ -118,7 +118,7 @@ function PlaygroundHero({
                   <input
                     type="search"
                     id="cyber-search-input"
-                    placeholder="Filter hardware capabilities…"
+                    placeholder="Search modules…"
                     autoComplete="off"
                     spellCheck={false}
                     value={query}

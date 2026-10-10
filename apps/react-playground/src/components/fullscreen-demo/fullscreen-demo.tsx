@@ -23,9 +23,11 @@ function FullscreenDemo() {
 
   return (
     <section className={DEMO_SECTION_CLASS}>
-      {!Fullscreen.isSupported() && (
-        <div className="demo-callout">Fullscreen API is not supported.</div>
-      )}
+      {!Fullscreen.isSupported() ? (
+        <div className="demo-callout">
+          Fullscreen API is not supported (common on iOS Safari).
+        </div>
+      ) : null}
       <button
         type="button"
         className={DEMO_BUTTON_CLASS}

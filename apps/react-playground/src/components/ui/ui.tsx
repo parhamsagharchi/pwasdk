@@ -54,9 +54,9 @@ function Examples({ children }: { children: ReactNode }) {
       <div className="wrap">
         <div className="bento-section-head">
           <h2 className="bento-title">
-            <span>Hardware &amp; Device Capabilities (@pwasdk/core)</span>
+            <span>Try the modules</span>
           </h2>
-          <span className="bento-counter mono">// 14 INTERACTIVE LABS</span>
+          <span className="bento-counter mono">16 live examples</span>
         </div>
         <ConnectionStatus protocol={protocol} debugInfo={debugInfo} />
         <div className="bento-grid">{children}</div>

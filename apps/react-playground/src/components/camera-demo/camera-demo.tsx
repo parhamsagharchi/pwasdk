@@ -55,7 +55,7 @@ function CameraDemo() {
         />
         {!cameraStream ? (
           <div className="camera-idle-ui" id="camera-idle-ui">
-            <span>📷 Stream Offline — Click Start</span>
+            <span>Camera off — press Start</span>
           </div>
         ) : null}
         <div className="camera-hud-brackets" />
@@ -71,7 +71,7 @@ function CameraDemo() {
             onClick={handleStartClick}
             disabled={!isMediaDevicesSupported}
           >
-            {cameraStream ? "Stop Stream" : "Start Stream"}
+            {cameraStream ? "Stop" : "Start"}
           </button>
           <button
             type="button"
@@ -79,10 +79,10 @@ function CameraDemo() {
             onClick={handleFlipClick}
             disabled={!isMediaDevicesSupported}
           >
-            Flip Lens
+            Flip
           </button>
           <button type="button" className="hud-btn" onClick={handleSnapClick}>
-            Capture Flash
+            Flash
           </button>
         </div>
       </div>
