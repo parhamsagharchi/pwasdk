@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.1.0] – 2026-10-10
+
+### Features
+
+- Redesigned the live React demo around the `new-design` visual language: hardware radar, AI prompt generator, media showcase, and interactive bento stages
+- Renamed `apps/playground` → `apps/react-playground` and wired root scripts, Vercel, and docs to the new package name
+- Added stage UIs for camera HUD, haptic device shell, audio spectrum, gyroscope tilt card, push toast, wake lock switch, clipboard, badge, and network + AppStorage
+- Expanded Screenshot helpers: `watch({ autoNotify })`, `requestPermission()`, and `installBridge()` / `window.PwaSdkScreenshot.notify()` for native WebView hosts
+- Expanded Tailwind design tokens (surfaces, accent alphas, shadows, z-index, breakpoints) mapped through `theme.css`
+
+### Changes
+
+- Kept Contributors and the STYLE_GUIDE demo folder structure
+- Demo cards use real `@pwasdk/core` APIs only (no fake `Camera.start` / `Microphone.getStream` snippets)
+- Code samples open from a `[ View Code ]` trigger in each card footer
+- Documented that pure mobile browsers cannot detect OS Power+Volume screenshots; native Android/iOS must forward the event
+
+### Fixes
+
+- Align JSX event handlers with STYLE_GUIDE named-handler rules across demo components
+- Refresh README / monorepo paths after the playground rename
+- Screenshot demo now enables notifications and simulates detection for the notify UX
+
 ## [1.0.0] – 2026-10-08
 
 ### Features

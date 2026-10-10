@@ -1,0 +1,98 @@
+@config "../../tailwind.config.js";
+
+:root {
+  /* Surfaces */
+  --bg-deep: theme(colors.obsidian.deep);
+  --bg-surface: theme(colors.obsidian.surface);
+  --bg-card: theme(colors.obsidian.card);
+  --bg-card-hover: theme(colors.obsidian.hover);
+  --bg-glass: theme(colors.obsidian.glass);
+  --bg-void: theme(colors.obsidian.void);
+  --bg-panel: theme(colors.obsidian.panel);
+  --bg-stage: theme(colors.obsidian.stage);
+  --bg-slate: theme(colors.obsidian.slate);
+
+  /* Borders */
+  --border-subtle: theme(colors.line.subtle);
+  --border-soft: theme(colors.line.soft);
+  --border-hover: theme(colors.line.hover);
+  --border-glow: theme(colors.line.glow);
+  --border-active: theme(colors.line.active);
+
+  /* Ink */
+  --text-main: theme(colors.ink.DEFAULT);
+  --text-muted: theme(colors.ink.muted);
+  --text-dim: theme(colors.ink.dim);
+  --text-soft: theme(colors.ink.soft);
+  --text-pure: theme(colors.ink.pure);
+  --ink-inverse: theme(colors.ink.inverse);
+
+  /* Accents */
+  --cyan: theme(colors.cyan.DEFAULT);
+  --cyan-soft: theme(colors.cyan.soft);
+  --cyan-glow: theme(colors.cyan.glow);
+  --cyan-mist: theme(colors.cyan.mist);
+  --cyan-wash: theme(colors.cyan.wash);
+  --cyan-rim: theme(colors.cyan.rim);
+  --cyan-edge: theme(colors.cyan.edge);
+  --cyan-strong: theme(colors.cyan.strong);
+
+  --emerald: theme(colors.emerald.DEFAULT);
+  --emerald-glow: theme(colors.emerald.glow);
+  --emerald-mist: theme(colors.emerald.mist);
+  --emerald-rim: theme(colors.emerald.rim);
+
+  --violet: theme(colors.violet.DEFAULT);
+  --violet-glow: theme(colors.violet.glow);
+  --violet-mist: theme(colors.violet.mist);
+  --violet-wash: theme(colors.violet.wash);
+
+  --coral: theme(colors.coral.DEFAULT);
+  --coral-mist: theme(colors.coral.mist);
+  --coral-glow: theme(colors.coral.glow);
+  --coral-hot: theme(colors.coral.hot);
+
+  --amber: theme(colors.amber.DEFAULT);
+  --amber-mist: theme(colors.amber.mist);
+  --amber-rim: theme(colors.amber.rim);
+
+  /* Typography */
+  --font-display: theme(fontFamily.display);
+  --font-body: theme(fontFamily.sans);
+  --font-mono: theme(fontFamily.mono);
+
+  /* Layout */
+  --wrap: theme(maxWidth.wrap);
+  --space-grid: theme(spacing.grid);
+  --space-nav: theme(spacing.nav);
+  --radius-xl: theme(borderRadius.xl);
+  --radius-lg: theme(borderRadius.lg);
+  --radius-md: theme(borderRadius.md);
+  --radius-sm: theme(borderRadius.sm);
+  --radius-pill: theme(borderRadius.pill);
+
+  /* Elevation */
+  --shadow-glow: theme(boxShadow.glow);
+  --shadow-glow-lg: theme(boxShadow.glow-lg);
+  --shadow-card: theme(boxShadow.card);
+  --shadow-lift: theme(boxShadow.lift);
+  --shadow-media: theme(boxShadow.media);
+  --shadow-emerald: theme(boxShadow.emerald);
+  --shadow-coral: theme(boxShadow.coral);
+
+  --z-grid: theme(zIndex.grid);
+  --z-raise: theme(zIndex.raise);
+  --z-stage: theme(zIndex.stage);
+  --z-nav: theme(zIndex.nav);
+  --z-overlay: theme(zIndex.overlay);
+
+  /* Motion */
+  --spring-bounce: theme(transitionTimingFunction.bounce);
+  --spring-smooth: theme(transitionTimingFunction.smooth);
+
+  /* Breakpoints (for reference / JS; CSS still uses @media) */
+  --bp-xs: theme(screens.xs);
+  --bp-sm: theme(screens.sm);
+  --bp-md: theme(screens.md);
+  --bp-lg: theme(screens.lg);
+}

@@ -1,6 +1,10 @@
 # @pwasdk/core
 
+**Version:** `1.1.0`
+
 Browser helpers for Progressive Web Apps: haptics, share, clipboard, push, install prompts, geolocation, wake lock, camera, and more.
+
+Live demo: [pwasdk.vercel.app](https://pwasdk.vercel.app) (`apps/react-playground`)
 
 ## Install
 
@@ -53,7 +57,7 @@ const position = await Geolocation.getCurrent();
 - Browser-only. Do not import into Node/SSR without guards.
 - `Push.subscribe(vapidPublicKey)` requires **your** VAPID public key.
 - Call `Install.init()` during app bootstrap to capture `beforeinstallprompt`.
-- OS screenshot detection is **not** available in pure browsers. Use a native WebView bridge that calls `Screenshot.notifyDetected()`.
+- OS screenshot detection is **not** available in pure browsers (mobile Chrome / Safari / PWA included). Android 14+ and iOS only expose that signal to native apps. Install `Screenshot.installBridge()` and call `window.PwaSdkScreenshot.notify()` from the native shell, or use `Screenshot.watch({ autoNotify: true })` after `notifyDetected()`.
 
 ## License
 

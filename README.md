@@ -2,6 +2,7 @@
 
 Progressive Web App helpers for the browser. One small TypeScript package with focused modules for common device and web APIs.
 
+**Current version:** `1.1.0`  
 **Live demo:** [pwasdk.vercel.app](https://pwasdk.vercel.app)
 
 ```bash
@@ -94,15 +95,35 @@ Each module exposes `isSupported()` — check before use.
 ## Monorepo
 
 ```
-packages/core     # @pwasdk/core (published)
-apps/playground   # local demo (not published)
+packages/core            # @pwasdk/core (published)
+apps/react-playground    # React live demo (not published)
 ```
+
+The React demo (`apps/react-playground`) is the official showcase:
+
+- Hardware radar + searchable capability labs
+- AI prompt generator for Cursor / Claude / Copilot
+- Media showcase (image + demo video)
+- Interactive bento stages for camera, haptics, mic, push, and more
+- Contributors section
+
+A future Vue demo can live at `apps/vue-playground` without changing the SDK package.
 
 ```bash
 pnpm install
 pnpm --filter @pwasdk/core build
-pnpm dev
+pnpm dev                         # starts apps/react-playground
+pnpm build:react-playground      # core + demo production build
 ```
+
+## Versioning
+
+| Package | Version |
+|---------|---------|
+| `@pwasdk/core` | `1.1.0` |
+| Monorepo (`pwasdk`) | `1.1.0` |
+
+See [CHANGELOG.md](CHANGELOG.md) for release notes.
 
 ## Contributing
 

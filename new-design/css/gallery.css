@@ -1,0 +1,380 @@
+/* ============================================================
+   PWA SDK — Bento Gallery Grid & Modern Code Drawer
+   Asymmetrical, high-contrast, non-templated card architecture
+   ============================================================ */
+
+.bento-section {
+  padding: 20px 0 80px;
+}
+
+.bento-section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 26px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.bento-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 24px;
+  letter-spacing: -0.025em;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bento-counter {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--cyan);
+}
+
+/* Bento Grid */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+}
+
+/* Card Column Spans */
+.bento-card {
+  grid-column: span 4;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s var(--spring-smooth);
+  position: relative;
+  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.5);
+}
+
+.bento-card.col-span-8 {
+  grid-column: span 8;
+}
+
+.bento-card.col-span-6 {
+  grid-column: span 6;
+}
+
+.bento-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 242, 254, 0.4);
+  box-shadow: 0 20px 40px -15px rgba(0, 242, 254, 0.15), 0 0 0 1px rgba(0, 242, 254, 0.2);
+}
+
+/* Card Stage (Interactive Play Zone) */
+.bento-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 210px;
+  padding: 24px 20px;
+  background: radial-gradient(110% 85% at 50% 0%, #151d30, #0a0e18);
+  border-bottom: 1px solid var(--border-subtle);
+  overflow: hidden;
+}
+
+.bento-card.col-span-8 .bento-stage {
+  min-height: 240px;
+}
+
+/* Status Badge Top-Right */
+.hardware-status-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  background: rgba(5, 241, 156, 0.1);
+  border: 1px solid rgba(5, 241, 156, 0.3);
+  color: var(--emerald);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 10;
+}
+
+.hardware-status-badge.simulated {
+  background: rgba(255, 138, 0, 0.1);
+  border-color: rgba(255, 138, 0, 0.3);
+  color: #ffaa40;
+}
+
+.hardware-status-badge .dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* Method Signature Badge Top-Left */
+.method-sig-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--cyan);
+  background: rgba(0, 242, 254, 0.08);
+  padding: 3px 9px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(0, 242, 254, 0.2);
+  backdrop-filter: blur(6px);
+  z-index: 10;
+  max-width: calc(100% - 130px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Card Footer */
+.bento-foot {
+  padding: 16px 20px;
+  background: var(--bg-card);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  gap: 12px;
+}
+
+.bento-foot-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.bento-foot-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -0.015em;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bento-foot-desc {
+  margin-top: 4px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.btn-code-trigger {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--cyan);
+  background: rgba(0, 242, 254, 0.08);
+  border: 1px solid rgba(0, 242, 254, 0.25);
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+.btn-code-trigger:hover {
+  background: var(--cyan);
+  color: #030712;
+  box-shadow: 0 0 12px var(--cyan-glow);
+}
+
+/* Hidden code snippet template */
+.code-panel {
+  display: none;
+}
+
+/* ---- Modern Code Modal ---- */
+.cyber-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.cyber-modal.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cyber-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(3, 5, 8, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.cyber-modal-dialog {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 690px;
+  background: var(--bg-surface);
+  border: 1px solid rgba(0, 242, 254, 0.3);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 35px 70px -15px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 242, 254, 0.15);
+  overflow: hidden;
+  transform: scale(0.96) translateY(8px);
+  transition: transform 0.25s var(--spring-bounce);
+}
+
+.cyber-modal.open .cyber-modal-dialog {
+  transform: scale(1) translateY(0);
+}
+
+.cyber-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: #0d121f;
+}
+
+.cyber-modal-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cyber-modal-title .param {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--cyan);
+  background: rgba(0, 242, 254, 0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 242, 254, 0.3);
+}
+
+.cyber-modal-close {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--text-muted);
+  font-size: 14px;
+  transition: all 0.15s ease;
+}
+.cyber-modal-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.cyber-modal-content {
+  padding: 20px;
+}
+
+/* Code Tabs inside modal */
+.cyber-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 10px;
+}
+
+.cyber-tab {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  transition: all 0.15s ease;
+  background: transparent;
+}
+.cyber-tab:hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.05);
+}
+.cyber-tab.active {
+  color: var(--cyan);
+  background: rgba(0, 242, 254, 0.12);
+  border: 1px solid rgba(0, 242, 254, 0.35);
+  font-weight: 600;
+}
+
+/* Code Body */
+.cyber-code-block {
+  position: relative;
+  background: #060910;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  overflow: hidden;
+}
+
+.cyber-code-block pre {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.7;
+  color: #cbd5e1;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+
+.cyber-code-block pre.hidden {
+  display: none !important;
+}
+
+.cyber-copy-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  background: #111827;
+  border: 1px solid var(--border-subtle);
+  padding: 5px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+.cyber-copy-btn:hover {
+  color: #fff;
+  border-color: var(--cyan);
+}
+.cyber-copy-btn.copied {
+  background: var(--emerald);
+  color: #030712;
+  border-color: var(--emerald);
+  font-weight: 700;
+}
+
+/* Responsive Grid Breakpoints */
+@media (max-width: 1100px) {
+  .bento-card {
+    grid-column: span 6 !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .bento-card {
+    grid-column: span 12 !important;
+  }
+}

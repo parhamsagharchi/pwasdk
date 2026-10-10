@@ -1,0 +1,203 @@
+/* ============================================================
+   PWA SDK — Bento Gallery Grid (new-design card chrome)
+   ============================================================ */
+
+.bento-section {
+  padding: 20px 0 80px;
+}
+
+.bento-section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 26px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.bento-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 24px;
+  letter-spacing: -0.025em;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bento-counter {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--cyan);
+}
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+}
+
+.bento-card {
+  grid-column: span 4;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s var(--spring-smooth);
+  position: relative;
+  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.5);
+}
+
+.bento-card.col-span-8 {
+  grid-column: span 8;
+}
+
+.bento-card.col-span-6 {
+  grid-column: span 6;
+}
+
+.bento-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 242, 254, 0.4);
+  box-shadow:
+    0 20px 40px -15px rgba(0, 242, 254, 0.15),
+    0 0 0 1px rgba(0, 242, 254, 0.2);
+}
+
+.bento-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 210px;
+  padding: 44px 18px 18px;
+  background: radial-gradient(110% 85% at 50% 0%, #151d30, #0a0e18);
+  overflow: hidden;
+}
+
+.bento-card.col-span-8 .bento-stage {
+  min-height: 240px;
+}
+
+.hardware-status-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--emerald-mist);
+  border: 1px solid var(--emerald-rim);
+  color: var(--emerald);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 10;
+}
+
+.hardware-status-badge .dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.method-sig-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--cyan);
+  background: rgba(0, 242, 254, 0.08);
+  padding: 3px 9px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(0, 242, 254, 0.2);
+  backdrop-filter: blur(6px);
+  z-index: 10;
+  max-width: calc(100% - 130px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bento-foot {
+  padding: 16px 20px;
+  background: var(--bg-card);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.bento-foot-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.bento-foot-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -0.015em;
+  color: #fff;
+}
+
+.bento-foot-desc {
+  margin-top: 4px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.btn-code-trigger {
+  appearance: none;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--cyan);
+  background: var(--cyan-mist);
+  border: 1px solid var(--cyan-rim);
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.btn-code-trigger:hover {
+  background: var(--cyan);
+  color: var(--ink-inverse);
+  box-shadow: var(--shadow-glow);
+}
+
+.bento-stage .demo-panel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 140px;
+}
+
+.bento-foot .code-snippet {
+  margin-top: 0;
+}
+
+@media (max-width: 1100px) {
+  .bento-card {
+    grid-column: span 6 !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .bento-card {
+    grid-column: span 12 !important;
+  }
+}
