@@ -1,8 +1,10 @@
 import {
+  SCREENSHOT_BRIDGE_GLOBAL,
   SCREENSHOT_BRIDGE_KEY,
   SCREENSHOT_EVENT,
 } from "./screenshot.constants";
 import type {
+  IScreenshotBridge,
   IScreenshotEvent,
   TScreenshotMediaSource,
 } from "./screenshot.types";
@@ -34,6 +36,24 @@ export function dispatchScreenshotEvent(event: IScreenshotEvent): void {
       detail: event,
     }),
   );
+}
+
+export function installBridgeObject(
+  notify: (detail?: unknown) => void,
+): IScreenshotBridge | null {
+  if (!hasWindow()) return null;
+
+  const win = window as unknown as Record<string, unknown>;
+  win[SCREENSHOT_BRIDGE_KEY] = true;
+
+  const bridge: IScreenshotBridge = {
+    notify: (detail?: unknown) => {
+      notify(detail);
+    },
+  };
+
+  win[SCREENSHOT_BRIDGE_GLOBAL] = bridge;
+  return bridge;
 }
 
 export function drawMediaToCanvas(

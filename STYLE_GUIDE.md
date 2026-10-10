@@ -3,7 +3,7 @@
 Standards for:
 
 - `packages/core` → `@pwasdk/core` (published SDK)
-- `apps/playground` → React demo
+- `apps/react-playground` → React demo
 
 **Influences:** [Airbnb JS](https://github.com/airbnb/javascript) · [three.js](https://github.com/mrdoob/three.js/) · [JS/React patterns](https://github.com/lydiahallie/javascript-react-patterns/tree/main/pages/patterns)
 
@@ -44,7 +44,7 @@ pwasdk/
 │   ├── constants/
 │   ├── utils/
 │   └── modules/[feature]/
-└── apps/playground/src/
+└── apps/react-playground/src/
     ├── components/[feature]/
     ├── pages/
     ├── hooks/                # shared (3+ usages)
@@ -59,12 +59,12 @@ pwasdk/
 ```
 
 - Publishable logic → `packages/core` only
-- React / demo UI → `apps/playground` only
+- React / demo UI → `apps/react-playground` only (future Vue demo → `apps/vue-playground`)
 - Consumers import SDK from `@pwasdk/core` (no deep imports)
 
 ---
 
-## 3. File suffixes (core + playground)
+## 3. File suffixes (core + playground apps)
 
 ```
 [feature].[suffix].ts(x)
@@ -77,8 +77,8 @@ pwasdk/
 | `.enum` | Enums |
 | `.constants` | Constants |
 | `.utils` | Pure helpers |
-| `.hooks` | React hooks (playground) |
-| `.apis` / `.queries` | Remote API layer (playground, when needed) |
+| `.hooks` | React hooks (react-playground) |
+| `.apis` / `.queries` | Remote API layer (playground apps, when needed) |
 | `.view` | Optional pure UI extract |
 | `.module.css` | Styles |
 | `.test` | Tests |
@@ -197,7 +197,7 @@ English messages · no secrets in logs · no `console.*` in core.
 
 ---
 
-## 6. Playground (React)
+## 6. React playground (`apps/react-playground`)
 
 ### Component folder
 
@@ -328,7 +328,7 @@ export default SamplePanel;
 ### Performance ([performance-patterns](https://github.com/lydiahallie/javascript-react-patterns/tree/main/pages/patterns/performance-patterns))
 
 - Named imports from `@pwasdk/core` (tree-shaking)
-- Dynamic import / route splitting for heavy playground pages when needed
+- Dynamic import / route splitting for heavy playground-app pages when needed
 - Keep `App.tsx` as composition root — not a 1000-line dump
 
 ### Promotion thresholds
@@ -387,8 +387,8 @@ import { Geolocation, type IGeoPosition } from "@pwasdk/core";
 - [ ] `[feature].[suffix].*` naming
 - [ ] `I*` / `T*` / `E*` on our types
 - [ ] Core: namespace + `isSupported()` + no import side effects
-- [ ] Playground: no `.wrap.tsx`; SDK via `@pwasdk/core`
-- [ ] Playground: no inline JSX handlers — use `const handleX = () => {}`
+- [ ] React playground: no `.wrap.tsx`; SDK via `@pwasdk/core`
+- [ ] React playground: no inline JSX handlers — use `const handleX = () => {}`
 - [ ] DRY / KISS / SOLID: no third copy of the same logic or style; no extra layer that the feature does not need
 - [ ] No secrets · no `console.*` in core
 - [ ] `pnpm --filter @pwasdk/core build` passes

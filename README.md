@@ -1,7 +1,10 @@
 # pwasdk
 
-Progressive Web App helpers for the browser. One small TypeScript package with focused modules for common device and web APIs.
+`@pwasdk/core` is a small TypeScript package: one import per browser/PWA API (camera, vibration, push, share, storage, and more). Check `isSupported()`, then call the method.
 
+**What it is not:** a native mobile SDK or a UI kit — just thin, typed wrappers around Web APIs.
+
+**Current version:** `1.1.0`  
 **Live demo:** [pwasdk.vercel.app](https://pwasdk.vercel.app)
 
 ```bash
@@ -94,15 +97,34 @@ Each module exposes `isSupported()` — check before use.
 ## Monorepo
 
 ```
-packages/core     # @pwasdk/core (published)
-apps/playground   # local demo (not published)
+packages/core            # @pwasdk/core (published)
+apps/react-playground    # React live demo (not published)
 ```
+
+The React demo (`apps/react-playground`) lets you try each module:
+
+- Install snippet + browser support chips
+- Live examples (camera, haptic, push, share, …)
+- Copyable AI prompt for Cursor / Claude / Copilot
+- Preview media + contributors
+
+A future Vue demo can live at `apps/vue-playground` without changing the SDK package.
 
 ```bash
 pnpm install
 pnpm --filter @pwasdk/core build
-pnpm dev
+pnpm dev                         # starts apps/react-playground
+pnpm build:react-playground      # core + demo production build
 ```
+
+## Versioning
+
+| Package | Version |
+|---------|---------|
+| `@pwasdk/core` | `1.1.0` |
+| Monorepo (`pwasdk`) | `1.1.0` |
+
+See [CHANGELOG.md](CHANGELOG.md) for release notes.
 
 ## Contributing
 

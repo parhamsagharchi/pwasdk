@@ -1,0 +1,20 @@
+{
+  "name": "pwa-sdk-showcase",
+  "version": "1.0.0",
+  "description": "PWA SDK Showcase & Interactive Playground designed in Kinetics style",
+  "scripts": {
+    "start": "npx serve -l 4321 .",
+    "dev": "npx serve -l 4321 ."
+  },
+  "keywords": [
+    "pwa",
+    "sdk",
+    "kinetics",
+    "playground",
+    "hardware",
+    "haptics",
+    "camera"
+  ],
+  "author": "",
+  "license": "MIT"
+}
