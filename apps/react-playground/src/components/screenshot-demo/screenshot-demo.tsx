@@ -9,6 +9,7 @@ function ScreenshotDemo() {
   const {
     lastEvent,
     notifyResult,
+    toastVisible,
     permission,
     handleEnableNotificationsClick,
     handleSimulateCaptureClick,
@@ -24,6 +25,27 @@ function ScreenshotDemo() {
         <strong>Simulate screenshot</strong> to test the notification, or call{" "}
         <code>window.PwaSdkScreenshot.notify()</code> from a native WebView.
       </div>
+      {toastVisible ? (
+        <div className="push-dynamic-stage">
+          <div
+            className="dynamic-island-toast visible"
+            role="status"
+            aria-live="polite"
+          >
+            <div className="toast-top-row">
+              <div className="toast-app-pill">
+                <span className="toast-dot" />
+                <span>PWA.SDK</span>
+              </div>
+              <span>Just now</span>
+            </div>
+            <div className="toast-body-title">Screenshot taken</div>
+            <div className="toast-body-text">
+              This page received a screenshot event.
+            </div>
+          </div>
+        </div>
+      ) : null}
       <div className="demo-actions-row">
         {notificationSupported ? (
           <button

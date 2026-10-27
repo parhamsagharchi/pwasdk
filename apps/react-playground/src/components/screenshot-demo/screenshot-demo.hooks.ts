@@ -4,14 +4,16 @@ import { Screenshot, type IScreenshotEvent } from "@pwasdk/core";
 export function useScreenshotDemo() {
   const [lastEvent, setLastEvent] = useState<IScreenshotEvent | null>(null);
   const [notifyResult, setNotifyResult] = useState("");
+  const [toastVisible, setToastVisible] = useState(false);
   const [permission, setPermission] = useState<string>(() =>
     Screenshot.isNotificationSupported() ? Notification.permission : "unsupported",
   );
 
   useEffect(() => {
     Screenshot.installBridge();
+    let hideToastTimer: number | undefined;
 
-    return Screenshot.watch({
+    const stopWatch = Screenshot.watch({
       autoNotify: true,
       notification: {
         title: "Screenshot detected",
@@ -24,8 +26,18 @@ export function useScreenshotDemo() {
             ? "Native bridge reported a screenshot — notification sent if allowed."
             : "Detection fired — notification sent if permission is granted.",
         );
+        setToastVisible(true);
+        window.clearTimeout(hideToastTimer);
+        hideToastTimer = window.setTimeout(() => {
+          setToastVisible(false);
+        }, 3500);
       },
     });
+
+    return () => {
+      stopWatch();
+      window.clearTimeout(hideToastTimer);
+    };
   }, []);
 
   const handleEnableNotificationsClick = () => {
@@ -49,6 +61,7 @@ export function useScreenshotDemo() {
   return {
     lastEvent,
     notifyResult,
+    toastVisible,
     permission,
     handleEnableNotificationsClick,
     handleSimulateCaptureClick,
