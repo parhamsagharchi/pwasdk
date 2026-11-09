@@ -11,7 +11,7 @@ function SiteFooter() {
           </a>
         </div>
         <div className="site-footer-status">
-          TypeScript helpers for browser / PWA APIs
+          Small helpers for phone features in the browser
         </div>
       </div>
     </footer>

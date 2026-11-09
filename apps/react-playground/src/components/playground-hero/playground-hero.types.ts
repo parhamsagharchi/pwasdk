@@ -1,5 +1,3 @@
-import type { ChangeEvent } from "react";
-
 export type TPackageManager = "npm" | "pnpm" | "bun" | "yarn";
 
 export type TDemoCategory = "all" | "hardware" | "sensors" | "system" | "network";
@@ -28,13 +26,10 @@ export interface ICategoryPill {
   label: string;
 }
 
+/** Compact hero — install switcher only (search lives in the lab). */
 export interface IPlaygroundHeroProps {
   packageManager: TPackageManager;
   copied: boolean;
-  query: string;
-  category: TDemoCategory;
   packageManagerHandlers: Record<TPackageManager, () => void>;
-  categoryHandlers: Record<TDemoCategory, () => void>;
   handleCopyInstall: () => void;
-  handleSearchChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }

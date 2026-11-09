@@ -1,6 +1,6 @@
 # @pwasdk/core
 
-**Version:** `1.2.0`
+**Version:** `1.4.0`
 
 Small TypeScript modules for browser and PWA APIs — one export per feature (`Camera`, `Haptic`, `Push`, `Share`, …). Import, call `isSupported()`, then use it.
 
@@ -52,13 +52,24 @@ const position = await Geolocation.getCurrent();
 | `Pwa` | Standalone / platform helpers |
 | `Screenshot` | Screenshot event bus + notification helpers |
 | `Shake` | DeviceMotion shake detection + callback |
+| `Network` | Connection generation / quality / strength |
+| `Battery` | Charge level and charging state |
+| `Torch` | Phone flashlight via camera torch |
+| `Qr` | QR / barcode detect + video watch |
+| `ScreenShare` | getDisplayMedia screen capture |
+| `Contacts` | Contact Picker API |
+| `Pip` | Picture-in-Picture |
+| `MediaSession` | Lock-screen media controls |
+| `Passkey` | WebAuthn passkeys |
+| `WebOtp` | SMS one-time codes |
+| `Nfc` | Web NFC read / write (Android) |
 
 ## Notes
 
 - Browser-only. Do not import into Node/SSR without guards.
 - `Push.subscribe(vapidPublicKey)` requires **your** VAPID public key.
 - Call `Install.init()` during app bootstrap to capture `beforeinstallprompt`.
-- OS screenshot detection is **not** available in pure browsers (mobile Chrome / Safari / PWA included). Android 14+ and iOS only expose that signal to native apps. Install `Screenshot.installBridge()` and call `window.PwaSdkScreenshot.notify()` from the native shell, or use `Screenshot.watch({ autoNotify: true })` after `notifyDetected()`.
+- OS screenshot detection is **not** available in pure browsers (mobile Chrome / Safari / installed PWA included). Power+Volume never reaches JavaScript there. On Android 14+, a native Activity can use `ScreenCaptureCallback`, then call `window.PwaSdkScreenshot.advertise()` once and `window.PwaSdkScreenshot.notify()` on each capture after `Screenshot.installBridge()`. `isNativeDetectionSupported()` stays `false` until that native host connects.
 
 ## License
 

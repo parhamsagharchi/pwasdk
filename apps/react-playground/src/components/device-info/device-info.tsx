@@ -6,7 +6,7 @@ import type { IDeviceInfoProps } from "./device-info.types";
 function DeviceInfo({ online, orientation }: IDeviceInfoProps) {
   const stageRef = useRef<HTMLDivElement | null>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const [readout, setReadout] = useState("Move pointer to tilt");
+  const [readout, setReadout] = useState("Tilt the phone or move the pointer");
 
   useEffect(() => {
     const stage = stageRef.current;
@@ -19,12 +19,12 @@ function DeviceInfo({ online, orientation }: IDeviceInfoProps) {
       const rotY = (x / rect.width) * 40;
       const rotX = -(y / rect.height) * 40;
       setTilt({ x: rotX, y: rotY });
-      setReadout(`X: ${rotX.toFixed(0)}°  Y: ${rotY.toFixed(0)}°`);
+      setReadout(`Tilt X ${rotX.toFixed(0)}° · Y ${rotY.toFixed(0)}°`);
     };
 
     const handleLeave = () => {
       setTilt({ x: 0, y: 0 });
-      setReadout("Move pointer to tilt");
+      setReadout("Tilt the phone or move the pointer");
     };
 
     const handleOrientation = (event: DeviceOrientationEvent) => {
@@ -32,7 +32,7 @@ function DeviceInfo({ online, orientation }: IDeviceInfoProps) {
       const beta = Math.min(35, Math.max(-35, event.beta - 45));
       const gamma = Math.min(35, Math.max(-35, event.gamma));
       setTilt({ x: beta, y: gamma });
-      setReadout(`β: ${beta.toFixed(0)}°  γ: ${gamma.toFixed(0)}°`);
+      setReadout(`Tilt X ${beta.toFixed(0)}° · Y ${gamma.toFixed(0)}°`);
     };
 
     stage.addEventListener("mousemove", handleMove);
@@ -53,6 +53,10 @@ function DeviceInfo({ online, orientation }: IDeviceInfoProps) {
 
   return (
     <section className={DEMO_SECTION_CLASS}>
+      <p className="demo-meta">
+        Basic facts about this device — phone vs desktop, online status, and
+        screen rotation.
+      </p>
       <div className="gyro-hologram-stage" ref={stageRef}>
         <div className="gyro-gimbal-card" style={gimbalStyle}>
           <div className="gyro-axis-indicator" />
@@ -61,12 +65,12 @@ function DeviceInfo({ online, orientation }: IDeviceInfoProps) {
       </div>
       <div className="demo-meta demo-meta-spaced">
         <p>
-          {Device.isMobile ? "Mobile" : "Desktop"} · {Device.platform} ·{" "}
+          {Device.isMobile ? "Phone / tablet" : "Desktop"} · {Device.platform} ·{" "}
           {online ? "Online" : "Offline"} ({connection})
         </p>
         <p>
-          Screen: {orientation || "—"} · Standalone:{" "}
-          {String(Pwa.isStandalone())} · PWA: {Pwa.platform()}
+          Screen: {orientation || "—"} · Opened from home screen:{" "}
+          {Pwa.isStandalone() ? "Yes" : "No"} · PWA platform: {Pwa.platform()}
         </p>
       </div>
     </section>

@@ -1,9 +1,10 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Camera, Microphone } from "@pwasdk/core";
 
 export function useCameraDemo() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const stopFramesRef = useRef<(() => void) | null>(null);
+  const streamRef = useRef<MediaStream | null>(null);
   const lastFramePaintRef = useRef(0);
   const [cameraStream, setCameraStream] = useState<MediaStream | null>(null);
   const [cameraError, setCameraError] = useState("");
@@ -13,15 +14,6 @@ export function useCameraDemo() {
   const isMediaDevicesSupported =
     Camera.isSupported() || Microphone.isSupported();
 
-  const stopStream = (
-    stream: MediaStream | null,
-    setFn: (s: MediaStream | null) => void,
-  ) => {
-    if (!stream) return;
-    Camera.stop(stream);
-    setFn(null);
-  };
-
   const stopFrames = () => {
     stopFramesRef.current?.();
     stopFramesRef.current = null;
@@ -29,16 +21,24 @@ export function useCameraDemo() {
     setFrameCallbackRan(false);
   };
 
+  const stopCameraOnly = () => {
+    stopFrames();
+    Camera.stop(streamRef.current);
+    streamRef.current = null;
+    setCameraStream(null);
+    if (videoRef.current) videoRef.current.srcObject = null;
+    setCameraError("");
+  };
+
   const openCamera = async (which: "front" | "back" | "laptop") => {
     setCameraError("");
 
     if (!Camera.isSupported()) {
-      setCameraError("Camera API is not supported in this browser.");
+      setCameraError("Camera is not available in this browser.");
       return;
     }
 
-    stopFrames();
-    stopStream(cameraStream, setCameraStream);
+    stopCameraOnly();
     setIsCameraLoading(true);
 
     try {
@@ -47,6 +47,7 @@ export function useCameraDemo() {
       else if (which === "back") stream = await Camera.openBack();
       else stream = await Camera.openDefault();
 
+      streamRef.current = stream;
       setCameraStream(stream);
 
       if (videoRef.current) {
@@ -62,19 +63,20 @@ export function useCameraDemo() {
       const message = e instanceof Error ? e.message : String(e);
       setCameraError(
         message ||
-          "Failed to open camera. Check HTTPS and camera permissions.",
+          "Could not open the camera. Check HTTPS and camera permission.",
       );
     } finally {
       setIsCameraLoading(false);
     }
   };
 
-  const stopCameraOnly = () => {
-    stopFrames();
-    stopStream(cameraStream, setCameraStream);
-    if (videoRef.current) videoRef.current.srcObject = null;
-    setCameraError("");
-  };
+  useEffect(() => {
+    return () => {
+      stopFrames();
+      Camera.stop(streamRef.current);
+      streamRef.current = null;
+    };
+  }, []);
 
   return {
     videoRef,

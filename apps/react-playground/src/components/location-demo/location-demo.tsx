@@ -21,9 +21,13 @@ function LocationDemo() {
       {isLocationLoading ? <PageLoader /> : null}
       {!Geolocation.isSupported() ? (
         <div className="demo-callout">
-          Geolocation API is not supported in this browser.
+          Location is not available in this browser.
         </div>
-      ) : null}
+      ) : (
+        <p className="demo-meta">
+          Ask once for the current position, or keep updating as the user moves.
+        </p>
+      )}
       <div className="demo-actions-row">
         <button
           type="button"
@@ -31,7 +35,7 @@ function LocationDemo() {
           onClick={getCurrentLocation}
           disabled={!Geolocation.isSupported()}
         >
-          Get Current Location
+          Get current location
         </button>
         <button
           type="button"
@@ -39,7 +43,7 @@ function LocationDemo() {
           onClick={toggleWatchLocation}
           disabled={!Geolocation.isSupported()}
         >
-          {isWatchingLocation ? "Stop Watching" : "Watch Location"}
+          {isWatchingLocation ? "Stop live updates" : "Start live updates"}
         </button>
       </div>
       {locationError ? <p className="demo-error">{locationError}</p> : null}
@@ -53,7 +57,7 @@ function LocationDemo() {
           </p>
           {location.accuracy != null ? (
             <p>
-              <strong>Accuracy:</strong> {Math.round(location.accuracy)} m
+              <strong>Accuracy:</strong> about {Math.round(location.accuracy)} m
             </p>
           ) : null}
         </div>

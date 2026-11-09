@@ -16,34 +16,38 @@ function PwaDemo() {
 
   return (
     <section className={DEMO_SECTION_CLASS}>
+      <p className="demo-meta">
+        Detect where the app is running and whether it was opened from the home
+        screen.
+      </p>
       <div className="demo-meta demo-meta-spaced">
         <p>Platform: {platform}</p>
-        <p>Standalone (installed): {String(standalone)}</p>
+        <p>Opened from home screen: {standalone ? "Yes" : "No"}</p>
         <p>
-          Install prompt event:{" "}
-          {String(Pwa.isInstallPromptSupported())}
+          Browser install prompt available:{" "}
+          {Pwa.isInstallPromptSupported() ? "Yes" : "No"}
         </p>
       </div>
       {platform === "ios" ? (
-        <div className="demo-actions-row" style={{ marginTop: 10 }}>
+        <div className="demo-actions-row demo-actions-single">
           <button
             type="button"
             className={DEMO_BUTTON_CLASS}
             onClick={handleShowIosHelpClick}
           >
-            {showIosHelp ? "Hide iOS install steps" : "iOS install steps"}
+            {showIosHelp ? "Hide iPhone steps" : "Show iPhone install steps"}
           </button>
         </div>
       ) : null}
       {showIosHelp ? (
-        <div className="demo-callout" style={{ marginTop: 12, whiteSpace: "pre-line" }}>
+        <div className="demo-callout" style={{ whiteSpace: "pre-line" }}>
           {Pwa.getIOSInstallInstructions()}
         </div>
       ) : null}
       {platform !== "ios" && !standalone ? (
-        <p className="demo-meta" style={{ marginTop: 8 }}>
-          On Android Chrome, use the Install example when the browser offers a
-          prompt. On iOS, add to Home Screen from Safari.
+        <p className="demo-meta">
+          On Android Chrome, use the Install feature when the browser offers a
+          button. On iPhone, add to Home Screen from Safari.
         </p>
       ) : null}
     </section>

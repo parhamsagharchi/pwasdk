@@ -37,5 +37,8 @@ export type TScreenshotMediaSource =
   | OffscreenCanvas;
 
 export interface IScreenshotBridge {
+  /** Native host should call once when ScreenCaptureCallback is registered. */
+  advertise: () => void;
+  /** Native host calls this on each OS screenshot (Power+Volume). */
   notify: (detail?: unknown) => void;
 }

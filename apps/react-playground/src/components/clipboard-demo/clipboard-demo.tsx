@@ -17,7 +17,7 @@ function ClipboardDemo() {
     void (async () => {
       try {
         await Clipboard.copy(value);
-        setStatus("Copied!");
+        setStatus("Copied to clipboard!");
         window.setTimeout(() => setStatus(""), 1200);
       } catch (error: unknown) {
         const message = error instanceof Error ? error.message : String(error);
@@ -31,7 +31,7 @@ function ClipboardDemo() {
       try {
         const text = await Clipboard.paste();
         setValue(text);
-        setStatus("Pasted!");
+        setStatus("Pasted from clipboard!");
         window.setTimeout(() => setStatus(""), 1200);
       } catch (error: unknown) {
         const message = error instanceof Error ? error.message : String(error);
@@ -42,6 +42,9 @@ function ClipboardDemo() {
 
   return (
     <section className={DEMO_SECTION_CLASS}>
+      <p className="demo-meta">
+        Copy the text below, or paste from your clipboard into the field.
+      </p>
       <div className="clip-cyber-stage">
         <div className="clip-cyber-input-wrap">
           <input type="text" value={value} onChange={handleValueChange} />
@@ -59,7 +62,9 @@ function ClipboardDemo() {
           </button>
         </div>
         {status ? <p className="demo-meta">{status}</p> : null}
-        <p className="demo-meta">Supported: {String(Clipboard.isSupported())}</p>
+        <p className="demo-meta">
+          Works here: {Clipboard.isSupported() ? "Yes" : "No"}
+        </p>
       </div>
     </section>
   );

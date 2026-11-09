@@ -1,8 +1,17 @@
 /** Custom DOM event name used by native bridges / hosts. */
 export const SCREENSHOT_EVENT = "pwasdk:screenshot";
 
-/** Optional global flag set by a native WebView host. */
+/**
+ * Set when JS bridge object exists (`installBridge`).
+ * This does **not** mean OS Power+Volume detection works.
+ */
 export const SCREENSHOT_BRIDGE_KEY = "__PWASDK_SCREENSHOT_BRIDGE__";
+
+/**
+ * Set only when a native host calls `advertise()` or `notify()`.
+ * Pure Chrome / Safari / installed PWA never set this.
+ */
+export const SCREENSHOT_NATIVE_HOST_KEY = "__PWASDK_SCREENSHOT_NATIVE__";
 
 /** Global object native hosts can call: `window.PwaSdkScreenshot.notify()`. */
 export const SCREENSHOT_BRIDGE_GLOBAL = "PwaSdkScreenshot";

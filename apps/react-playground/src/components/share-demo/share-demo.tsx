@@ -22,16 +22,16 @@ function ShareDemo() {
       if (Clipboard.isSupported()) {
         try {
           await Clipboard.copy(`${payload.title}\n${payload.text}\n${payload.url}`);
-          setStatus("Share API missing — link copied to clipboard.");
+          setStatus("Share menu isn’t available — link copied instead.");
         } catch (error: unknown) {
           const message =
             error instanceof Error ? error.message : String(error);
-          setStatus(message || "Clipboard fallback failed.");
+          setStatus(message || "Could not copy the link.");
         }
         return;
       }
 
-      setStatus("Neither Share nor Clipboard is available.");
+      setStatus("Neither share nor clipboard works in this browser.");
     })();
   };
 
@@ -39,19 +39,25 @@ function ShareDemo() {
     <section className={DEMO_SECTION_CLASS}>
       {!Share.isSupported() ? (
         <div className="demo-callout">
-          Web Share is common on phones; desktop browsers often fall back to
-          clipboard.
+          Phones usually show a share menu. On desktop we often copy the link
+          instead.
         </div>
-      ) : null}
-      <button
-        type="button"
-        className="btn-cyan mono btn-demo-compact"
-        onClick={handleShareClick}
-      >
-        Share
-      </button>
+      ) : (
+        <p className="demo-meta">
+          Opens your phone’s share menu (WhatsApp, Messages, …).
+        </p>
+      )}
+      <div className="demo-actions-row demo-actions-single">
+        <button
+          type="button"
+          className="btn-cyan mono btn-demo-compact"
+          onClick={handleShareClick}
+        >
+          Share this page
+        </button>
+      </div>
       <div className="demo-meta demo-meta-spaced">
-        <p>Share supported: {String(Share.isSupported())}</p>
+        <p>Share menu available: {Share.isSupported() ? "Yes" : "No"}</p>
         {status ? <p>{status}</p> : null}
       </div>
     </section>

@@ -34,7 +34,7 @@ export function useScreenshotFeedback(): IScreenshotFeedbackState {
     stopRef.current?.();
     stopRef.current = null;
     setIsListening(false);
-    setStatus("Screenshot listening stopped.");
+    setStatus("Stopped listening for screenshots.");
   }, []);
 
   const enableListening = useCallback(() => {
@@ -55,17 +55,17 @@ export function useScreenshotFeedback(): IScreenshotFeedbackState {
         setIsSheetOpen(true);
         setStatus(
           event.source === "native"
-            ? "Native host reported a screenshot."
+            ? "The phone OS reported a screenshot."
             : event.source === "keyboard"
-              ? "Screenshot shortcut detected."
-              : "Screenshot event received — open your UI in onDetected.",
+              ? "Keyboard screenshot shortcut detected."
+              : "Screenshot simulated — this is where your tip sheet opens.",
         );
       },
     });
 
     setIsListening(true);
     setStatus(
-      "Listening. On phones use Simulate (or a native bridge). On desktop try PrintScreen.",
+      "Listening for Simulate / PrintScreen. Power+Volume in Chrome will not fire.",
     );
   }, []);
 
@@ -77,12 +77,11 @@ export function useScreenshotFeedback(): IScreenshotFeedbackState {
   }, [enableListening, isListening]);
 
   useEffect(() => {
-    enableListening();
     return () => {
       stopRef.current?.();
       stopRef.current = null;
     };
-  }, [enableListening]);
+  }, []);
 
   return {
     isListening,

@@ -29,10 +29,15 @@ function HapticDemo() {
 
   return (
     <section className={DEMO_SECTION_CLASS}>
-      {!Haptic.isSupported() && (
+      {!Haptic.isSupported() ? (
         <div className="demo-callout">
-          Vibration API is not supported on this browser/device.
+          This phone or browser can’t vibrate. Try on a real Android/iPhone
+          device.
         </div>
+      ) : (
+        <p className="demo-meta">
+          Tap a button — your phone should vibrate.
+        </p>
       )}
       <div className="haptic-sensory-stage">
         <div
@@ -46,7 +51,7 @@ function HapticDemo() {
         </div>
         <div className="haptic-pulse-grid">
           <button type="button" className="pulse-chip-btn" onClick={handleSoftClick}>
-            Soft
+            Soft vibrate
           </button>
           <button
             type="button"
@@ -60,7 +65,7 @@ function HapticDemo() {
             className="pulse-chip-btn"
             onClick={handleHeavyClick}
           >
-            Heavy
+            Strong
           </button>
           <button
             type="button"

@@ -4,7 +4,7 @@
 
 **What it is not:** a native mobile SDK or a UI kit — just thin, typed wrappers around Web APIs.
 
-**Current version:** `1.2.0`  
+**Current version:** `1.4.0`  
 **Live demo:** [pwasdk.vercel.app](https://pwasdk.vercel.app)
 
 ```bash
@@ -28,6 +28,17 @@ pnpm add @pwasdk/core
 - **Pwa** — standalone detection & install hints
 - **Screenshot** — callback when a host or your app reports a capture
 - **Shake** — DeviceMotion shake detection (open your own bottom sheet in the callback)
+- **Network** — 2G–4G (and 5G estimate), quality, and strength
+- **Battery** — charge level and charging state
+- **Torch** — phone flashlight
+- **QR** — scan QR codes from the camera
+- **ScreenShare** — share a tab or window
+- **Contacts** — pick people from the address book
+- **PiP** — Picture-in-Picture video
+- **MediaSession** — lock-screen media controls
+- **Passkey** — Face ID / fingerprint (WebAuthn)
+- **WebOtp** — auto-read SMS one-time codes
+- **NFC** — read/write tags (Android Chrome)
 
 ## Usage
 
@@ -104,10 +115,9 @@ apps/react-playground    # React live demo (not published)
 
 The React demo (`apps/react-playground`) lets you try each module:
 
-- Install snippet + browser support chips
-- Live examples (camera, haptic, push, share, …)
-- Copyable AI prompt for Cursor / Claude / Copilot
-- Preview media + contributors
+- Install snippet
+- Module lab (pick a module → try it → show code)
+- Contributors
 
 A future Vue demo can live at `apps/vue-playground` without changing the SDK package.
 
@@ -122,8 +132,8 @@ pnpm build:react-playground      # core + demo production build
 
 | Package | Version |
 |---------|---------|
-| `@pwasdk/core` | `1.2.0` |
-| Monorepo (`pwasdk`) | `1.2.0` |
+| `@pwasdk/core` | `1.4.0` |
+| Monorepo (`pwasdk`) | `1.4.0` |
 
 See [CHANGELOG.md](CHANGELOG.md) for release notes.
 

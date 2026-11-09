@@ -48,7 +48,7 @@ function WakeLockDemo() {
         setWakeLockActive(true);
       } catch (e: unknown) {
         const message =
-          e instanceof Error ? e.message : "Failed to request wake lock";
+          e instanceof Error ? e.message : "Could not keep the screen on";
         alert(message);
       }
     })();
@@ -58,10 +58,14 @@ function WakeLockDemo() {
     <section className={DEMO_SECTION_CLASS}>
       {!WakeLock.isSupported() ? (
         <div className="demo-callout">
-          Wake Lock API is not supported (needs a secure context on most
-          phones).
+          Keep-screen-on isn’t available here. Try HTTPS on a supported phone
+          browser.
         </div>
-      ) : null}
+      ) : (
+        <p className="demo-meta">
+          Toggle on to stop the screen from sleeping.
+        </p>
+      )}
       <div className="wake-cyber-stage">
         <button
           type="button"
@@ -70,6 +74,9 @@ function WakeLockDemo() {
           }
           id="wake-cyber-switch"
           aria-pressed={wakeLockActive}
+          aria-label={
+            wakeLockActive ? "Allow screen to sleep" : "Keep screen on"
+          }
           onClick={handleToggleClick}
           disabled={!WakeLock.isSupported()}
         >
@@ -80,7 +87,7 @@ function WakeLockDemo() {
             wakeLockActive ? "wake-status-text is-active" : "wake-status-text"
           }
         >
-          Screen: {wakeLockActive ? "kept on" : "normal"}
+          Screen: {wakeLockActive ? "stays on" : "can sleep"}
         </span>
       </div>
     </section>

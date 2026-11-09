@@ -104,13 +104,15 @@ export default {
       },
       spacing: {
         grid: "40px",
-        nav: "88px",
+        /* Mobile-first sticky offset; bumped in CSS at ≥700px */
+        nav: "56px",
       },
       screens: {
         xs: "480px",
         sm: "640px",
         md: "700px",
-        lg: "960px",
+        lg: "900px",
+        xl: "960px",
       },
       zIndex: {
         grid: "0",
