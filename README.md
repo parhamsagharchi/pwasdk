@@ -4,7 +4,7 @@
 
 **What it is not:** a native mobile SDK or a UI kit — just thin, typed wrappers around Web APIs.
 
-**Current version:** `1.1.0`  
+**Current version:** `1.2.0`  
 **Live demo:** [pwasdk.vercel.app](https://pwasdk.vercel.app)
 
 ```bash
@@ -27,6 +27,7 @@ pnpm add @pwasdk/core
 - **Camera / Microphone** — getUserMedia helpers
 - **Pwa** — standalone detection & install hints
 - **Screenshot** — callback when a host or your app reports a capture
+- **Shake** — DeviceMotion shake detection (open your own bottom sheet in the callback)
 
 ## Usage
 
@@ -121,8 +122,8 @@ pnpm build:react-playground      # core + demo production build
 
 | Package | Version |
 |---------|---------|
-| `@pwasdk/core` | `1.1.0` |
-| Monorepo (`pwasdk`) | `1.1.0` |
+| `@pwasdk/core` | `1.2.0` |
+| Monorepo (`pwasdk`) | `1.2.0` |
 
 See [CHANGELOG.md](CHANGELOG.md) for release notes.
 

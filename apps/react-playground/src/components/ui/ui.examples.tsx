@@ -25,6 +25,8 @@ import { PWA_EXAMPLE } from "../pwa-demo/pwa-demo.constants";
 import PwaDemo from "../pwa-demo";
 import { SCREENSHOT_EXAMPLE } from "../screenshot-demo/screenshot-demo.constants";
 import ScreenshotDemo from "../screenshot-demo";
+import { SHAKE_EXAMPLE } from "../shake-demo/shake-demo.constants";
+import ShakeDemo from "../shake-demo";
 import { SHARE_EXAMPLE } from "../share-demo/share-demo.constants";
 import ShareDemo from "../share-demo";
 import { STORAGE_EXAMPLE } from "../storage-demo/storage-demo.constants";
@@ -197,6 +199,23 @@ function OrientationExample() {
   );
 }
 
+function ShakeExample() {
+  return (
+    <ExampleSlot
+      category="sensors"
+      label="shake motion feedback sheet"
+      span="col-span-8"
+      signature="Shake.watch(onShake)"
+      status="DeviceMotion"
+      title="Shake"
+      description="Detect a phone shake and run your callback — this demo opens a bottom sheet like Instagram’s shake-to-report."
+      code={SHAKE_EXAMPLE}
+    >
+      <ShakeDemo />
+    </ExampleSlot>
+  );
+}
+
 function Share() {
   return (
     <ExampleSlot
@@ -253,7 +272,7 @@ function Screenshot() {
       signature="Screenshot.watch({ autoNotify })"
       status="Event + Notification"
       title="Screenshot"
-      description="Show a notification when a screenshot is reported. Real OS detection needs a native WebView bridge."
+      description="Open your own bottom sheet from onDetected when a screenshot is reported. Real phone OS detection needs a native WebView bridge."
       code={SCREENSHOT_EXAMPLE}
     >
       <ScreenshotDemo />
@@ -336,6 +355,7 @@ export const uiExamples = {
   WakeLock,
   Fullscreen,
   Orientation: OrientationExample,
+  Shake: ShakeExample,
   Share,
   Clipboard,
   Push,

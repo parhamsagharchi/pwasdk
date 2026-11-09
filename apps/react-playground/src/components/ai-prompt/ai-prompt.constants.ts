@@ -32,6 +32,7 @@ export const AI_MODULE_OPTIONS: IAiModuleOption[] = [
   { id: "Clipboard", label: "Clipboard — copy / paste" },
   { id: "WakeLock", label: "WakeLock — keep screen on" },
   { id: "Orientation", label: "Orientation — lock screen" },
+  { id: "Shake", label: "Shake — motion callback" },
   { id: "Fullscreen", label: "Fullscreen — display mode" },
   { id: "Badge", label: "Badge — app icon count" },
   { id: "Geolocation", label: "Geolocation — GPS" },
@@ -68,7 +69,7 @@ export const AI_MODULE_INSTRUCTIONS: Record<TAiModuleId, string> = {
   Geolocation:
     "- Geolocation: Use Geolocation.getCurrent() / watch() after checking Geolocation.isSupported().",
   Screenshot:
-    "- Screenshot: Call Screenshot.installBridge() in WebViews, Screenshot.watch({ autoNotify: true }) for notifications, and have native Android/iOS call window.PwaSdkScreenshot.notify() on OS screenshots (browsers cannot detect Power+Volume alone).",
+    "- Screenshot: Call Screenshot.installBridge() once, then Screenshot.watch({ autoNotify: false, listenKeyboard: true, onDetected }) and open your bottom sheet in onDetected. Native Android/iOS must call window.PwaSdkScreenshot.notify() — browsers cannot see Power+Volume screenshots.",
   AppStorage:
     "- AppStorage: Persist JSON with AppStorage.local.setJSON / getJSON.",
   Orientation:
@@ -79,6 +80,8 @@ export const AI_MODULE_INSTRUCTIONS: Record<TAiModuleId, string> = {
     "- Device: Read Device.isMobile, Device.online, Device.platform, and Device.onOnlineStatusChange.",
   Fullscreen:
     "- Fullscreen: Call Fullscreen.isSupported() then Fullscreen.request / exit / toggle.",
+  Shake:
+    "- Shake: On iOS call Shake.requestPermission() from a tap, then Shake.watch(onShake) to open your own bottom sheet / feedback UI.",
 };
 
 export const AI_INSTALL_COMMANDS: Record<TAiPackageManager, string> = {

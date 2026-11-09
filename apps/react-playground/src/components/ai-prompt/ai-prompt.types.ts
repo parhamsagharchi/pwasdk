@@ -23,7 +23,8 @@ export type TAiModuleId =
   | "Orientation"
   | "Pwa"
   | "Device"
-  | "Fullscreen";
+  | "Fullscreen"
+  | "Shake";
 
 export interface IAiModuleOption {
   id: TAiModuleId;

@@ -18,12 +18,12 @@ export const PACKAGE_MANAGERS: TPackageManager[] = [
 ];
 
 export const CATEGORY_PILLS: ICategoryPill[] = [
-  { id: "all", label: "All (16)" },
+  { id: "all", label: "All (17)" },
   { id: "hardware", label: "Camera & audio (3)" },
-  { id: "sensors", label: "Device (5)" },
+  { id: "sensors", label: "Device (6)" },
   { id: "system", label: "App (6)" },
   { id: "network", label: "Storage (2)" },
 ];
 
 export const GITHUB_URL = "https://github.com/parhamsagharchi/pwasdk";
-export const SDK_VERSION = "v1.1.0";
+export const SDK_VERSION = "v1.2.0";

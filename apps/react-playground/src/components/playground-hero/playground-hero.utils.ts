@@ -12,6 +12,7 @@ import {
   Pwa,
   Push,
   Screenshot,
+  Shake,
   Share,
   WakeLock,
 } from "@pwasdk/core";
@@ -25,6 +26,7 @@ export function probeRadar(): IRadarChip[] {
     { id: "push", label: "Push", active: Push.isSupported() },
     { id: "device", label: "Device", active: typeof navigator !== "undefined" },
     { id: "gyro", label: "Orientation", active: Orientation.isSupported() },
+    { id: "shake", label: "Shake", active: Shake.isSupported() },
     { id: "clipboard", label: "Clipboard", active: Clipboard.isSupported() },
     { id: "wakelock", label: "WakeLock", active: WakeLock.isSupported() },
     { id: "share", label: "Share", active: Share.isSupported() },
