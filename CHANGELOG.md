@@ -1,5 +1,30 @@
 # Changelog
 
+## [1.5.0] – 2026-11-10
+
+### Features
+
+- Added `Speak` — text-to-speech via Speech Synthesis
+- Added `Tilt` — DeviceOrientation tilt watch + iOS permission helper
+- Added `Proximity` — near/far Generic Sensor API
+- Added `AmbientLight` — ambient lux Generic Sensor API
+- Added `DoubleTap` — Instagram-style double-tap with optional haptic
+- Playground demos for all five modules
+
+### Playground
+
+- Module lab categories + advanced filter (search suggestions with highlight)
+- Wow-first module order (reliable demos first, rare sensors next)
+- Soft radii / minimal shadows; compact controls
+- Mobile scroll-to-top FAB (Telegram-style)
+- Hidden scrollbars; footer GitHub + contact email
+
+### Notes
+
+- Proximity and Ambient Light are rare in browsers; best chance is Android Chrome over HTTPS
+- Tilt may need `DeviceOrientationEvent.requestPermission()` on iOS
+
+
 ## [1.4.0] – 2026-11-10
 
 ### Features

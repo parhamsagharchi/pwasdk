@@ -1,6 +1,6 @@
 # @pwasdk/core
 
-**Version:** `1.4.0`
+**Version:** `1.5.0`
 
 Small TypeScript modules for browser and PWA APIs — one export per feature (`Camera`, `Haptic`, `Push`, `Share`, …). Import, call `isSupported()`, then use it.
 

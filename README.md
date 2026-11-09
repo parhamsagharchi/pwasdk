@@ -4,7 +4,7 @@
 
 **What it is not:** a native mobile SDK or a UI kit — just thin, typed wrappers around Web APIs.
 
-**Current version:** `1.4.0`  
+**Current version:** `1.5.0`  
 **Live demo:** [pwasdk.vercel.app](https://pwasdk.vercel.app)
 
 ```bash
@@ -39,6 +39,11 @@ pnpm add @pwasdk/core
 - **Passkey** — Face ID / fingerprint (WebAuthn)
 - **WebOtp** — auto-read SMS one-time codes
 - **NFC** — read/write tags (Android Chrome)
+- **Speak** — text-to-speech
+- **Tilt** — DeviceOrientation tilt readings (gyro games)
+- **Proximity** — near/far sensor (limited browsers)
+- **AmbientLight** — ambient lux readings (limited browsers)
+- **DoubleTap** — double-tap like with optional haptic
 
 ## Usage
 
@@ -132,8 +137,8 @@ pnpm build:react-playground      # core + demo production build
 
 | Package | Version |
 |---------|---------|
-| `@pwasdk/core` | `1.4.0` |
-| Monorepo (`pwasdk`) | `1.4.0` |
+| `@pwasdk/core` | `1.5.0` |
+| Monorepo (`pwasdk`) | `1.5.0` |
 
 See [CHANGELOG.md](CHANGELOG.md) for release notes.
 

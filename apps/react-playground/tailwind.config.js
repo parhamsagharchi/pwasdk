@@ -93,11 +93,12 @@ export default {
         ],
       },
       borderRadius: {
-        sm: "6px",
-        md: "10px",
-        lg: "14px",
-        xl: "20px",
-        pill: "9999px",
+        sm: "4px",
+        md: "8px",
+        lg: "10px",
+        xl: "12px",
+        /* Soft chip radius — not a full stadium pill */
+        pill: "10px",
       },
       maxWidth: {
         wrap: "1260px",
@@ -122,14 +123,13 @@ export default {
         overlay: "200",
       },
       boxShadow: {
-        glow: "0 0 14px rgba(0, 242, 254, 0.35)",
-        "glow-lg": "0 8px 30px rgba(0, 242, 254, 0.5)",
-        card: "0 10px 25px -10px rgba(0, 0, 0, 0.5)",
-        lift: "0 20px 40px -15px rgba(0, 0, 0, 0.8)",
-        media:
-          "0 25px 60px -15px rgba(0, 0, 0, 0.9), 0 0 35px rgba(0, 242, 254, 0.15)",
-        emerald: "0 0 14px rgba(5, 241, 156, 0.35)",
-        coral: "0 0 16px rgba(255, 71, 87, 0.25)",
+        glow: "none",
+        "glow-lg": "none",
+        card: "0 1px 0 rgba(255, 255, 255, 0.03)",
+        lift: "0 4px 16px rgba(0, 0, 0, 0.18)",
+        media: "0 4px 18px rgba(0, 0, 0, 0.22)",
+        emerald: "none",
+        coral: "none",
       },
       transitionTimingFunction: {
         bounce: "cubic-bezier(0.34, 1.4, 0.64, 1)",

@@ -48,7 +48,7 @@
   flex-direction: column;
   transition: all 0.3s var(--spring-smooth);
   position: relative;
-  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.5);
+  box-shadow: none;
 }
 
 .bento-card.col-span-8 {
@@ -60,11 +60,9 @@
 }
 
 .bento-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(0, 242, 254, 0.4);
-  box-shadow:
-    0 20px 40px -15px rgba(0, 242, 254, 0.15),
-    0 0 0 1px rgba(0, 242, 254, 0.2);
+  transform: translateY(-2px);
+  border-color: rgba(0, 242, 254, 0.35);
+  box-shadow: none;
 }
 
 .bento-stage {
@@ -159,12 +157,12 @@
 .btn-code-trigger {
   appearance: none;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 10px;
   color: var(--cyan);
   background: var(--cyan-mist);
   border: 1px solid var(--cyan-rim);
-  padding: 6px 12px;
-  border-radius: var(--radius-pill);
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
   transition: all 0.2s ease;
   flex-shrink: 0;
   white-space: nowrap;
@@ -173,7 +171,7 @@
 .btn-code-trigger:hover {
   background: var(--cyan);
   color: var(--ink-inverse);
-  box-shadow: var(--shadow-glow);
+  box-shadow: none;
 }
 
 .bento-stage .demo-panel {

@@ -1,4 +1,5 @@
 import {
+  GITHUB_URL,
   INSTALL_COMMANDS,
   PACKAGE_MANAGERS,
 } from "./playground-hero.constants";
@@ -36,7 +37,7 @@ function PlaygroundHero({
                 Try modules
               </a>
               <a
-                href="https://github.com/parhamsagharchi/pwasdk"
+                href={GITHUB_URL}
                 className="btn-glass mono"
                 target="_blank"
                 rel="noopener noreferrer"

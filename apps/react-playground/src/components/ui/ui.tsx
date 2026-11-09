@@ -4,6 +4,7 @@ import ModuleLab from "../module-lab";
 import PlaygroundHero from "../playground-hero";
 import { usePlaygroundChrome } from "../playground-hero";
 import ScreenshotFeedbackSheet from "../screenshot-feedback-sheet";
+import ScrollToTop from "../scroll-to-top";
 import ShakeFeedbackSheet from "../shake-feedback-sheet";
 import SiteFooter from "../site-footer";
 import SiteHeader from "../site-header";
@@ -33,6 +34,7 @@ function Ui({ children }: IUiProps) {
     >
       <div className="bg-grid-pattern" />
       {children}
+      <ScrollToTop />
       <ShakeFeedbackSheet
         open={shake.isSheetOpen}
         lastShake={shake.lastShake}

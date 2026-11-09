@@ -1,7 +1,4 @@
-import {
-  GITHUB_URL,
-  SDK_VERSION,
-} from "../playground-hero/playground-hero.constants";
+import { SDK_VERSION } from "../playground-hero/playground-hero.constants";
 
 function SiteHeader() {
   return (
@@ -30,24 +27,7 @@ function SiteHeader() {
 
         <nav className="nav-links" aria-label="Primary">
           <a href="/?module=torch">Modules</a>
-          <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
-            GitHub ↗
-          </a>
         </nav>
-
-        <div className="nav-actions">
-          <a href="/?module=torch" className="btn-cyan nav-try-btn">
-            Try
-          </a>
-          <a
-            href={GITHUB_URL}
-            className="btn-glass mono nav-github-btn"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            GitHub
-          </a>
-        </div>
       </div>
     </header>
   );

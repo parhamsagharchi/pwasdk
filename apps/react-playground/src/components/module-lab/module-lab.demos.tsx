@@ -1,9 +1,11 @@
+import AmbientLightDemo from "../ambient-light-demo";
 import BadgeDemo from "../badge-demo";
 import BatteryDemo from "../battery-demo";
 import CameraDemo from "../camera-demo";
 import ClipboardDemo from "../clipboard-demo";
 import ContactsDemo from "../contacts-demo";
 import DeviceInfo from "../device-info";
+import DoubleTapDemo from "../double-tap-demo";
 import FullscreenDemo from "../fullscreen-demo";
 import HapticDemo from "../haptic-demo";
 import InstallDemo from "../install-demo";
@@ -15,6 +17,7 @@ import NfcDemo from "../nfc-demo";
 import OrientationDemo from "../orientation-demo";
 import PasskeyDemo from "../passkey-demo";
 import PipDemo from "../pip-demo";
+import ProximityDemo from "../proximity-demo";
 import PushDemo from "../push-demo";
 import PwaDemo from "../pwa-demo";
 import QrDemo from "../qr-demo";
@@ -22,7 +25,9 @@ import ScreenShareDemo from "../screen-share-demo";
 import ScreenshotDemo from "../screenshot-demo";
 import ShakeDemo from "../shake-demo";
 import ShareDemo from "../share-demo";
+import SpeakDemo from "../speak-demo";
 import StorageDemo from "../storage-demo";
+import TiltDemo from "../tilt-demo";
 import TorchDemo from "../torch-demo";
 import WakeLockDemo from "../wake-lock-demo";
 import WebOtpDemo from "../web-otp-demo";
@@ -35,6 +40,16 @@ export function ModuleLabDemo({ id }: { id: TModuleLabId }) {
   switch (id) {
     case "torch":
       return <TorchDemo />;
+    case "proximity":
+      return <ProximityDemo />;
+    case "ambientlight":
+      return <AmbientLightDemo />;
+    case "doubletap":
+      return <DoubleTapDemo />;
+    case "speak":
+      return <SpeakDemo />;
+    case "tilt":
+      return <TiltDemo />;
     case "qr":
       return <QrDemo />;
     case "camera":
