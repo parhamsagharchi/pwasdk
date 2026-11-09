@@ -1,84 +1,78 @@
-import { Screenshot } from "@pwasdk/core";
 import {
   DEMO_BUTTON_CLASS,
   DEMO_SECTION_CLASS,
 } from "../../constants/demo.constants";
-import { useScreenshotDemo } from "./screenshot-demo.hooks";
+import { useUiContext } from "../ui/ui.hooks";
 
 function ScreenshotDemo() {
-  const {
-    lastEvent,
-    notifyResult,
-    toastVisible,
-    permission,
-    handleEnableNotificationsClick,
-    handleSimulateCaptureClick,
-    nativeSupported,
-    notificationSupported,
-    captureSupported,
-  } = useScreenshotDemo();
+  const { screenshot } = useUiContext();
+
+  const handleEnableClick = () => {
+    screenshot.enableListening();
+  };
+
+  const handleDisableClick = () => {
+    screenshot.disableListening();
+  };
+
+  const handleSimulateClick = () => {
+    screenshot.simulate();
+  };
+
+  const handlePreviewSheetClick = () => {
+    screenshot.openSheet();
+  };
 
   return (
     <section className={DEMO_SECTION_CLASS}>
       <div className="demo-callout">
-        Browsers cannot detect a real phone screenshot. Use{" "}
-        <strong>Simulate screenshot</strong> to test the notification, or call{" "}
-        <code>window.PwaSdkScreenshot.notify()</code> from a native WebView.
+        Chrome / Safari / installed PWAs cannot see Power+Volume screenshots.
+        Tap <strong>Simulate screenshot</strong> to open the bottom sheet, or
+        call <code>window.PwaSdkScreenshot.notify()</code> from a native
+        WebView. Desktop: PrintScreen also fires the callback.
       </div>
-      {toastVisible ? (
-        <div className="push-dynamic-stage">
-          <div
-            className="dynamic-island-toast visible"
-            role="status"
-            aria-live="polite"
-          >
-            <div className="toast-top-row">
-              <div className="toast-app-pill">
-                <span className="toast-dot" />
-                <span>PWA.SDK</span>
-              </div>
-              <span>Just now</span>
-            </div>
-            <div className="toast-body-title">Screenshot taken</div>
-            <div className="toast-body-text">
-              This page received a screenshot event.
-            </div>
-          </div>
-        </div>
-      ) : null}
       <div className="demo-actions-row">
-        {notificationSupported ? (
-          <button
-            type="button"
-            className={DEMO_BUTTON_CLASS}
-            onClick={handleEnableNotificationsClick}
-          >
-            {permission === "granted"
-              ? "Notifications on"
-              : "Enable notifications"}
-          </button>
-        ) : null}
         <button
           type="button"
           className={DEMO_BUTTON_CLASS}
-          onClick={handleSimulateCaptureClick}
+          onClick={handleEnableClick}
+          disabled={screenshot.isListening}
+        >
+          {screenshot.isListening ? "Listening…" : "Enable listen"}
+        </button>
+        <button
+          type="button"
+          className={DEMO_BUTTON_CLASS}
+          onClick={handleDisableClick}
+          disabled={!screenshot.isListening}
+        >
+          Stop
+        </button>
+        <button
+          type="button"
+          className={DEMO_BUTTON_CLASS}
+          onClick={handleSimulateClick}
         >
           Simulate screenshot
         </button>
+        <button
+          type="button"
+          className={DEMO_BUTTON_CLASS}
+          onClick={handlePreviewSheetClick}
+        >
+          Preview sheet
+        </button>
       </div>
       <div className="demo-meta demo-meta-spaced">
-        <p>Module supported: {String(Screenshot.isSupported())}</p>
-        <p>Native OS bridge: {String(nativeSupported)}</p>
-        <p>Notification API: {String(notificationSupported)}</p>
-        <p>Permission: {permission}</p>
-        <p>Canvas/video capture: {String(captureSupported)}</p>
-        {lastEvent ? (
+        <p>Listening: {String(screenshot.isListening)}</p>
+        <p>Native bridge flag: {String(screenshot.nativeBridge)}</p>
+        {screenshot.lastEvent ? (
           <p>
-            Last event: source={lastEvent.source}, at=
-            {new Date(lastEvent.at).toLocaleTimeString()}
+            Last: source={screenshot.lastEvent.source} ·{" "}
+            {new Date(screenshot.lastEvent.at).toLocaleTimeString()}
           </p>
         ) : null}
-        {notifyResult ? <p>{notifyResult}</p> : null}
+        {screenshot.status ? <p>{screenshot.status}</p> : null}
       </div>
     </section>
   );

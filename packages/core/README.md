@@ -1,6 +1,6 @@
 # @pwasdk/core
 
-**Version:** `1.1.0`
+**Version:** `1.2.0`
 
 Small TypeScript modules for browser and PWA APIs — one export per feature (`Camera`, `Haptic`, `Push`, `Share`, …). Import, call `isSupported()`, then use it.
 
@@ -51,6 +51,7 @@ const position = await Geolocation.getCurrent();
 | `Microphone` | getUserMedia audio |
 | `Pwa` | Standalone / platform helpers |
 | `Screenshot` | Screenshot event bus + notification helpers |
+| `Shake` | DeviceMotion shake detection + callback |
 
 ## Notes
 

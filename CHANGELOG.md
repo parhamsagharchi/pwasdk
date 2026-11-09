@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.2.0] – 2026-11-10
+
+### Features
+
+- Added `Shake` module: `isSupported()`, `needsPermission()`, `requestPermission()`, and `watch(onShake)` for Instagram-style shake detection via DeviceMotion
+- Playground: enable shake on a phone, then open a global bottom sheet from the `Shake.watch` callback (plus Preview sheet for desktop)
+- Screenshot playground now opens a global “You took a screenshot” bottom sheet from `onDetected` (Simulate / PrintScreen / native bridge)
+- `Screenshot.watch({ listenKeyboard: true })` optionally detects desktop PrintScreen-style shortcuts
+
+### Notes
+
+- iOS requires `Shake.requestPermission()` from a user gesture before motion events fire
+- Core reports shakes / screenshot events only — bottom sheet / feedback UI stays in the app
+- Pure mobile browsers still cannot observe Power+Volume screenshots; use `window.PwaSdkScreenshot.notify()` from a native shell
+
 ## [1.1.0] – 2026-10-10
 
 ### Features

@@ -14,4 +14,5 @@ export * from "./modules/camera";
 export * from "./modules/microphone";
 export * from "./modules/pwa";
 export * from "./modules/screenshot";
+export * from "./modules/shake";
 export * from "./types";

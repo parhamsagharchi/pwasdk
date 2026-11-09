@@ -1,4 +1,4 @@
-export type TScreenshotSource = "native" | "manual" | "unknown";
+export type TScreenshotSource = "native" | "manual" | "keyboard" | "unknown";
 
 export interface IScreenshotEvent {
   source: TScreenshotSource;
@@ -20,6 +20,11 @@ export interface IScreenshotWatchOptions {
   autoNotify?: boolean;
   /** Override notification copy when `autoNotify` is on. */
   notification?: IScreenshotNotifyOptions;
+  /**
+   * When true, also listen for desktop PrintScreen (and common screenshot
+   * shortcuts). Does **not** detect phone Power+Volume screenshots.
+   */
+  listenKeyboard?: boolean;
   /** Extra callback besides the optional auto notification. */
   onDetected?: TScreenshotListener;
 }

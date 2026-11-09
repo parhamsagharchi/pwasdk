@@ -35,6 +35,7 @@ import {
   hasNativeBridge,
   hasWindow,
   installBridgeObject,
+  isScreenshotKeyboardEvent,
 } from "./screenshot.utils";
 
 export const Screenshot = {
@@ -104,17 +105,35 @@ export const Screenshot = {
 
   /**
    * Listen for detections and optionally show a system notification.
-   * This is the recommended API for "tell the user they took a screenshot".
+   * Recommended for “you took a screenshot” UX: pass `onDetected` and open
+   * your own bottom sheet / modal. Pure mobile browsers still cannot see
+   * Power+Volume — use `installBridge()` + native `PwaSdkScreenshot.notify()`.
    */
   watch(options: IScreenshotWatchOptions = {}): () => void {
     const autoNotify = options.autoNotify !== false;
+    const listenKeyboard = options.listenKeyboard === true;
 
-    return this.onDetected((event) => {
+    const stopDetected = this.onDetected((event) => {
       options.onDetected?.(event);
       if (autoNotify) {
         void this.showNotification(options.notification);
       }
     });
+
+    let stopKeyboard = () => {};
+    if (listenKeyboard && hasWindow()) {
+      const onKeyUp = (event: KeyboardEvent) => {
+        if (!isScreenshotKeyboardEvent(event)) return;
+        this.notifyDetected({ source: "keyboard" });
+      };
+      window.addEventListener("keyup", onKeyUp);
+      stopKeyboard = () => window.removeEventListener("keyup", onKeyUp);
+    }
+
+    return () => {
+      stopDetected();
+      stopKeyboard();
+    };
   },
 
   /**

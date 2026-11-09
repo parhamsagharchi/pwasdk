@@ -17,6 +17,7 @@ export default function App() {
           <Ui.WakeLock />
           <Ui.Fullscreen />
           <Ui.Orientation />
+          <Ui.Shake />
           <Ui.Share />
           <Ui.Clipboard />
           <Ui.Push />

@@ -1,4 +1,6 @@
 import type { ReactNode } from "react";
+import type { IScreenshotFeedbackState } from "../../hooks/use-screenshot-feedback.hooks";
+import type { IShakeFeedbackState } from "../../hooks/use-shake-feedback.hooks";
 import type {
   IPlaygroundHeroProps,
   TDemoCategory,
@@ -10,6 +12,8 @@ export interface IUiContext {
   protocol: string;
   orientation: string | null;
   chrome: IPlaygroundHeroProps;
+  shake: IShakeFeedbackState;
+  screenshot: IScreenshotFeedbackState;
 }
 
 export interface IUiProps {

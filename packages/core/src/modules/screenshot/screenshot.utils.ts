@@ -38,6 +38,21 @@ export function dispatchScreenshotEvent(event: IScreenshotEvent): void {
   );
 }
 
+/** Desktop PrintScreen / common screenshot shortcut heuristics. */
+export function isScreenshotKeyboardEvent(event: KeyboardEvent): boolean {
+  const key = event.key;
+  if (key === "PrintScreen") return true;
+  // macOS-style shortcuts sometimes reach the page as Meta+Shift+3/4
+  if (
+    (event.metaKey || event.ctrlKey) &&
+    event.shiftKey &&
+    (key === "3" || key === "4" || key === "Digit3" || key === "Digit4")
+  ) {
+    return true;
+  }
+  return false;
+}
+
 export function installBridgeObject(
   notify: (detail?: unknown) => void,
 ): IScreenshotBridge | null {
