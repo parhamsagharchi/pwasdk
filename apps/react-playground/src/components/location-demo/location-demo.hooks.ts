@@ -18,7 +18,7 @@ export function useLocationDemo() {
       });
       setLocation(pos);
     } catch (e: any) {
-      setLocationError(e?.message || "Failed to get location");
+      setLocationError(e?.message || "Could not get location");
     } finally {
       setIsLocationLoading(false);
     }
@@ -40,7 +40,7 @@ export function useLocationDemo() {
         locationStopRef.current = stop;
         setIsWatchingLocation(true);
       } catch (e: any) {
-        setLocationError(e?.message || "Failed to watch location");
+        setLocationError(e?.message || "Could not start live location updates");
       }
     } else {
       if (locationStopRef.current) locationStopRef.current();

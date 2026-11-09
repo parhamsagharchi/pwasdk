@@ -2,6 +2,7 @@ import {
   SCREENSHOT_BRIDGE_GLOBAL,
   SCREENSHOT_BRIDGE_KEY,
   SCREENSHOT_EVENT,
+  SCREENSHOT_NATIVE_HOST_KEY,
 } from "./screenshot.constants";
 import type {
   IScreenshotBridge,
@@ -13,10 +14,30 @@ export function hasWindow(): boolean {
   return typeof window !== "undefined";
 }
 
-export function hasNativeBridge(): boolean {
-  if (!hasWindow()) return false;
-  const win = window as unknown as Record<string, unknown>;
-  return win[SCREENSHOT_BRIDGE_KEY] === true;
+function getWin(): Record<string, unknown> | null {
+  if (!hasWindow()) return null;
+  return window as unknown as Record<string, unknown>;
+}
+
+/** JS bridge object was installed (still false for real OS detection alone). */
+export function hasBridgeObject(): boolean {
+  const win = getWin();
+  return !!win && win[SCREENSHOT_BRIDGE_KEY] === true;
+}
+
+/**
+ * A native Android/iOS host has advertised or notified.
+ * Always false in pure mobile Chrome / Safari / PWA.
+ */
+export function hasNativeHost(): boolean {
+  const win = getWin();
+  return !!win && win[SCREENSHOT_NATIVE_HOST_KEY] === true;
+}
+
+export function markNativeHost(): void {
+  const win = getWin();
+  if (!win) return;
+  win[SCREENSHOT_NATIVE_HOST_KEY] = true;
 }
 
 export function createScreenshotEvent(
@@ -42,7 +63,6 @@ export function dispatchScreenshotEvent(event: IScreenshotEvent): void {
 export function isScreenshotKeyboardEvent(event: KeyboardEvent): boolean {
   const key = event.key;
   if (key === "PrintScreen") return true;
-  // macOS-style shortcuts sometimes reach the page as Meta+Shift+3/4
   if (
     (event.metaKey || event.ctrlKey) &&
     event.shiftKey &&
@@ -56,13 +76,17 @@ export function isScreenshotKeyboardEvent(event: KeyboardEvent): boolean {
 export function installBridgeObject(
   notify: (detail?: unknown) => void,
 ): IScreenshotBridge | null {
-  if (!hasWindow()) return null;
+  const win = getWin();
+  if (!win) return null;
 
-  const win = window as unknown as Record<string, unknown>;
   win[SCREENSHOT_BRIDGE_KEY] = true;
 
   const bridge: IScreenshotBridge = {
+    advertise: () => {
+      markNativeHost();
+    },
     notify: (detail?: unknown) => {
+      markNativeHost();
       notify(detail);
     },
   };

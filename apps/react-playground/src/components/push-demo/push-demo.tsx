@@ -5,7 +5,7 @@ import { DEMO_SECTION_CLASS } from "../../constants/demo.constants";
 function PushDemo() {
   const [toastVisible, setToastVisible] = useState(false);
   const [toastText, setToastText] = useState(
-    "Service Worker registered push subscription.",
+    "Tap Enable to ask for notification permission.",
   );
 
   const handleEnablePushClick = () => {
@@ -13,7 +13,7 @@ function PushDemo() {
       try {
         const reg = await Push.register();
         if (!reg) {
-          setToastText("Failed to register service worker.");
+          setToastText("Could not set up the background worker for push.");
           setToastVisible(true);
           window.setTimeout(() => setToastVisible(false), 3500);
           return;
@@ -25,19 +25,21 @@ function PushDemo() {
             | string
             | undefined;
           if (!vapidPublicKey) {
-            setToastText("Permission granted — set VITE_VAPID_PUBLIC_KEY.");
+            setToastText(
+              "Permission granted. Add VITE_VAPID_PUBLIC_KEY in .env to finish subscribe.",
+            );
           } else {
             await Push.subscribe(vapidPublicKey);
-            setToastText("Push subscription active.");
+            setToastText("Subscribed — your server can send push now.");
           }
         } else if (permission === "denied") {
-          setToastText("Push permission denied.");
+          setToastText("Notifications were blocked.");
         } else {
-          setToastText("Push permission dismissed.");
+          setToastText("Permission dialog was dismissed.");
         }
       } catch (error: unknown) {
         const message = error instanceof Error ? error.message : String(error);
-        setToastText(`Failed to enable push: ${message}`);
+        setToastText(`Could not enable push: ${message}`);
       }
 
       setToastVisible(true);
@@ -47,6 +49,10 @@ function PushDemo() {
 
   return (
     <section className={DEMO_SECTION_CLASS}>
+      <p className="demo-meta">
+        Ask for permission so your server can notify the user later — even when
+        the tab is closed.
+      </p>
       <div className="push-dynamic-stage">
         <div
           className={
@@ -62,17 +68,21 @@ function PushDemo() {
             </div>
             <span>Just now</span>
           </div>
-          <div className="toast-body-title">Push Notification</div>
+          <div className="toast-body-title">Push notification</div>
           <div className="toast-body-text">{toastText}</div>
         </div>
-        <button
-          type="button"
-          className="btn-cyan mono btn-demo-compact"
-          onClick={handleEnablePushClick}
-        >
-          Enable push
-        </button>
-        <p className="demo-meta">Supported: {String(Push.isSupported())}</p>
+        <div className="demo-actions-row demo-actions-single">
+          <button
+            type="button"
+            className="btn-cyan mono btn-demo-compact"
+            onClick={handleEnablePushClick}
+          >
+            Enable notifications
+          </button>
+        </div>
+        <p className="demo-meta">
+          Works here: {Push.isSupported() ? "Yes" : "No"}
+        </p>
       </div>
     </section>
   );

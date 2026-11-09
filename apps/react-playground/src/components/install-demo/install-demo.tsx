@@ -16,7 +16,7 @@ function InstallDemo() {
             return;
           }
           setMessage(
-            "Install prompt is not ready yet. Stay on HTTPS, keep a service worker, and try again after the browser fires beforeinstallprompt.",
+            "Install isn’t ready yet. Stay on HTTPS with a service worker, then wait until the browser offers install — or check the browser menu.",
           );
           return;
         }
@@ -24,8 +24,8 @@ function InstallDemo() {
         const installed = await Install.prompt();
         setMessage(
           installed
-            ? "PWA installed successfully."
-            : "Install dismissed or not completed.",
+            ? "App installed successfully."
+            : "Install was cancelled or not finished.",
         );
       } catch (error: unknown) {
         const errMessage =
@@ -38,37 +38,48 @@ function InstallDemo() {
   return (
     <section className={DEMO_SECTION_CLASS}>
       {Install.isInstalled() ? (
-        <div className="demo-callout ok">App is already installed.</div>
+        <div className="demo-callout ok">This app is already installed.</div>
       ) : null}
       {showIosHelp ? (
         <div className="demo-callout" style={{ whiteSpace: "pre-line" }}>
-          iOS has no beforeinstallprompt. Use Safari Share → Add to Home Screen.
+          iPhone doesn’t show a browser Install button. Use Safari → Share → Add
+          to Home Screen.
         </div>
       ) : null}
       {!Install.isSupported() && platform !== "ios" ? (
         <div className="demo-callout">
-          Install prompt needs a valid manifest, service worker, and HTTPS.
+          Install needs HTTPS, a web app manifest, and a service worker.
         </div>
-      ) : null}
-      <button
-        type="button"
-        className="btn-cyan mono btn-demo-install"
-        onClick={handleInstallClick}
-        disabled={Install.isInstalled()}
-      >
-        {Install.isInstalled()
-          ? "Already Installed"
-          : platform === "ios"
-            ? "Show iOS install steps"
-            : "Install app"}
-      </button>
+      ) : (
+        <p className="demo-meta">
+          Add this site to the home screen like a real app.
+        </p>
+      )}
+      <div className="demo-actions-row demo-actions-single">
+        <button
+          type="button"
+          className="btn-cyan mono btn-demo-install"
+          onClick={handleInstallClick}
+          disabled={Install.isInstalled()}
+        >
+          {Install.isInstalled()
+            ? "Already installed"
+            : platform === "ios"
+              ? "Show iPhone install steps"
+              : "Install app"}
+        </button>
+      </div>
       <div className="demo-meta demo-meta-spaced">
-        <p>Installed: {String(Install.isInstalled())}</p>
-        <p>canPrompt: {String(Install.canPrompt())}</p>
+        <p>Installed: {Install.isInstalled() ? "Yes" : "No"}</p>
+        <p>
+          Browser can show install button: {Install.canPrompt() ? "Yes" : "Not yet"}
+        </p>
         <p>Platform: {platform}</p>
         <p>
-          Standalone:{" "}
-          {window.matchMedia("(display-mode: standalone)").matches ? "yes" : "no"}
+          Running from home screen:{" "}
+          {window.matchMedia("(display-mode: standalone)").matches
+            ? "Yes"
+            : "No"}
         </p>
         {message ? (
           <p style={{ whiteSpace: "pre-line" }}>{message}</p>

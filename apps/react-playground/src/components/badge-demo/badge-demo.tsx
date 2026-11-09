@@ -32,6 +32,10 @@ function BadgeDemo() {
 
   return (
     <section className={DEMO_SECTION_CLASS}>
+      <p className="demo-meta">
+        Changes the unread number on the app icon (when the browser supports
+        it). The preview below is a mock of that icon.
+      </p>
       <div className="badge-cyber-stage">
         <div className="cyber-icon-mock">
           <span>⚡</span>
@@ -41,13 +45,15 @@ function BadgeDemo() {
         </div>
         <div className="demo-actions-row">
           <button type="button" className="pulse-chip-btn" onClick={handleIncClick}>
-            + Badge
+            Add 1
           </button>
           <button type="button" className="pulse-chip-btn" onClick={handleDecClick}>
-            - Badge
+            Remove 1
           </button>
         </div>
-        <p className="demo-meta">Supported: {String(Badge.isSupported())}</p>
+        <p className="demo-meta">
+          Works here: {Badge.isSupported() ? "Yes" : "No"}
+        </p>
       </div>
     </section>
   );

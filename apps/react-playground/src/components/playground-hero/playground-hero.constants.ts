@@ -26,4 +26,4 @@ export const CATEGORY_PILLS: ICategoryPill[] = [
 ];
 
 export const GITHUB_URL = "https://github.com/parhamsagharchi/pwasdk";
-export const SDK_VERSION = "v1.2.0";
+export const SDK_VERSION = "v1.5.0";

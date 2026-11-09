@@ -1,5 +1,64 @@
 # Changelog
 
+## [1.5.0] – 2026-11-10
+
+### Features
+
+- Added `Speak` — text-to-speech via Speech Synthesis
+- Added `Tilt` — DeviceOrientation tilt watch + iOS permission helper
+- Added `Proximity` — near/far Generic Sensor API
+- Added `AmbientLight` — ambient lux Generic Sensor API
+- Added `DoubleTap` — Instagram-style double-tap with optional haptic
+- Playground demos for all five modules
+
+### Playground
+
+- Module lab categories + advanced filter (search suggestions with highlight)
+- Wow-first module order (reliable demos first, rare sensors next)
+- Soft radii / minimal shadows; compact controls
+- Mobile scroll-to-top FAB (Telegram-style)
+- Hidden scrollbars; footer GitHub + contact email
+
+### Notes
+
+- Proximity and Ambient Light are rare in browsers; best chance is Android Chrome over HTTPS
+- Tilt may need `DeviceOrientationEvent.requestPermission()` on iOS
+
+
+## [1.4.0] – 2026-11-10
+
+### Features
+
+- Added `Torch` — flashlight via camera track constraints
+- Added `Qr` — QR scan with `BarcodeDetector` + `watch(video, onDetect)`
+- Added `ScreenShare` — `getDisplayMedia` helpers
+- Added `Contacts` — Contact Picker API
+- Added `Pip` — Picture-in-Picture enter/exit
+- Added `MediaSession` — lock-screen Now Playing controls
+- Added `Passkey` — WebAuthn create/get + `randomChallenge()`
+- Added `WebOtp` — SMS one-time code listener
+- Added `Nfc` — Web NFC read/write (Android Chrome)
+- Playground demos for all new modules; lab ordered wow-first (Torch first)
+
+### Notes
+
+- QR / Contacts / WebOTP / NFC are strongest on Android Chrome
+- Torch needs a camera track that exposes the `torch` capability
+- Passkey demos create local credentials; production apps must verify on a server
+
+## [1.3.0] – 2026-11-10
+
+### Features
+
+- Added `Network` module: `getStatus()` / `watch()` with effectiveType (2g–4g), quality, strength score, and optional `5g-est` from fast downlink
+- Added `Battery` module: `getStatus()` / `watch()` for level, charging, and time estimates
+- Playground lab demos for Network and Battery
+
+### Notes
+
+- Browsers do not expose a real OS `5g` enum; `generation: "5g-est"` is heuristic
+- Battery Status API is often missing on iOS Safari
+
 ## [1.2.0] – 2026-11-10
 
 ### Features
@@ -8,12 +67,14 @@
 - Playground: enable shake on a phone, then open a global bottom sheet from the `Shake.watch` callback (plus Preview sheet for desktop)
 - Screenshot playground now opens a global “You took a screenshot” bottom sheet from `onDetected` (Simulate / PrintScreen / native bridge)
 - `Screenshot.watch({ listenKeyboard: true })` optionally detects desktop PrintScreen-style shortcuts
+- Playground UI: Gestalt-style module lab (module list + one active demo) instead of a crowded bento grid; media / architecture / AI prompt removed from the main path
+- Screenshot bridge: `isNativeDetectionSupported()` is true only after a native host calls `advertise()` / `notify()` (installing the JS bridge alone is not enough)
 
 ### Notes
 
 - iOS requires `Shake.requestPermission()` from a user gesture before motion events fire
 - Core reports shakes / screenshot events only — bottom sheet / feedback UI stays in the app
-- Pure mobile browsers still cannot observe Power+Volume screenshots; use `window.PwaSdkScreenshot.notify()` from a native shell
+- Pure mobile browsers still cannot observe Power+Volume screenshots; Android needs `ScreenCaptureCallback` → `window.PwaSdkScreenshot.notify()`
 
 ## [1.1.0] – 2026-10-10
 

@@ -1,17 +1,15 @@
 import type { ReactNode } from "react";
 import type { IScreenshotFeedbackState } from "../../hooks/use-screenshot-feedback.hooks";
 import type { IShakeFeedbackState } from "../../hooks/use-shake-feedback.hooks";
-import type {
-  IPlaygroundHeroProps,
-  TDemoCategory,
-} from "../playground-hero/playground-hero.types";
+import type { usePlaygroundChrome } from "../playground-hero";
+import type { TDemoCategory } from "../playground-hero/playground-hero.types";
 
 export interface IUiContext {
   online: boolean;
   debugInfo: string;
   protocol: string;
   orientation: string | null;
-  chrome: IPlaygroundHeroProps;
+  chrome: ReturnType<typeof usePlaygroundChrome>;
   shake: IShakeFeedbackState;
   screenshot: IScreenshotFeedbackState;
 }

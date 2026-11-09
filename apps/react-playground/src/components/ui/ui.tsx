@@ -1,13 +1,11 @@
 import type { ReactNode } from "react";
-import AiPrompt from "../ai-prompt";
-import ConnectionStatus from "../connection-status";
 import Contributors from "../contributors";
-import MediaShowcase from "../media-showcase";
+import ModuleLab from "../module-lab";
 import PlaygroundHero from "../playground-hero";
 import { usePlaygroundChrome } from "../playground-hero";
 import ScreenshotFeedbackSheet from "../screenshot-feedback-sheet";
+import ScrollToTop from "../scroll-to-top";
 import ShakeFeedbackSheet from "../shake-feedback-sheet";
-import SiteArchitecture from "../site-architecture";
 import SiteFooter from "../site-footer";
 import SiteHeader from "../site-header";
 import { useDemoBootstrap } from "../../hooks/use-demo-bootstrap.hooks";
@@ -36,6 +34,7 @@ function Ui({ children }: IUiProps) {
     >
       <div className="bg-grid-pattern" />
       {children}
+      <ScrollToTop />
       <ShakeFeedbackSheet
         open={shake.isSheetOpen}
         lastShake={shake.lastShake}
@@ -60,32 +59,9 @@ function Hero() {
     <PlaygroundHero
       packageManager={chrome.packageManager}
       copied={chrome.copied}
-      query={chrome.query}
-      category={chrome.category}
       packageManagerHandlers={chrome.packageManagerHandlers}
-      categoryHandlers={chrome.categoryHandlers}
       handleCopyInstall={chrome.handleCopyInstall}
-      handleSearchChange={chrome.handleSearchChange}
     />
-  );
-}
-
-function Examples({ children }: { children: ReactNode }) {
-  const { protocol, debugInfo } = useUiContext();
-
-  return (
-    <section className="bento-section" id="capabilities">
-      <div className="wrap">
-        <div className="bento-section-head">
-          <h2 className="bento-title">
-            <span>Try the modules</span>
-          </h2>
-          <span className="bento-counter mono">17 live examples</span>
-        </div>
-        <ConnectionStatus protocol={protocol} debugInfo={debugInfo} />
-        <div className="bento-grid">{children}</div>
-      </div>
-    </section>
   );
 }
 
@@ -94,10 +70,7 @@ export const uiParts = {
   Header: SiteHeader,
   Main,
   Hero,
-  AiPrompt,
-  MediaShowcase,
-  Examples,
-  HowItWorks: SiteArchitecture,
+  Lab: ModuleLab,
   Contributors,
   Footer: SiteFooter,
 };

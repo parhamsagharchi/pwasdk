@@ -12,12 +12,12 @@ function StorageDemo() {
   const [online, setOnline] = useState(() => Device.online);
 
   const handleSetNameClick = () => {
-    const name = prompt("Enter a name to store:", storedName) || "";
+    const name = prompt("Enter a name to save on this device:", storedName) || "";
     try {
       AppStorage.local.set("demo:name", name);
       setStoredName(name);
     } catch (e: unknown) {
-      const message = e instanceof Error ? e.message : "Failed to store name";
+      const message = e instanceof Error ? e.message : "Could not save the name";
       alert(message);
     }
   };
@@ -27,7 +27,7 @@ function StorageDemo() {
       AppStorage.local.remove("demo:name");
       setStoredName("");
     } catch (e: unknown) {
-      const message = e instanceof Error ? e.message : "Failed to clear name";
+      const message = e instanceof Error ? e.message : "Could not clear the name";
       alert(message);
     }
   };
@@ -41,8 +41,15 @@ function StorageDemo() {
   return (
     <section className={DEMO_SECTION_CLASS}>
       {!AppStorage.local.isSupported() ? (
-        <div className="demo-callout">localStorage is not available.</div>
-      ) : null}
+        <div className="demo-callout">
+          Device storage is not available in this browser.
+        </div>
+      ) : (
+        <p className="demo-meta">
+          Save a small value on the device (survives refresh). The online toggle
+          below is only a UI simulation.
+        </p>
+      )}
       <div className="storage-network-stage">
         <div className="storage-online-row">
           <span
@@ -52,25 +59,27 @@ function StorageDemo() {
           />
           <span>
             {online
-              ? `Online (${connection})`
-              : "Offline (simulated view)"}
+              ? `Online view (${connection})`
+              : "Offline view (simulated)"}
           </span>
         </div>
-        <button
-          type="button"
-          className={DEMO_BUTTON_CLASS}
-          onClick={handleToggleOnlineClick}
-        >
-          {online ? "Simulate Offline" : "Simulate Online"}
-        </button>
-        <div className="haptic-pulse-grid">
+        <div className="demo-actions-row demo-actions-single">
+          <button
+            type="button"
+            className={DEMO_BUTTON_CLASS}
+            onClick={handleToggleOnlineClick}
+          >
+            {online ? "Simulate offline UI" : "Simulate online UI"}
+          </button>
+        </div>
+        <div className="demo-actions-row">
           <button
             type="button"
             className={DEMO_BUTTON_CLASS}
             onClick={handleSetNameClick}
             disabled={!AppStorage.local.isSupported()}
           >
-            Set Name
+            Save name
           </button>
           <button
             type="button"
@@ -78,11 +87,11 @@ function StorageDemo() {
             onClick={handleClearNameClick}
             disabled={!AppStorage.local.isSupported()}
           >
-            Clear Name
+            Clear name
           </button>
         </div>
         <p className="demo-meta">
-          Stored name: {storedName ? <code>{storedName}</code> : "—"}
+          Saved name: {storedName ? <code>{storedName}</code> : "—"}
         </p>
       </div>
     </section>

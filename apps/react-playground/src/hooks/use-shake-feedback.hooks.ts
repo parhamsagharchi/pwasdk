@@ -36,23 +36,25 @@ export function useShakeFeedback(): IShakeFeedbackState {
     stopRef.current?.();
     stopRef.current = null;
     setIsListening(false);
-    setStatus("Shake listening stopped.");
+    setStatus("Stopped listening for shake.");
   }, []);
 
   const enableListening = useCallback(async () => {
     if (!Shake.isSupported()) {
-      setStatus("DeviceMotion is not available in this browser.");
+      setStatus("This browser can’t detect phone shake.");
       return;
     }
 
     try {
       const permission = await Shake.requestPermission();
       if (permission === "denied") {
-        setStatus("Motion permission denied. Enable it in Safari settings.");
+        setStatus(
+          "Motion access was denied. Allow motion in Safari settings, then try again.",
+        );
         return;
       }
       if (permission === "unsupported") {
-        setStatus("Shake is not supported here.");
+        setStatus("Shake is not available on this device.");
         return;
       }
 
@@ -60,13 +62,15 @@ export function useShakeFeedback(): IShakeFeedbackState {
       stopRef.current = Shake.watch((event) => {
         setLastShake(event);
         setIsSheetOpen(true);
-        setStatus(`Shake detected · magnitude ${event.magnitude.toFixed(1)}`);
+        setStatus(
+          `Shake detected (strength ${event.magnitude.toFixed(1)}).`,
+        );
       });
       setIsListening(true);
-      setStatus("Listening. Shake your phone to open the sheet.");
+      setStatus("Listening — shake your phone to open the report sheet.");
     } catch (error: unknown) {
       const message = error instanceof Error ? error.message : String(error);
-      setStatus(message || "Failed to enable shake listening.");
+      setStatus(message || "Could not start shake listening.");
     }
   }, []);
 

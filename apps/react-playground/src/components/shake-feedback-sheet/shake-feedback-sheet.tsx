@@ -38,13 +38,13 @@ function ShakeFeedbackSheet({
           Report a problem
         </h2>
         <p className="feedback-sheet-body">
-          You opened this by shaking your phone — same pattern as Instagram.
-          In your app, put any feedback or help UI here via the{" "}
-          <code>Shake.watch</code> callback.
+          You opened this by shaking your phone — the same idea as Instagram’s
+          shake-to-report. In your app, show any help or feedback screen when
+          shake is detected.
         </p>
         {lastShake ? (
           <p className="feedback-sheet-meta mono">
-            magnitude {lastShake.magnitude.toFixed(1)} ·{" "}
+            Shake strength {lastShake.magnitude.toFixed(1)} ·{" "}
             {new Date(lastShake.at).toLocaleTimeString()}
           </p>
         ) : null}

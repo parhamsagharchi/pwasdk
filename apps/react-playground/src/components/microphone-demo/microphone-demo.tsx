@@ -1,5 +1,6 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { DEMO_SECTION_CLASS } from "../../constants/demo.constants";
+import { useDemoAutorun } from "../../hooks/use-demo-autorun.hooks";
 import PageLoader from "../page-loader";
 import { MICROPHONE_DEMO_WORD } from "./microphone-demo.constants";
 import { useMicrophoneDemo } from "./microphone-demo.hooks";
@@ -21,6 +22,13 @@ function MicrophoneDemo() {
     stopListening,
   } = useMicrophoneDemo();
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  const start = useCallback(async () => {
+    await openMic();
+    listenForWord();
+  }, [openMic, listenForWord]);
+
+  useDemoAutorun(start, stopMicOnly);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -65,6 +73,9 @@ function MicrophoneDemo() {
   return (
     <section className={DEMO_SECTION_CLASS}>
       {isMicLoading ? <PageLoader /> : null}
+      <p className="demo-meta">
+        Mic + speech listen start automatically — say “{MICROPHONE_DEMO_WORD}”.
+      </p>
       <div className="audio-spectrum-stage">
         <canvas ref={canvasRef} className="cyber-spectrum-canvas" />
         <button
@@ -79,7 +90,7 @@ function MicrophoneDemo() {
         >
           <span className="mic-live-dot">●</span>
           <span className="mic-status-label">
-            {micStream ? "Stop mic" : "Start mic"}
+            {micStream ? "Stop microphone" : "Start microphone"}
           </span>
         </button>
         <div className="haptic-pulse-grid">
@@ -97,7 +108,7 @@ function MicrophoneDemo() {
             onClick={stopListening}
             disabled={!isListening}
           >
-            Stop listening
+            Stop speech listen
           </button>
         </div>
         <audio ref={audioRef} className="sr-only-media" />
@@ -110,6 +121,11 @@ function MicrophoneDemo() {
           <p className="demo-meta">Matched “{MICROPHONE_DEMO_WORD}”.</p>
         ) : null}
         {micError ? <p className="demo-error">{micError}</p> : null}
+        {!isSpeechSupported ? (
+          <p className="demo-meta">
+            Speech-to-text isn’t available in this browser.
+          </p>
+        ) : null}
       </div>
     </section>
   );

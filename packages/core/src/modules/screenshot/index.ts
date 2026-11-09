@@ -5,6 +5,7 @@ export {
   SCREENSHOT_BRIDGE_GLOBAL,
   SCREENSHOT_BRIDGE_KEY,
   SCREENSHOT_EVENT,
+  SCREENSHOT_NATIVE_HOST_KEY,
 } from "./screenshot.constants";
 export type {
   IScreenshotBridge,

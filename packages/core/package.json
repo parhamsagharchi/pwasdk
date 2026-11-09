@@ -1,7 +1,7 @@
 {
   "name": "@pwasdk/core",
-  "version": "1.2.0",
-  "description": "Browser PWA helpers for haptics, share, clipboard, push, install, media, shake, and more",
+  "version": "1.5.0",
+  "description": "Browser PWA helpers for haptics, share, clipboard, push, install, media, shake, torch, QR, passkeys, NFC, speak, tilt, and more",
   "license": "MIT",
   "type": "module",
   "sideEffects": false,

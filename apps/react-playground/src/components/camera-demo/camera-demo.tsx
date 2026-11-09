@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { DEMO_SECTION_CLASS } from "../../constants/demo.constants";
+import { useDemoAutorun } from "../../hooks/use-demo-autorun.hooks";
 import PageLoader from "../page-loader";
 import { useCameraDemo } from "./camera-demo.hooks";
 
@@ -16,6 +17,13 @@ function CameraDemo() {
   } = useCameraDemo();
   const [flashing, setFlashing] = useState(false);
   const [facing, setFacing] = useState<"front" | "back">("front");
+
+  const start = useCallback(() => {
+    if (!isMediaDevicesSupported) return;
+    void openCamera("front");
+  }, [isMediaDevicesSupported, openCamera]);
+
+  useDemoAutorun(start, stopCameraOnly);
 
   const handleStartClick = () => {
     if (cameraStream) {
@@ -39,32 +47,36 @@ function CameraDemo() {
   return (
     <section className={DEMO_SECTION_CLASS}>
       {isCameraLoading ? <PageLoader /> : null}
-      {!isMediaDevicesSupported && (
+      {!isMediaDevicesSupported ? (
         <div className="demo-callout">
-          Camera API is not supported in this browser.
+          Camera is not available in this browser. Use HTTPS on a phone or
+          laptop with a webcam.
         </div>
+      ) : (
+        <p className="demo-meta">Camera starts automatically on this module.</p>
       )}
-      <div className="camera-vision-stage">
-        <video
-          ref={videoRef}
-          className={
-            cameraStream ? "camera-video-elem active" : "camera-video-elem"
-          }
-          playsInline
-          muted
-        />
-        {!cameraStream ? (
-          <div className="camera-idle-ui" id="camera-idle-ui">
-            <span>Camera off — press Start</span>
-          </div>
-        ) : null}
-        <div className="camera-hud-brackets" />
-        <div
-          className={
-            flashing ? "camera-flash-layer flashing" : "camera-flash-layer"
-          }
-        />
-        <div className="camera-hud-controls">
+
+      <div className="camera-lab">
+        <div className="camera-viewport">
+          <video
+            ref={videoRef}
+            className={
+              cameraStream ? "camera-video-elem active" : "camera-video-elem"
+            }
+            playsInline
+            muted
+          />
+          {!cameraStream ? (
+            <p className="camera-idle-ui">Starting camera…</p>
+          ) : null}
+          <div
+            className={
+              flashing ? "camera-flash-layer flashing" : "camera-flash-layer"
+            }
+          />
+        </div>
+
+        <div className="camera-controls" role="group" aria-label="Camera controls">
           <button
             type="button"
             className="hud-btn"
@@ -79,16 +91,17 @@ function CameraDemo() {
             onClick={handleFlipClick}
             disabled={!isMediaDevicesSupported}
           >
-            Flip
+            Flip camera
           </button>
           <button type="button" className="hud-btn" onClick={handleSnapClick}>
-            Flash
+            Screen flash
           </button>
         </div>
       </div>
+
       {cameraError ? <p className="demo-error">{cameraError}</p> : null}
       {frameCallbackRan ? (
-        <p className="demo-meta">Frame callback is running.</p>
+        <p className="demo-meta">Live preview is running (each frame can call your code).</p>
       ) : null}
     </section>
   );

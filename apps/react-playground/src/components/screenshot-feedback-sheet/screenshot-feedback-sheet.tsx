@@ -20,6 +20,17 @@ function ScreenshotFeedbackSheet({
 
   if (!open) return null;
 
+  const sourceLabel =
+    lastEvent?.source === "native"
+      ? "from the phone OS"
+      : lastEvent?.source === "keyboard"
+        ? "from a keyboard shortcut"
+        : lastEvent?.source === "manual"
+          ? "from Simulate"
+          : lastEvent
+            ? `from ${lastEvent.source}`
+            : null;
+
   return (
     <div
       className="feedback-sheet-backdrop"
@@ -38,14 +49,14 @@ function ScreenshotFeedbackSheet({
           You took a screenshot
         </h2>
         <p className="feedback-sheet-body">
-          This bottom sheet opened from the{" "}
-          <code>Screenshot.watch</code> / <code>onDetected</code> callback.
-          In your app, use that hook for share tips, watermark warnings, or
-          support flows — same pattern as Instagram-style screenshot prompts.
+          This is the UI you can show after a screenshot — for example a tip to
+          share, a watermark warning, or a support message. In Chrome on the
+          web, use Simulate; real Power+Volume detection needs a native Android
+          app shell.
         </p>
         {lastEvent ? (
           <p className="feedback-sheet-meta mono">
-            source={lastEvent.source} ·{" "}
+            Detected {sourceLabel} ·{" "}
             {new Date(lastEvent.at).toLocaleTimeString()}
           </p>
         ) : null}

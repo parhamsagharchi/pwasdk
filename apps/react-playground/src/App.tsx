@@ -6,28 +6,7 @@ export default function App() {
       <Ui.Header />
       <Ui.Main>
         <Ui.Hero />
-        <Ui.AiPrompt />
-        <Ui.MediaShowcase />
-        <Ui.Examples>
-          <Ui.Camera />
-          <Ui.Haptic />
-          <Ui.Microphone />
-          <Ui.Device />
-          <Ui.Location />
-          <Ui.WakeLock />
-          <Ui.Fullscreen />
-          <Ui.Orientation />
-          <Ui.Shake />
-          <Ui.Share />
-          <Ui.Clipboard />
-          <Ui.Push />
-          <Ui.Screenshot />
-          <Ui.Install />
-          <Ui.Pwa />
-          <Ui.Badge />
-          <Ui.Storage />
-        </Ui.Examples>
-        <Ui.HowItWorks />
+        <Ui.Lab />
         <Ui.Contributors />
       </Ui.Main>
       <Ui.Footer />

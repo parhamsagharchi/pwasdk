@@ -30,7 +30,7 @@ function OrientationDemo() {
           error instanceof Error ? error.message : String(error);
         setStatus(
           message ||
-            "Lock failed. Many browsers only allow lock in fullscreen or installed PWAs.",
+            "Lock failed. Many browsers only allow this in fullscreen or an installed app.",
         );
       }
     })();
@@ -47,7 +47,7 @@ function OrientationDemo() {
           error instanceof Error ? error.message : String(error);
         setStatus(
           message ||
-            "Lock failed. Try fullscreen or an installed PWA on Android.",
+            "Lock failed. Try fullscreen or an installed Android app.",
         );
       }
     })();
@@ -56,7 +56,7 @@ function OrientationDemo() {
   const handleUnlockClick = () => {
     void (async () => {
       const ok = await Orientation.unlock();
-      setStatus(ok ? "Unlocked." : "Unlock not available.");
+      setStatus(ok ? "Rotation unlocked." : "Unlock isn’t available here.");
       setCurrent(Orientation.current());
     })();
   };
@@ -65,10 +65,13 @@ function OrientationDemo() {
     <section className={DEMO_SECTION_CLASS}>
       {!Orientation.isSupported() ? (
         <div className="demo-callout">
-          Screen Orientation API is limited on this browser (common on iOS
-          Safari).
+          Screen lock is limited here (common on iPhone Safari).
         </div>
-      ) : null}
+      ) : (
+        <p className="demo-meta">
+          Lock the screen upright or sideways when the browser allows it.
+        </p>
+      )}
       <div className="demo-actions-row">
         <button
           type="button"
@@ -92,12 +95,12 @@ function OrientationDemo() {
           onClick={handleUnlockClick}
           disabled={!Orientation.isSupported()}
         >
-          Unlock
+          Unlock rotation
         </button>
       </div>
       <div className="demo-meta demo-meta-spaced">
         <p>Current: {current || "—"}</p>
-        <p>Supported: {String(Orientation.isSupported())}</p>
+        <p>Works here: {Orientation.isSupported() ? "Yes" : "No"}</p>
         {status ? <p>{status}</p> : null}
       </div>
     </section>

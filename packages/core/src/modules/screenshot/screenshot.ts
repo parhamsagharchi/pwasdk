@@ -32,7 +32,7 @@ import {
   createScreenshotEvent,
   dispatchScreenshotEvent,
   drawMediaToCanvas,
-  hasNativeBridge,
+  hasNativeHost,
   hasWindow,
   installBridgeObject,
   isScreenshotKeyboardEvent,
@@ -48,11 +48,13 @@ export const Screenshot = {
   },
 
   /**
-   * Whether a native host has advertised OS screenshot detection.
-   * Pure browsers (including mobile Chrome / Safari / PWA) return `false`.
+   * Whether a native Android/iOS host has called `advertise()` or `notify()`.
+   * Pure Chrome / Safari / installed PWAs always return `false` — they never
+   * receive Power+Volume. You need a WebView Activity with
+   * `ScreenCaptureCallback` (Android 14+) forwarding into JS.
    */
   isNativeDetectionSupported(): boolean {
-    return hasNativeBridge();
+    return hasNativeHost();
   },
 
   isNotificationSupported(): boolean {

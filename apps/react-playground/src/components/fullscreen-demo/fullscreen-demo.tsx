@@ -15,7 +15,7 @@ function FullscreenDemo() {
         setIsFullscreen(Fullscreen.isFullscreen());
       } catch (e: unknown) {
         const message =
-          e instanceof Error ? e.message : "Failed to toggle fullscreen";
+          e instanceof Error ? e.message : "Could not toggle fullscreen";
         alert(message);
       }
     })();
@@ -25,18 +25,26 @@ function FullscreenDemo() {
     <section className={DEMO_SECTION_CLASS}>
       {!Fullscreen.isSupported() ? (
         <div className="demo-callout">
-          Fullscreen API is not supported (common on iOS Safari).
+          Fullscreen isn’t available here (common on iPhone Safari).
         </div>
-      ) : null}
-      <button
-        type="button"
-        className={DEMO_BUTTON_CLASS}
-        onClick={handleToggleFullscreenClick}
-        disabled={!Fullscreen.isSupported()}
-      >
-        {isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
-      </button>
-      <p className="demo-meta">Fullscreen: {String(isFullscreen)}</p>
+      ) : (
+        <p className="demo-meta">
+          Expand this page to fill the whole screen, then exit again.
+        </p>
+      )}
+      <div className="demo-actions-row demo-actions-single">
+        <button
+          type="button"
+          className={DEMO_BUTTON_CLASS}
+          onClick={handleToggleFullscreenClick}
+          disabled={!Fullscreen.isSupported()}
+        >
+          {isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+        </button>
+      </div>
+      <p className="demo-meta">
+        Fullscreen now: {isFullscreen ? "Yes" : "No"}
+      </p>
     </section>
   );
 }
